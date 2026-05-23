@@ -38,6 +38,12 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
+For notebook editing, install Jupyter locally as an extra:
+
+```bash
+pip install jupyter ipykernel
+```
+
 The local `.env` file already contains the API key you provided. It is ignored by Git. For another machine, copy `.env.example` to `.env` and set `ENTSOE_API_KEY`.
 
 ## Fetch One Operational Snapshot
