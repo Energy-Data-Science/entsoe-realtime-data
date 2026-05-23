@@ -1,8 +1,10 @@
 from __future__ import annotations
 
 import json
+import os
 import sys
 from pathlib import Path
+from urllib.request import urlopen
 
 import pandas as pd
 import plotly.express as px
@@ -16,10 +18,50 @@ from entsoe_realtime.config import VARIABLES, load_settings
 from entsoe_realtime.jobs import run_refresh
 from entsoe_realtime.storage import collect_file_summary, collect_snapshot_summary
 
+DEFAULT_REMOTE_DATA_BASE_URL = (
+    "https://raw.githubusercontent.com/"
+    "Energy-Data-Science/entsoe-realtime-data/data/"
+)
+DATA_SOURCE = os.getenv("ENTSOE_DASHBOARD_DATA_SOURCE", "remote").strip().lower()
+REMOTE_DATA_BASE_URL = os.getenv(
+    "ENTSOE_DASHBOARD_DATA_BASE_URL", DEFAULT_REMOTE_DATA_BASE_URL
+).rstrip("/")
+
 
 def resolve_data_path(path_value: str) -> Path:
     path = Path(path_value)
     return path if path.is_absolute() else PROJECT_ROOT / path
+
+
+def remote_url(path_value: str) -> str:
+    return f"{REMOTE_DATA_BASE_URL}/{path_value.lstrip('/')}"
+
+
+@st.cache_data(ttl=60, show_spinner=False)
+def read_remote_csv(path_value: str) -> pd.DataFrame:
+    return pd.read_csv(remote_url(path_value))
+
+
+@st.cache_data(ttl=60, show_spinner=False)
+def read_remote_json(path_value: str) -> dict:
+    with urlopen(remote_url(path_value), timeout=15) as response:
+        return json.loads(response.read().decode("utf-8"))
+
+
+def load_snapshot_summary_frame(settings) -> pd.DataFrame:
+    if DATA_SOURCE == "remote":
+        try:
+            return read_remote_csv("data/update_manifest.csv")
+        except Exception as exc:
+            st.warning(f"Could not read remote snapshot manifest: {exc}")
+            return pd.DataFrame()
+    return collect_snapshot_summary(settings.update_dir, settings.update_manifest)
+
+
+def read_snapshot_csv(path_value: str) -> pd.DataFrame:
+    if DATA_SOURCE == "remote":
+        return read_remote_csv(path_value)
+    return pd.read_csv(resolve_data_path(path_value))
 
 
 st.set_page_config(page_title="ENTSO-E Fetch Monitor", layout="wide")
@@ -36,11 +78,15 @@ components.html(
 st.title("ENTSO-E 15-Minute Collection Monitor")
 
 settings = load_settings(require_api_key=False)
-st.caption(f"Update snapshots: {settings.update_dir}")
+if DATA_SOURCE == "remote":
+    st.caption(f"Update snapshots: {REMOTE_DATA_BASE_URL}")
+else:
+    st.caption(f"Update snapshots: {settings.update_dir}")
 
 with st.sidebar:
     st.header("Controls")
     st.caption(f"Fetch: {settings.fetch_mode} | Storage: {settings.storage_mode}")
+    st.caption(f"Dashboard data source: {DATA_SOURCE}")
     st.caption(f"Window: latest {settings.recent_days} days")
     selected_country = st.selectbox("Country", settings.countries)
     selected_variable = st.selectbox("Variable", list(VARIABLES))
@@ -53,15 +99,25 @@ with st.sidebar:
 
 status_path = settings.status_file
 status = {}
-if status_path.exists():
+if DATA_SOURCE == "remote":
+    try:
+        status = read_remote_json("data/status.json")
+    except Exception:
+        status = {}
+elif status_path.exists():
     status = json.loads(status_path.read_text(encoding="utf-8"))
 
 progress = {}
-if settings.progress_file.exists():
+if DATA_SOURCE == "remote":
+    try:
+        progress = read_remote_json("data/progress.json")
+    except Exception:
+        progress = {}
+elif settings.progress_file.exists():
     progress = json.loads(settings.progress_file.read_text(encoding="utf-8"))
 
-snapshot_summary = collect_snapshot_summary(settings.update_dir, settings.update_manifest)
-historical_summary = collect_file_summary(settings.data_dir)
+snapshot_summary = load_snapshot_summary_frame(settings)
+historical_summary = collect_file_summary(settings.data_dir) if DATA_SOURCE != "remote" else pd.DataFrame()
 
 top = st.columns(6)
 top[0].metric("Last collection", status.get("collection_time_utc", "No run yet"))
@@ -144,8 +200,8 @@ if filtered.empty:
 else:
     options = filtered.sort_values("collection_time_utc", ascending=False)
     selected_collection = st.selectbox("Collection time", options["collection_time_utc"].tolist())
-    preview_path = resolve_data_path(options.loc[options["collection_time_utc"] == selected_collection, "path"].iloc[0])
-    frame = pd.read_csv(preview_path)
+    preview_path = options.loc[options["collection_time_utc"] == selected_collection, "path"].iloc[0]
+    frame = read_snapshot_csv(preview_path)
     frame["timestamp_utc"] = pd.to_datetime(frame["timestamp_utc"], utc=True)
     source_options = sorted(frame["source"].dropna().unique())
     selected_sources = st.multiselect("Source columns", source_options, default=source_options[:3])
@@ -170,7 +226,16 @@ with st.expander("Historical Backfill Files"):
         )
 
 st.subheader("Recent Run Events")
-if settings.run_history.exists():
+if DATA_SOURCE == "remote":
+    try:
+        history = read_remote_csv("data/run_history.csv")
+    except Exception:
+        history = pd.DataFrame()
+    if history.empty:
+        st.info("No run history yet.")
+    else:
+        st.dataframe(history.tail(100).iloc[::-1], use_container_width=True, hide_index=True)
+elif settings.run_history.exists():
     history = pd.read_csv(settings.run_history)
     st.dataframe(history.tail(100).iloc[::-1], use_container_width=True, hide_index=True)
 else:

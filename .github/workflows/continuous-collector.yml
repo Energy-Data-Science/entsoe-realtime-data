@@ -53,27 +53,46 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      - name: Prepare data branch
+        run: |
+          git fetch origin data --depth=1 || true
+          if git show-ref --verify --quiet refs/remotes/origin/data; then
+            git worktree add ../entsoe-data origin/data
+            cp -a ../entsoe-data/data/. data/ 2>/dev/null || true
+          else
+            git worktree add -b data ../entsoe-data
+          fi
+
       - name: Run collection loop
         shell: bash
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
           for iteration in $(seq 1 48); do
             echo "Collection loop iteration ${iteration}/48 at $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
-            git pull --rebase origin main
+            git -C ../entsoe-data pull --rebase origin data || true
+            cp -a ../entsoe-data/data/. data/ 2>/dev/null || true
 
             due_output="$(python scripts/should_collect.py)"
             echo "${due_output}"
             if echo "${due_output}" | grep -q "should_collect=true"; then
               python scripts/fetch_once.py
+              mkdir -p ../entsoe-data/data
+              cp -a data/updates ../entsoe-data/data/ 2>/dev/null || true
+              cp -f data/update_manifest.csv ../entsoe-data/data/update_manifest.csv 2>/dev/null || true
+              cp -f data/status.json ../entsoe-data/data/status.json 2>/dev/null || true
+              cp -f data/run_history.csv ../entsoe-data/data/run_history.csv 2>/dev/null || true
+              cp -f data/progress.json ../entsoe-data/data/progress.json 2>/dev/null || true
+
+              cd ../entsoe-data
+              git config user.name "github-actions[bot]"
+              git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
               git add data/updates data/update_manifest.csv data/status.json data/run_history.csv data/progress.json
               if git diff --cached --quiet; then
                 echo "No snapshot changes to commit."
               else
                 git commit -m "data: collect ENTSO-E snapshot $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
-                git push
+                git push origin HEAD:data
               fi
+              cd "$GITHUB_WORKSPACE"
             else
               echo "Collection not due yet."
             fi
@@ -82,4 +101,3 @@ jobs:
               sleep 300
             fi
           done
-

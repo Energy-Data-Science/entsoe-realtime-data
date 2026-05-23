@@ -77,7 +77,8 @@ but `scripts/should_collect.py` skips the collection unless the latest snapshot
 is at least 13 minutes old. This gives GitHub more chances to launch the job
 while still producing roughly 15-minute datasets. The workflow fetches the
 latest 31 days, writes timestamped CSV snapshots under `data/updates`, updates
-`data/update_manifest.csv`, then commits those changes back to the repository.
+`data/update_manifest.csv`, then commits those changes to the repository's
+`data` branch.
 
 If GitHub's built-in scheduler is still unreliable, trigger the workflow from an
 external cron service by sending a `repository_dispatch` event named
@@ -106,7 +107,8 @@ Main file path: dashboard/app.py
 ```
 
 The public dashboard does not need the ENTSO-E API key. It reads committed CSV
-snapshots and the manifest from the repository.
+snapshots and the manifest from the repository's `data` branch, so the
+dashboard app on `main` does not redeploy every time new data is collected.
 
 If you later want the public dashboard to allow manual fetches, add
 `ENTSOE_API_KEY` as a Streamlit app secret. For a public app, keeping the
