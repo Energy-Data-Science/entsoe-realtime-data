@@ -83,6 +83,16 @@ If GitHub's built-in scheduler is still unreliable, trigger the workflow from an
 external cron service by sending a `repository_dispatch` event named
 `collect-entsoe`.
 
+For a GitHub-only fallback, use:
+
+```text
+.github/workflows/continuous-collector.yml
+```
+
+This workflow runs for about four hours, checks every five minutes, and collects
+only when the latest committed snapshot is at least 13 minutes old. Start it
+manually from the Actions tab, or let its four-hour schedule restart it.
+
 ## 4. Publish The Dashboard
 
 Recommended deployment: Streamlit Community Cloud.

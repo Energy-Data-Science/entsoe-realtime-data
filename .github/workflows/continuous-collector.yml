@@ -1,0 +1,85 @@
+name: Continuous ENTSO-E collector
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "5 */4 * * *"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: entsoe-continuous-collector
+  cancel-in-progress: true
+
+jobs:
+  collect-loop:
+    runs-on: ubuntu-latest
+    timeout-minutes: 250
+    env:
+      ENTSOE_API_KEY: ${{ secrets.ENTSOE_API_KEY }}
+      ENTSOE_COUNTRIES: BE,FR,DE
+      ENTSOE_TIMEZONE: Europe/Brussels
+      ENTSOE_DATA_DIR: data/raw
+      ENTSOE_UPDATE_DIR: data/updates
+      ENTSOE_UPDATE_MANIFEST: data/update_manifest.csv
+      ENTSOE_RUN_HISTORY: data/run_history.csv
+      ENTSOE_STATUS_FILE: data/status.json
+      ENTSOE_PROGRESS_FILE: data/progress.json
+      ENTSOE_FETCH_MODE: recent
+      ENTSOE_STORAGE_MODE: snapshot
+      ENTSOE_RECENT_DAYS: 31
+      ENTSOE_CHUNK_DAYS: 31
+      ENTSOE_SLEEP_SECONDS: 1.0
+      ENTSOE_MAX_RETRIES: 3
+      ENTSOE_RETRY_SLEEP_SECONDS: 5.0
+      ENTSOE_MIN_CHUNK_HOURS: 24
+      ENTSOE_REQUEST_TIMEOUT_SECONDS: 60
+      ENTSOE_MIN_COLLECTION_INTERVAL_MINUTES: 13
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.DATA_PUSH_TOKEN }}
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run collection loop
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          for iteration in $(seq 1 48); do
+            echo "Collection loop iteration ${iteration}/48 at $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+            git pull --rebase origin main
+
+            due_output="$(python scripts/should_collect.py)"
+            echo "${due_output}"
+            if echo "${due_output}" | grep -q "should_collect=true"; then
+              python scripts/fetch_once.py
+              git add data/updates data/update_manifest.csv data/status.json data/run_history.csv data/progress.json
+              if git diff --cached --quiet; then
+                echo "No snapshot changes to commit."
+              else
+                git commit -m "data: collect ENTSO-E snapshot $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+                git push
+              fi
+            else
+              echo "Collection not due yet."
+            fi
+
+            if [ "${iteration}" != "48" ]; then
+              sleep 300
+            fi
+          done
+
