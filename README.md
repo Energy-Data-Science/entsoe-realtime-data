@@ -76,6 +76,9 @@ It runs every 15 minutes, fetches the latest 31 days, writes timestamped
 snapshot CSVs, updates the manifest, and commits the new data back to GitHub.
 See [docs/deployment.md](docs/deployment.md).
 
+If the organization keeps the default `GITHUB_TOKEN` read-only, add a
+`DATA_PUSH_TOKEN` repository secret with repository contents read/write access.
+
 ## Dashboard
 
 ```bash

@@ -46,6 +46,17 @@ ENTSOE_API_KEY
 
 Use the ENTSO-E token as the value. Do not commit `.env`.
 
+If the organization prevents repositories from enabling write permissions for
+the default GitHub Actions token, also add a repository secret:
+
+```text
+DATA_PUSH_TOKEN
+```
+
+Create this as a GitHub fine-grained personal access token with access to this
+repository and `Contents: Read and write`. The workflow uses this token only for
+checking out the repository and pushing newly collected CSV snapshots.
+
 ## 3. Enable Scheduled Collection
 
 The workflow is:
@@ -115,4 +126,3 @@ Committing CSV snapshots to GitHub is convenient for transparency and a public
 dashboard, but repository size will grow over time. If the repository becomes
 too large, move snapshots to object storage or Git LFS and keep only a compact
 manifest in Git.
-
