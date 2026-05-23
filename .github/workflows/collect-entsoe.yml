@@ -2,8 +2,10 @@ name: Collect ENTSO-E snapshots
 
 on:
   workflow_dispatch:
+  repository_dispatch:
+    types: [collect-entsoe]
   schedule:
-    - cron: "7,22,37,52 * * * *"
+    - cron: "2,7,12,17,22,27,32,37,42,47,52,57 * * * *"
 
 permissions:
   contents: read
@@ -35,6 +37,7 @@ jobs:
       ENTSOE_RETRY_SLEEP_SECONDS: 5.0
       ENTSOE_MIN_CHUNK_HOURS: 24
       ENTSOE_REQUEST_TIMEOUT_SECONDS: 60
+      ENTSOE_MIN_COLLECTION_INTERVAL_MINUTES: 13
 
     steps:
       - name: Check out repository
@@ -51,10 +54,16 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      - name: Decide whether collection is due
+        id: due
+        run: python scripts/should_collect.py
+
       - name: Fetch latest ENTSO-E snapshots
+        if: steps.due.outputs.should_collect == 'true' || github.event_name == 'workflow_dispatch' || github.event_name == 'repository_dispatch'
         run: python scripts/fetch_once.py
 
       - name: Commit new snapshot data
+        if: steps.due.outputs.should_collect == 'true' || github.event_name == 'workflow_dispatch' || github.event_name == 'repository_dispatch'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

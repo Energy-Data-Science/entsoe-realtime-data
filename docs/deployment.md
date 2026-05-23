@@ -69,15 +69,19 @@ It can be started manually from the GitHub Actions tab with `Run workflow`.
 It also runs on this schedule:
 
 ```text
-7,22,37,52 * * * *
+2,7,12,17,22,27,32,37,42,47,52,57 * * * *
 ```
 
-GitHub schedules are interpreted in UTC. The workflow still runs every 15
-minutes, but uses offset minutes rather than `0,15,30,45` to reduce the chance
-of GitHub scheduler delays or dropped jobs during common high-load times. The
-workflow fetches the latest 31 days, writes timestamped CSV snapshots under
-`data/updates`, updates `data/update_manifest.csv`, then commits those changes
-back to the repository.
+GitHub schedules are interpreted in UTC. The workflow checks every 5 minutes,
+but `scripts/should_collect.py` skips the collection unless the latest snapshot
+is at least 13 minutes old. This gives GitHub more chances to launch the job
+while still producing roughly 15-minute datasets. The workflow fetches the
+latest 31 days, writes timestamped CSV snapshots under `data/updates`, updates
+`data/update_manifest.csv`, then commits those changes back to the repository.
+
+If GitHub's built-in scheduler is still unreliable, trigger the workflow from an
+external cron service by sending a `repository_dispatch` event named
+`collect-entsoe`.
 
 ## 4. Publish The Dashboard
 
