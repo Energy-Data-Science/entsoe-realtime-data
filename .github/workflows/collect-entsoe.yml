@@ -1,0 +1,66 @@
+name: Collect ENTSO-E snapshots
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/15 * * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: entsoe-collection
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      ENTSOE_API_KEY: ${{ secrets.ENTSOE_API_KEY }}
+      ENTSOE_COUNTRIES: BE,FR,DE
+      ENTSOE_TIMEZONE: Europe/Brussels
+      ENTSOE_DATA_DIR: data/raw
+      ENTSOE_UPDATE_DIR: data/updates
+      ENTSOE_UPDATE_MANIFEST: data/update_manifest.csv
+      ENTSOE_RUN_HISTORY: data/run_history.csv
+      ENTSOE_STATUS_FILE: data/status.json
+      ENTSOE_PROGRESS_FILE: data/progress.json
+      ENTSOE_FETCH_MODE: recent
+      ENTSOE_STORAGE_MODE: snapshot
+      ENTSOE_RECENT_DAYS: 31
+      ENTSOE_CHUNK_DAYS: 31
+      ENTSOE_SLEEP_SECONDS: 1.0
+      ENTSOE_MAX_RETRIES: 3
+      ENTSOE_RETRY_SLEEP_SECONDS: 5.0
+      ENTSOE_MIN_CHUNK_HOURS: 24
+      ENTSOE_REQUEST_TIMEOUT_SECONDS: 60
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Fetch latest ENTSO-E snapshots
+        run: python scripts/fetch_once.py
+
+      - name: Commit new snapshot data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/updates data/update_manifest.csv data/status.json data/run_history.csv data/progress.json
+          if git diff --cached --quiet; then
+            echo "No snapshot changes to commit."
+          else
+            git commit -m "data: collect ENTSO-E snapshot $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+            git push
+          fi
+

@@ -1,0 +1,111 @@
+run_id,country,variable,window_start,window_end,started_at_utc,status,records_fetched,files_touched,message,duration_seconds
+e7d0e8cb-4ec1-4e66-8637-64f4c69b22e1,BE,actual_load,2026-05-18T09:30:00+02:00,2026-05-19T09:30:00+02:00,2026-05-19T07:26:06Z,ok,92,1,,2.92
+8bff1b5b-5a39-46da-8934-a2df9233ed49,BE,actual_load,2020-12-01T00:00:00+01:00,2026-05-19T09:45:00+02:00,2026-05-19T07:36:59Z,ok,191553,7,,176.11
+8bff1b5b-5a39-46da-8934-a2df9233ed49,BE,forecast_load,2020-12-01T00:00:00+01:00,2026-05-19T09:45:00+02:00,2026-05-19T07:39:55Z,ok,191556,7,,159.05
+8bff1b5b-5a39-46da-8934-a2df9233ed49,BE,actual_solar_generation,2022-01-01T00:00:00+01:00,2026-05-19T09:45:00+02:00,2026-05-19T07:42:35Z,ok,38384,6,,72.96
+8bff1b5b-5a39-46da-8934-a2df9233ed49,BE,forecast_solar_generation,2022-01-01T00:00:00+01:00,2026-05-19T09:45:00+02:00,2026-05-19T07:43:48Z,ok,38385,6,,64.6
+8bff1b5b-5a39-46da-8934-a2df9233ed49,BE,actual_onshore_wind_generation,2022-01-01T00:00:00+01:00,2026-05-19T09:45:00+02:00,2026-05-19T07:44:52Z,ok,38384,6,,142.75
+8bff1b5b-5a39-46da-8934-a2df9233ed49,BE,forecast_onshore_wind_generation,2022-01-01T00:00:00+01:00,2026-05-19T10:00:00+02:00,2026-05-19T07:47:15Z,ok,38385,6,,92.08
+8bff1b5b-5a39-46da-8934-a2df9233ed49,BE,actual_offshore_wind_generation,2022-01-01T00:00:00+01:00,2026-05-19T10:00:00+02:00,2026-05-19T07:48:47Z,ok,39896,6,,282.89
+8bff1b5b-5a39-46da-8934-a2df9233ed49,BE,forecast_offshore_wind_generation,2022-01-01T00:00:00+01:00,2026-05-19T10:00:00+02:00,2026-05-19T07:53:30Z,ok,38385,6,,70.56
+8bff1b5b-5a39-46da-8934-a2df9233ed49,BE,day_ahead_price,2020-12-01T00:00:00+01:00,2026-05-19T10:00:00+02:00,2026-05-19T07:54:40Z,ok,64480,7,,90.75
+8bff1b5b-5a39-46da-8934-a2df9233ed49,BE,imbalance_price,2020-12-01T00:00:00+01:00,2026-05-19T10:00:00+02:00,2026-05-19T07:56:11Z,ok,383110,7,,198.83
+8bff1b5b-5a39-46da-8934-a2df9233ed49,FR,actual_load,2020-12-01T00:00:00+01:00,2026-05-19T10:00:00+02:00,2026-05-19T07:59:30Z,error,0,0,503 Server Error: Service Unavailable for url: https://web-api.tp.entsoe.eu/api?documentType=A65&processType=A16&outBiddingZone_Domain=10YFR-RTE------C&out_Domain=10YFR-RTE------C&securityToken=<redacted>&periodStart=202301142300&periodEnd=202302142300,65.98
+8bff1b5b-5a39-46da-8934-a2df9233ed49,FR,forecast_load,2020-12-01T00:00:00+01:00,2026-05-19T10:15:00+02:00,2026-05-19T08:00:36Z,error,0,0,503 Server Error: Service Unavailable for url: https://web-api.tp.entsoe.eu/api?documentType=A65&processType=A01&outBiddingZone_Domain=10YFR-RTE------C&securityToken=<redacted>&periodStart=202011302300&periodEnd=202012312300,0.38
+8bff1b5b-5a39-46da-8934-a2df9233ed49,FR,actual_solar_generation,2022-01-01T00:00:00+01:00,2026-05-19T10:15:00+02:00,2026-05-19T08:00:36Z,error,0,0,503 Server Error: Service Unavailable for url: https://web-api.tp.entsoe.eu/api?documentType=A75&processType=A16&in_Domain=10YFR-RTE------C&psrType=B16&securityToken=<redacted>&periodStart=202112312300&periodEnd=202201312300,0.2
+8bff1b5b-5a39-46da-8934-a2df9233ed49,FR,forecast_solar_generation,2022-01-01T00:00:00+01:00,2026-05-19T10:15:00+02:00,2026-05-19T08:00:37Z,error,0,0,503 Server Error: Service Unavailable for url: https://web-api.tp.entsoe.eu/api?documentType=A69&processType=A01&in_Domain=10YFR-RTE------C&psrType=B16&securityToken=<redacted>&periodStart=202112312300&periodEnd=202201312300,0.2
+8bff1b5b-5a39-46da-8934-a2df9233ed49,FR,actual_onshore_wind_generation,2022-01-01T00:00:00+01:00,2026-05-19T10:15:00+02:00,2026-05-19T08:00:37Z,error,0,0,503 Server Error: Service Unavailable for url: https://web-api.tp.entsoe.eu/api?documentType=A75&processType=A16&in_Domain=10YFR-RTE------C&psrType=B19&securityToken=<redacted>&periodStart=202112312300&periodEnd=202201312300,0.1
+8bff1b5b-5a39-46da-8934-a2df9233ed49,FR,forecast_onshore_wind_generation,2022-01-01T00:00:00+01:00,2026-05-19T10:15:00+02:00,2026-05-19T08:00:37Z,error,0,0,503 Server Error: Service Unavailable for url: https://web-api.tp.entsoe.eu/api?documentType=A69&processType=A01&in_Domain=10YFR-RTE------C&psrType=B19&securityToken=<redacted>&periodStart=202112312300&periodEnd=202201312300,0.1
+8bff1b5b-5a39-46da-8934-a2df9233ed49,FR,actual_offshore_wind_generation,2022-01-01T00:00:00+01:00,2026-05-19T10:15:00+02:00,2026-05-19T08:00:37Z,error,0,0,503 Server Error: Service Unavailable for url: https://web-api.tp.entsoe.eu/api?documentType=A75&processType=A16&in_Domain=10YFR-RTE------C&psrType=B18&securityToken=<redacted>&periodStart=202112312300&periodEnd=202201312300,0.5
+8bff1b5b-5a39-46da-8934-a2df9233ed49,FR,forecast_offshore_wind_generation,2022-01-01T00:00:00+01:00,2026-05-19T10:15:00+02:00,2026-05-19T08:00:37Z,error,0,0,503 Server Error: Service Unavailable for url: https://web-api.tp.entsoe.eu/api?documentType=A69&processType=A01&in_Domain=10YFR-RTE------C&psrType=B18&securityToken=<redacted>&periodStart=202112312300&periodEnd=202201312300,0.99
+8bff1b5b-5a39-46da-8934-a2df9233ed49,FR,day_ahead_price,2020-12-01T00:00:00+01:00,2026-05-19T10:15:00+02:00,2026-05-19T08:00:38Z,error,0,0,503 Server Error: Service Unavailable for url: https://web-api.tp.entsoe.eu/api?documentType=A44&in_Domain=10YFR-RTE------C&out_Domain=10YFR-RTE------C&offset=0&contract_MarketAgreement.type=A01&securityToken=<redacted>&periodStart=202011292300&periodEnd=202101012300,0.1
+8bff1b5b-5a39-46da-8934-a2df9233ed49,FR,imbalance_price,2020-12-01T00:00:00+01:00,2026-05-19T10:15:00+02:00,2026-05-19T08:00:39Z,error,0,0,503 Server Error: Service Unavailable for url: https://web-api.tp.entsoe.eu/api?documentType=A85&controlArea_Domain=10YFR-RTE------C&securityToken=<redacted>&periodStart=202011302300&periodEnd=202012312300,0.39
+8bff1b5b-5a39-46da-8934-a2df9233ed49,DE,actual_load,2020-12-01T00:00:00+01:00,2026-05-19T10:15:00+02:00,2026-05-19T08:00:39Z,error,0,0,503 Server Error: Service Unavailable for url: https://web-api.tp.entsoe.eu/api?documentType=A65&processType=A16&outBiddingZone_Domain=10Y1001A1001A82H&out_Domain=10Y1001A1001A82H&securityToken=<redacted>&periodStart=202011302300&periodEnd=202012312300,0.62
+8bff1b5b-5a39-46da-8934-a2df9233ed49,DE,forecast_load,2020-12-01T00:00:00+01:00,2026-05-19T10:15:00+02:00,2026-05-19T08:00:40Z,error,0,0,503 Server Error: Service Unavailable for url: https://web-api.tp.entsoe.eu/api?documentType=A65&processType=A01&outBiddingZone_Domain=10Y1001A1001A82H&securityToken=<redacted>&periodStart=202011302300&periodEnd=202012312300,0.59
+8bff1b5b-5a39-46da-8934-a2df9233ed49,DE,actual_solar_generation,2022-01-01T00:00:00+01:00,2026-05-19T10:15:00+02:00,2026-05-19T08:00:40Z,error,0,0,503 Server Error: Service Unavailable for url: https://web-api.tp.entsoe.eu/api?documentType=A75&processType=A16&in_Domain=10Y1001A1001A82H&psrType=B16&securityToken=<redacted>&periodStart=202112312300&periodEnd=202201312300,0.59
+8bff1b5b-5a39-46da-8934-a2df9233ed49,DE,forecast_solar_generation,2022-01-01T00:00:00+01:00,2026-05-19T10:15:00+02:00,2026-05-19T08:00:41Z,error,0,0,503 Server Error: Service Unavailable for url: https://web-api.tp.entsoe.eu/api?documentType=A69&processType=A01&in_Domain=10Y1001A1001A82H&psrType=B16&securityToken=<redacted>&periodStart=202112312300&periodEnd=202201312300,0.6
+8bff1b5b-5a39-46da-8934-a2df9233ed49,DE,actual_onshore_wind_generation,2022-01-01T00:00:00+01:00,2026-05-19T10:15:00+02:00,2026-05-19T08:00:41Z,error,0,0,503 Server Error: Service Unavailable for url: https://web-api.tp.entsoe.eu/api?documentType=A75&processType=A16&in_Domain=10Y1001A1001A82H&psrType=B19&securityToken=<redacted>&periodStart=202112312300&periodEnd=202201312300,1.19
+8bff1b5b-5a39-46da-8934-a2df9233ed49,DE,forecast_onshore_wind_generation,2022-01-01T00:00:00+01:00,2026-05-19T10:15:00+02:00,2026-05-19T08:00:43Z,error,0,0,503 Server Error: Service Unavailable for url: https://web-api.tp.entsoe.eu/api?documentType=A69&processType=A01&in_Domain=10Y1001A1001A82H&psrType=B19&securityToken=<redacted>&periodStart=202112312300&periodEnd=202201312300,1.42
+8bff1b5b-5a39-46da-8934-a2df9233ed49,DE,actual_offshore_wind_generation,2022-01-01T00:00:00+01:00,2026-05-19T10:15:00+02:00,2026-05-19T08:00:44Z,error,0,0,503 Server Error: Service Unavailable for url: https://web-api.tp.entsoe.eu/api?documentType=A75&processType=A16&in_Domain=10Y1001A1001A82H&psrType=B18&securityToken=<redacted>&periodStart=202112312300&periodEnd=202201312300,0.17
+8bff1b5b-5a39-46da-8934-a2df9233ed49,DE,forecast_offshore_wind_generation,2022-01-01T00:00:00+01:00,2026-05-19T10:15:00+02:00,2026-05-19T08:00:44Z,error,0,0,503 Server Error: Service Unavailable for url: https://web-api.tp.entsoe.eu/api?documentType=A69&processType=A01&in_Domain=10Y1001A1001A82H&psrType=B18&securityToken=<redacted>&periodStart=202112312300&periodEnd=202201312300,0.3
+8bff1b5b-5a39-46da-8934-a2df9233ed49,DE,day_ahead_price,2020-12-01T00:00:00+01:00,2026-05-19T10:15:00+02:00,2026-05-19T08:00:44Z,error,0,0,503 Server Error: Service Unavailable for url: https://web-api.tp.entsoe.eu/api?documentType=A44&in_Domain=10Y1001A1001A82H&out_Domain=10Y1001A1001A82H&offset=0&contract_MarketAgreement.type=A01&classificationSequence_AttributeInstanceComponent.position=1&securityToken=<redacted>&periodStart=202011292300&periodEnd=202101012300,0.2
+8bff1b5b-5a39-46da-8934-a2df9233ed49,DE,imbalance_price,2020-12-01T00:00:00+01:00,2026-05-19T10:15:00+02:00,2026-05-19T08:00:45Z,error,0,0,503 Server Error: Service Unavailable for url: https://web-api.tp.entsoe.eu/api?documentType=A85&controlArea_Domain=10Y1001A1001A82H&securityToken=<redacted>&periodStart=202011302300&periodEnd=202012312300,1.8
+8d67044b-41b2-44d3-ab2a-bed83c646196,BE,actual_load,2020-12-01T00:00:00+01:00,2026-05-19T10:15:00+02:00,2026-05-19T08:11:55Z,ok,191555,7,,121.88
+8d67044b-41b2-44d3-ab2a-bed83c646196,BE,forecast_load,2020-12-01T00:00:00+01:00,2026-05-19T10:15:00+02:00,2026-05-19T08:13:57Z,ok,191556,7,,198.45
+8d67044b-41b2-44d3-ab2a-bed83c646196,BE,actual_solar_generation,2022-01-01T00:00:00+01:00,2026-05-19T10:30:00+02:00,2026-05-19T08:17:16Z,ok,38384,6,,149.02
+8d67044b-41b2-44d3-ab2a-bed83c646196,BE,forecast_solar_generation,2022-01-01T00:00:00+01:00,2026-05-19T10:30:00+02:00,2026-05-19T08:19:45Z,ok,38385,6,,100.67
+8d67044b-41b2-44d3-ab2a-bed83c646196,BE,actual_onshore_wind_generation,2022-01-01T00:00:00+01:00,2026-05-19T10:30:00+02:00,2026-05-19T08:21:25Z,ok,38384,6,,75.97
+8d67044b-41b2-44d3-ab2a-bed83c646196,BE,forecast_onshore_wind_generation,2022-01-01T00:00:00+01:00,2026-05-19T10:30:00+02:00,2026-05-19T08:22:41Z,ok,38385,6,,71.31
+8d67044b-41b2-44d3-ab2a-bed83c646196,BE,actual_offshore_wind_generation,2022-01-01T00:00:00+01:00,2026-05-19T10:30:00+02:00,2026-05-19T08:23:53Z,ok,39896,6,,82.29
+8d67044b-41b2-44d3-ab2a-bed83c646196,BE,forecast_offshore_wind_generation,2022-01-01T00:00:00+01:00,2026-05-19T10:30:00+02:00,2026-05-19T08:25:15Z,ok,38385,6,,70.92
+8d67044b-41b2-44d3-ab2a-bed83c646196,BE,day_ahead_price,2020-12-01T00:00:00+01:00,2026-05-19T10:30:00+02:00,2026-05-19T08:26:26Z,ok,64482,7,,87.48
+8d67044b-41b2-44d3-ab2a-bed83c646196,BE,imbalance_price,2020-12-01T00:00:00+01:00,2026-05-19T10:30:00+02:00,2026-05-19T08:27:53Z,ok,383112,7,,247.29
+8d67044b-41b2-44d3-ab2a-bed83c646196,FR,actual_load,2020-12-01T00:00:00+01:00,2026-05-19T10:45:00+02:00,2026-05-19T08:32:01Z,ok,84039,7,,569.34
+8d67044b-41b2-44d3-ab2a-bed83c646196,FR,forecast_load,2020-12-01T00:00:00+01:00,2026-05-19T10:45:00+02:00,2026-05-19T08:41:30Z,ok,84205,7,,528.73
+8d67044b-41b2-44d3-ab2a-bed83c646196,FR,actual_solar_generation,2022-01-01T00:00:00+01:00,2026-05-19T11:00:00+02:00,2026-05-19T08:50:19Z,ok,75431,6,,194.99
+8d67044b-41b2-44d3-ab2a-bed83c646196,FR,forecast_solar_generation,2022-01-01T00:00:00+01:00,2026-05-19T11:00:00+02:00,2026-05-19T08:53:34Z,ok,47692,6,,84.6
+8d67044b-41b2-44d3-ab2a-bed83c646196,FR,actual_onshore_wind_generation,2022-01-01T00:00:00+01:00,2026-05-19T11:00:00+02:00,2026-05-19T08:54:58Z,ok,75431,6,,92.9
+8d67044b-41b2-44d3-ab2a-bed83c646196,FR,forecast_onshore_wind_generation,2022-01-01T00:00:00+01:00,2026-05-19T11:00:00+02:00,2026-05-19T08:56:31Z,ok,47701,6,,72.3
+8d67044b-41b2-44d3-ab2a-bed83c646196,FR,actual_offshore_wind_generation,2022-01-01T00:00:00+01:00,2026-05-19T11:00:00+02:00,2026-05-19T08:57:44Z,ok,62641,4,,76.97
+8d67044b-41b2-44d3-ab2a-bed83c646196,FR,forecast_offshore_wind_generation,2022-01-01T00:00:00+01:00,2026-05-19T11:00:00+02:00,2026-05-19T08:59:01Z,ok,33785,4,,153.92
+9b895c1a-b996-4528-950c-b6ecb2dafe51,BE,actual_load,2020-12-01T00:00:00+01:00,2026-05-19T14:15:00+02:00,2026-05-19T12:09:17Z,ok,191571,7,,240.66
+9b895c1a-b996-4528-950c-b6ecb2dafe51,BE,forecast_load,2020-12-01T00:00:00+01:00,2026-05-19T14:15:00+02:00,2026-05-19T12:13:18Z,ok,191572,7,,961.31
+9b895c1a-b996-4528-950c-b6ecb2dafe51,BE,actual_solar_generation,2022-01-01T00:00:00+01:00,2026-05-19T14:30:00+02:00,2026-05-19T12:29:19Z,ok,38389,6,,368.05
+9b895c1a-b996-4528-950c-b6ecb2dafe51,BE,forecast_solar_generation,2022-01-01T00:00:00+01:00,2026-05-19T14:45:00+02:00,2026-05-19T12:35:27Z,ok,38390,6,,144.3
+9b895c1a-b996-4528-950c-b6ecb2dafe51,BE,actual_onshore_wind_generation,2022-01-01T00:00:00+01:00,2026-05-19T14:45:00+02:00,2026-05-19T12:37:52Z,ok,38389,6,,292.92
+9b895c1a-b996-4528-950c-b6ecb2dafe51,BE,forecast_onshore_wind_generation,2022-01-01T00:00:00+01:00,2026-05-19T14:45:00+02:00,2026-05-19T12:42:44Z,ok,38390,6,,102.9
+9b895c1a-b996-4528-950c-b6ecb2dafe51,BE,actual_offshore_wind_generation,2022-01-01T00:00:00+01:00,2026-05-19T14:45:00+02:00,2026-05-19T12:44:27Z,ok,39902,6,,563.36
+9b895c1a-b996-4528-950c-b6ecb2dafe51,BE,forecast_offshore_wind_generation,2022-01-01T00:00:00+01:00,2026-05-19T15:00:00+02:00,2026-05-19T12:53:51Z,ok,38390,6,,245.85
+9b895c1a-b996-4528-950c-b6ecb2dafe51,BE,day_ahead_price,2020-12-01T00:00:00+01:00,2026-05-19T15:00:00+02:00,2026-05-19T12:57:57Z,ok,64500,7,,665.22
+9b895c1a-b996-4528-950c-b6ecb2dafe51,BE,imbalance_price,2020-12-01T00:00:00+01:00,2026-05-19T15:15:00+02:00,2026-05-19T13:09:02Z,ok,383152,7,,329.53
+9b895c1a-b996-4528-950c-b6ecb2dafe51,FR,actual_load,2020-12-01T00:00:00+01:00,2026-05-19T15:15:00+02:00,2026-05-19T13:14:31Z,ok,84059,7,,200.38
+9b895c1a-b996-4528-950c-b6ecb2dafe51,FR,forecast_load,2020-12-01T00:00:00+01:00,2026-05-19T15:30:00+02:00,2026-05-19T13:17:52Z,ok,84224,7,,349.04
+9b895c1a-b996-4528-950c-b6ecb2dafe51,FR,actual_solar_generation,2022-01-01T00:00:00+01:00,2026-05-19T15:30:00+02:00,2026-05-19T13:23:41Z,ok,75451,6,,100.88
+9b895c1a-b996-4528-950c-b6ecb2dafe51,FR,forecast_solar_generation,2022-01-01T00:00:00+01:00,2026-05-19T15:30:00+02:00,2026-05-19T13:25:22Z,ok,47711,6,,92.72
+9b895c1a-b996-4528-950c-b6ecb2dafe51,FR,actual_onshore_wind_generation,2022-01-01T00:00:00+01:00,2026-05-19T15:30:00+02:00,2026-05-19T13:26:54Z,ok,75451,6,,100.34
+9b895c1a-b996-4528-950c-b6ecb2dafe51,FR,forecast_onshore_wind_generation,2022-01-01T00:00:00+01:00,2026-05-19T15:30:00+02:00,2026-05-19T13:28:35Z,ok,47720,6,,76.11
+9b895c1a-b996-4528-950c-b6ecb2dafe51,FR,actual_offshore_wind_generation,2022-01-01T00:00:00+01:00,2026-05-19T15:30:00+02:00,2026-05-19T13:29:51Z,ok,62661,4,,166.84
+9b895c1a-b996-4528-950c-b6ecb2dafe51,FR,forecast_offshore_wind_generation,2022-01-01T00:00:00+01:00,2026-05-19T15:45:00+02:00,2026-05-19T13:32:38Z,ok,33805,4,,317.84
+9b895c1a-b996-4528-950c-b6ecb2dafe51,FR,day_ahead_price,2020-12-01T00:00:00+01:00,2026-05-19T15:45:00+02:00,2026-05-19T13:37:55Z,ok,64503,7,,330.82
+9b895c1a-b996-4528-950c-b6ecb2dafe51,FR,imbalance_price,2020-12-01T00:00:00+01:00,2026-05-19T15:45:00+02:00,2026-05-19T13:43:26Z,ok,236568,7,,478.51
+9b895c1a-b996-4528-950c-b6ecb2dafe51,DE,actual_load,2020-12-01T00:00:00+01:00,2026-05-19T16:00:00+02:00,2026-05-19T13:51:25Z,ok,191576,7,,202.09
+9b895c1a-b996-4528-950c-b6ecb2dafe51,DE,forecast_load,2020-12-01T00:00:00+01:00,2026-05-19T16:00:00+02:00,2026-05-19T13:54:47Z,ok,191380,7,,154.54
+9b895c1a-b996-4528-950c-b6ecb2dafe51,DE,actual_solar_generation,2022-01-01T00:00:00+01:00,2026-05-19T16:00:00+02:00,2026-05-19T13:57:21Z,ok,273177,6,,88.53
+9b895c1a-b996-4528-950c-b6ecb2dafe51,DE,forecast_solar_generation,2022-01-01T00:00:00+01:00,2026-05-19T16:00:00+02:00,2026-05-19T13:58:50Z,ok,153552,6,,166.64
+9b895c1a-b996-4528-950c-b6ecb2dafe51,DE,actual_onshore_wind_generation,2022-01-01T00:00:00+01:00,2026-05-19T16:15:00+02:00,2026-05-19T14:01:37Z,ok,273178,6,,1799.14
+9b895c1a-b996-4528-950c-b6ecb2dafe51,DE,forecast_onshore_wind_generation,2022-01-01T00:00:00+01:00,2026-05-19T16:45:00+02:00,2026-05-19T14:31:36Z,ok,153556,6,,900.44
+9b895c1a-b996-4528-950c-b6ecb2dafe51,DE,actual_offshore_wind_generation,2022-01-01T00:00:00+01:00,2026-05-19T17:00:00+02:00,2026-05-19T14:46:36Z,ok,153565,6,,112.81
+9b895c1a-b996-4528-950c-b6ecb2dafe51,DE,forecast_offshore_wind_generation,2022-01-01T00:00:00+01:00,2026-05-19T17:00:00+02:00,2026-05-19T14:48:29Z,ok,153568,6,,132.46
+9b895c1a-b996-4528-950c-b6ecb2dafe51,DE,day_ahead_price,2020-12-01T00:00:00+01:00,2026-05-19T17:00:00+02:00,2026-05-19T14:50:41Z,ok,64508,7,,101.26
+9b895c1a-b996-4528-950c-b6ecb2dafe51,DE,imbalance_price,2020-12-01T00:00:00+01:00,2026-05-19T17:00:00+02:00,2026-05-19T14:52:23Z,ok,109048,3,,170.54
+b259820f-645b-408e-b427-cf305befecc0,BE,actual_load,2026-05-19T11:15:00+02:00,2026-05-20T11:15:00+02:00,2026-05-20T09:02:00Z,ok,93,1,,3.53
+f5e5be39-4a7b-4476-be3e-6bc1b98e7eef,BE,actual_load,2026-04-22T12:00:00+02:00,2026-05-23T12:00:00+02:00,2026-05-23T09:52:34Z,ok,2974,1,,5.15
+f5e5be39-4a7b-4476-be3e-6bc1b98e7eef,BE,forecast_load,2026-04-22T12:00:00+02:00,2026-05-23T12:00:00+02:00,2026-05-23T09:52:40Z,ok,2976,1,,2.04
+f5e5be39-4a7b-4476-be3e-6bc1b98e7eef,BE,actual_solar_generation,2026-04-22T12:00:00+02:00,2026-05-23T12:00:00+02:00,2026-05-23T09:52:42Z,ok,743,1,,1.36
+f5e5be39-4a7b-4476-be3e-6bc1b98e7eef,BE,forecast_solar_generation,2026-04-22T12:00:00+02:00,2026-05-23T12:00:00+02:00,2026-05-23T09:52:43Z,ok,744,1,,1.65
+f5e5be39-4a7b-4476-be3e-6bc1b98e7eef,BE,actual_onshore_wind_generation,2026-04-22T12:00:00+02:00,2026-05-23T12:00:00+02:00,2026-05-23T09:52:45Z,ok,743,1,,1.44
+f5e5be39-4a7b-4476-be3e-6bc1b98e7eef,BE,forecast_onshore_wind_generation,2026-04-22T12:00:00+02:00,2026-05-23T12:00:00+02:00,2026-05-23T09:52:46Z,ok,744,1,,3.46
+f5e5be39-4a7b-4476-be3e-6bc1b98e7eef,BE,actual_offshore_wind_generation,2026-04-22T12:00:00+02:00,2026-05-23T12:00:00+02:00,2026-05-23T09:52:50Z,ok,766,1,,1.34
+f5e5be39-4a7b-4476-be3e-6bc1b98e7eef,BE,forecast_offshore_wind_generation,2026-04-22T12:00:00+02:00,2026-05-23T12:00:00+02:00,2026-05-23T09:52:51Z,ok,744,1,,1.29
+f5e5be39-4a7b-4476-be3e-6bc1b98e7eef,BE,day_ahead_price,2026-04-22T12:00:00+02:00,2026-05-23T12:00:00+02:00,2026-05-23T09:52:52Z,ok,2977,1,,1.52
+f5e5be39-4a7b-4476-be3e-6bc1b98e7eef,BE,imbalance_price,2026-04-22T12:00:00+02:00,2026-05-23T12:00:00+02:00,2026-05-23T09:52:54Z,ok,5950,1,,8.05
+f5e5be39-4a7b-4476-be3e-6bc1b98e7eef,FR,actual_load,2026-04-22T12:00:00+02:00,2026-05-23T12:00:00+02:00,2026-05-23T09:53:02Z,ok,2972,1,,3.88
+f5e5be39-4a7b-4476-be3e-6bc1b98e7eef,FR,forecast_load,2026-04-22T12:00:00+02:00,2026-05-23T12:00:00+02:00,2026-05-23T09:53:06Z,ok,2976,1,,2.0
+f5e5be39-4a7b-4476-be3e-6bc1b98e7eef,FR,actual_solar_generation,2026-04-22T12:00:00+02:00,2026-05-23T12:00:00+02:00,2026-05-23T09:53:08Z,ok,2972,1,,1.82
+f5e5be39-4a7b-4476-be3e-6bc1b98e7eef,FR,forecast_solar_generation,2026-04-22T12:00:00+02:00,2026-05-23T12:00:00+02:00,2026-05-23T09:53:09Z,ok,2976,1,,1.56
+f5e5be39-4a7b-4476-be3e-6bc1b98e7eef,FR,actual_onshore_wind_generation,2026-04-22T12:00:00+02:00,2026-05-23T12:00:00+02:00,2026-05-23T09:53:11Z,ok,2972,1,,1.8
+f5e5be39-4a7b-4476-be3e-6bc1b98e7eef,FR,forecast_onshore_wind_generation,2026-04-22T12:00:00+02:00,2026-05-23T12:00:00+02:00,2026-05-23T09:53:13Z,ok,2976,1,,1.54
+f5e5be39-4a7b-4476-be3e-6bc1b98e7eef,FR,actual_offshore_wind_generation,2026-04-22T12:00:00+02:00,2026-05-23T12:00:00+02:00,2026-05-23T09:53:14Z,ok,2972,1,,1.73
+f5e5be39-4a7b-4476-be3e-6bc1b98e7eef,FR,forecast_offshore_wind_generation,2026-04-22T12:00:00+02:00,2026-05-23T12:00:00+02:00,2026-05-23T09:53:16Z,ok,2976,1,,1.58
+f5e5be39-4a7b-4476-be3e-6bc1b98e7eef,FR,day_ahead_price,2026-04-22T12:00:00+02:00,2026-05-23T12:00:00+02:00,2026-05-23T09:53:18Z,ok,2977,1,,1.55
+f5e5be39-4a7b-4476-be3e-6bc1b98e7eef,FR,imbalance_price,2026-04-22T12:00:00+02:00,2026-05-23T12:00:00+02:00,2026-05-23T09:53:19Z,ok,5950,1,,6.48
+f5e5be39-4a7b-4476-be3e-6bc1b98e7eef,DE,actual_load,2026-04-22T12:00:00+02:00,2026-05-23T12:00:00+02:00,2026-05-23T09:53:26Z,ok,2973,1,,4.03
+f5e5be39-4a7b-4476-be3e-6bc1b98e7eef,DE,forecast_load,2026-04-22T12:00:00+02:00,2026-05-23T12:00:00+02:00,2026-05-23T09:53:30Z,ok,2976,1,,1.86
+f5e5be39-4a7b-4476-be3e-6bc1b98e7eef,DE,actual_solar_generation,2026-04-22T12:00:00+02:00,2026-05-23T12:00:00+02:00,2026-05-23T09:53:32Z,ok,2974,1,,1.74
+f5e5be39-4a7b-4476-be3e-6bc1b98e7eef,DE,forecast_solar_generation,2026-04-22T12:00:00+02:00,2026-05-23T12:00:00+02:00,2026-05-23T09:53:33Z,ok,2976,1,,1.67
+f5e5be39-4a7b-4476-be3e-6bc1b98e7eef,DE,actual_onshore_wind_generation,2026-04-22T12:00:00+02:00,2026-05-23T12:00:00+02:00,2026-05-23T09:53:35Z,ok,2973,1,,1.65
+f5e5be39-4a7b-4476-be3e-6bc1b98e7eef,DE,forecast_onshore_wind_generation,2026-04-22T12:00:00+02:00,2026-05-23T12:00:00+02:00,2026-05-23T09:53:37Z,ok,2976,1,,1.55
+f5e5be39-4a7b-4476-be3e-6bc1b98e7eef,DE,actual_offshore_wind_generation,2026-04-22T12:00:00+02:00,2026-05-23T12:00:00+02:00,2026-05-23T09:53:38Z,ok,2974,1,,1.57
+f5e5be39-4a7b-4476-be3e-6bc1b98e7eef,DE,forecast_offshore_wind_generation,2026-04-22T12:00:00+02:00,2026-05-23T12:00:00+02:00,2026-05-23T09:53:40Z,ok,2976,1,,1.5
+f5e5be39-4a7b-4476-be3e-6bc1b98e7eef,DE,day_ahead_price,2026-04-22T12:00:00+02:00,2026-05-23T12:00:00+02:00,2026-05-23T09:53:41Z,ok,2977,1,,1.5
+f5e5be39-4a7b-4476-be3e-6bc1b98e7eef,DE,imbalance_price,2026-04-22T12:00:00+02:00,2026-05-23T12:00:00+02:00,2026-05-23T09:53:43Z,ok,0,0,,1.13

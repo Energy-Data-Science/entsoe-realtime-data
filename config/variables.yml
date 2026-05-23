@@ -1,0 +1,48 @@
+# Human-readable variable catalogue. The Python code keeps the executable
+# mapping in src/entsoe_realtime/config.py so notebooks and jobs can import it.
+actual_load:
+  family: load
+  start_date: 2020-12-01
+  unit: MW
+forecast_load:
+  family: load
+  start_date: 2020-12-01
+  unit: MW
+actual_solar_generation:
+  family: renewable_generation
+  psr_type: B16
+  start_date: 2022-01-01
+  unit: MW
+forecast_solar_generation:
+  family: renewable_generation
+  psr_type: B16
+  start_date: 2022-01-01
+  unit: MW
+actual_onshore_wind_generation:
+  family: renewable_generation
+  psr_type: B19
+  start_date: 2022-01-01
+  unit: MW
+forecast_onshore_wind_generation:
+  family: renewable_generation
+  psr_type: B19
+  start_date: 2022-01-01
+  unit: MW
+actual_offshore_wind_generation:
+  family: renewable_generation
+  psr_type: B18
+  start_date: 2022-01-01
+  unit: MW
+forecast_offshore_wind_generation:
+  family: renewable_generation
+  psr_type: B18
+  start_date: 2022-01-01
+  unit: MW
+day_ahead_price:
+  family: price
+  start_date: 2020-12-01
+  unit: EUR/MWh
+imbalance_price:
+  family: price
+  start_date: 2020-12-01
+  unit: EUR/MWh
