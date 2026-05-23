@@ -69,12 +69,15 @@ It can be started manually from the GitHub Actions tab with `Run workflow`.
 It also runs on this schedule:
 
 ```text
-*/15 * * * *
+7,22,37,52 * * * *
 ```
 
-GitHub schedules are interpreted in UTC. The workflow fetches the latest 31 days,
-writes timestamped CSV snapshots under `data/updates`, updates
-`data/update_manifest.csv`, then commits those changes back to the repository.
+GitHub schedules are interpreted in UTC. The workflow still runs every 15
+minutes, but uses offset minutes rather than `0,15,30,45` to reduce the chance
+of GitHub scheduler delays or dropped jobs during common high-load times. The
+workflow fetches the latest 31 days, writes timestamped CSV snapshots under
+`data/updates`, updates `data/update_manifest.csv`, then commits those changes
+back to the repository.
 
 ## 4. Publish The Dashboard
 
