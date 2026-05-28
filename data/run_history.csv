@@ -9529,3 +9529,33 @@ b000130c-8806-49b0-bc1d-a02c683fbbbb,DE,imbalance_price,2026-04-27T11:45:00+02:0
 02f94d77-151a-4076-9cda-d5483b56ec7c,DE,forecast_offshore_wind_generation,2026-04-27T12:00:00+02:00,2026-05-28T12:00:00+02:00,2026-05-28T09:52:13Z,ok,2976,1,,2.36
 02f94d77-151a-4076-9cda-d5483b56ec7c,DE,day_ahead_price,2026-04-27T12:00:00+02:00,2026-05-28T12:00:00+02:00,2026-05-28T09:52:15Z,ok,2977,1,,2.27
 02f94d77-151a-4076-9cda-d5483b56ec7c,DE,imbalance_price,2026-04-27T12:00:00+02:00,2026-05-28T12:00:00+02:00,2026-05-28T09:52:17Z,warning,0,0,No records fetched; no snapshot file was written.,1.32
+b7ddf5e9-ad9e-4a7e-bdd3-dbad46e21b3f,BE,actual_load,2026-04-27T12:15:00+02:00,2026-05-28T12:15:00+02:00,2026-05-28T10:08:30Z,ok,2974,1,,5.07
+b7ddf5e9-ad9e-4a7e-bdd3-dbad46e21b3f,BE,forecast_load,2026-04-27T12:15:00+02:00,2026-05-28T12:15:00+02:00,2026-05-28T10:08:35Z,ok,2975,1,,2.56
+b7ddf5e9-ad9e-4a7e-bdd3-dbad46e21b3f,BE,actual_solar_generation,2026-04-27T12:15:00+02:00,2026-05-28T12:15:00+02:00,2026-05-28T10:08:37Z,ok,742,1,,2.06
+b7ddf5e9-ad9e-4a7e-bdd3-dbad46e21b3f,BE,forecast_solar_generation,2026-04-27T12:15:00+02:00,2026-05-28T12:15:00+02:00,2026-05-28T10:08:40Z,ok,743,1,,2.09
+b7ddf5e9-ad9e-4a7e-bdd3-dbad46e21b3f,BE,actual_onshore_wind_generation,2026-04-27T12:15:00+02:00,2026-05-28T12:15:00+02:00,2026-05-28T10:08:42Z,ok,742,1,,1.55
+b7ddf5e9-ad9e-4a7e-bdd3-dbad46e21b3f,BE,forecast_onshore_wind_generation,2026-04-27T12:15:00+02:00,2026-05-28T12:15:00+02:00,2026-05-28T10:08:43Z,ok,743,1,,1.68
+b7ddf5e9-ad9e-4a7e-bdd3-dbad46e21b3f,BE,actual_offshore_wind_generation,2026-04-27T12:15:00+02:00,2026-05-28T12:15:00+02:00,2026-05-28T10:08:45Z,ok,767,1,,1.56
+b7ddf5e9-ad9e-4a7e-bdd3-dbad46e21b3f,BE,forecast_offshore_wind_generation,2026-04-27T12:15:00+02:00,2026-05-28T12:15:00+02:00,2026-05-28T10:08:47Z,ok,743,1,,1.53
+b7ddf5e9-ad9e-4a7e-bdd3-dbad46e21b3f,BE,day_ahead_price,2026-04-27T12:15:00+02:00,2026-05-28T12:15:00+02:00,2026-05-28T10:08:48Z,ok,2977,1,,2.27
+b7ddf5e9-ad9e-4a7e-bdd3-dbad46e21b3f,BE,imbalance_price,2026-04-27T12:15:00+02:00,2026-05-28T12:15:00+02:00,2026-05-28T10:08:51Z,ok,5950,1,,8.79
+b7ddf5e9-ad9e-4a7e-bdd3-dbad46e21b3f,FR,actual_load,2026-04-27T12:15:00+02:00,2026-05-28T12:15:00+02:00,2026-05-28T10:08:59Z,ok,2971,1,,3.26
+b7ddf5e9-ad9e-4a7e-bdd3-dbad46e21b3f,FR,forecast_load,2026-04-27T12:15:00+02:00,2026-05-28T12:15:00+02:00,2026-05-28T10:09:03Z,ok,2975,1,,2.97
+b7ddf5e9-ad9e-4a7e-bdd3-dbad46e21b3f,FR,actual_solar_generation,2026-04-27T12:15:00+02:00,2026-05-28T12:15:00+02:00,2026-05-28T10:09:06Z,ok,2971,1,,3.3
+b7ddf5e9-ad9e-4a7e-bdd3-dbad46e21b3f,FR,forecast_solar_generation,2026-04-27T12:15:00+02:00,2026-05-28T12:15:00+02:00,2026-05-28T10:09:09Z,ok,2975,1,,2.85
+b7ddf5e9-ad9e-4a7e-bdd3-dbad46e21b3f,FR,actual_onshore_wind_generation,2026-04-27T12:15:00+02:00,2026-05-28T12:15:00+02:00,2026-05-28T10:09:12Z,ok,2971,1,,2.31
+b7ddf5e9-ad9e-4a7e-bdd3-dbad46e21b3f,FR,forecast_onshore_wind_generation,2026-04-27T12:15:00+02:00,2026-05-28T12:15:00+02:00,2026-05-28T10:09:14Z,ok,2975,1,,2.9
+b7ddf5e9-ad9e-4a7e-bdd3-dbad46e21b3f,FR,actual_offshore_wind_generation,2026-04-27T12:15:00+02:00,2026-05-28T12:15:00+02:00,2026-05-28T10:09:17Z,ok,2971,1,,2.12
+b7ddf5e9-ad9e-4a7e-bdd3-dbad46e21b3f,FR,forecast_offshore_wind_generation,2026-04-27T12:15:00+02:00,2026-05-28T12:15:00+02:00,2026-05-28T10:09:20Z,ok,2975,1,,2.15
+b7ddf5e9-ad9e-4a7e-bdd3-dbad46e21b3f,FR,day_ahead_price,2026-04-27T12:15:00+02:00,2026-05-28T12:15:00+02:00,2026-05-28T10:09:22Z,ok,2977,1,,3.13
+b7ddf5e9-ad9e-4a7e-bdd3-dbad46e21b3f,FR,imbalance_price,2026-04-27T12:15:00+02:00,2026-05-28T12:15:00+02:00,2026-05-28T10:09:25Z,ok,5950,1,,12.66
+b7ddf5e9-ad9e-4a7e-bdd3-dbad46e21b3f,DE,actual_load,2026-04-27T12:15:00+02:00,2026-05-28T12:15:00+02:00,2026-05-28T10:09:38Z,ok,2973,1,,3.48
+b7ddf5e9-ad9e-4a7e-bdd3-dbad46e21b3f,DE,forecast_load,2026-04-27T12:15:00+02:00,2026-05-28T12:15:00+02:00,2026-05-28T10:09:41Z,ok,2975,1,,2.43
+b7ddf5e9-ad9e-4a7e-bdd3-dbad46e21b3f,DE,actual_solar_generation,2026-04-27T12:15:00+02:00,2026-05-28T12:15:00+02:00,2026-05-28T10:09:44Z,ok,2974,1,,2.56
+b7ddf5e9-ad9e-4a7e-bdd3-dbad46e21b3f,DE,forecast_solar_generation,2026-04-27T12:15:00+02:00,2026-05-28T12:15:00+02:00,2026-05-28T10:09:46Z,ok,2975,1,,2.12
+b7ddf5e9-ad9e-4a7e-bdd3-dbad46e21b3f,DE,actual_onshore_wind_generation,2026-04-27T12:15:00+02:00,2026-05-28T12:15:00+02:00,2026-05-28T10:09:48Z,ok,2972,1,,2.55
+b7ddf5e9-ad9e-4a7e-bdd3-dbad46e21b3f,DE,forecast_onshore_wind_generation,2026-04-27T12:15:00+02:00,2026-05-28T12:15:00+02:00,2026-05-28T10:09:51Z,ok,2975,1,,2.18
+b7ddf5e9-ad9e-4a7e-bdd3-dbad46e21b3f,DE,actual_offshore_wind_generation,2026-04-27T12:15:00+02:00,2026-05-28T12:15:00+02:00,2026-05-28T10:09:53Z,ok,2974,1,,2.21
+b7ddf5e9-ad9e-4a7e-bdd3-dbad46e21b3f,DE,forecast_offshore_wind_generation,2026-04-27T12:15:00+02:00,2026-05-28T12:15:00+02:00,2026-05-28T10:09:56Z,ok,2975,1,,2.17
+b7ddf5e9-ad9e-4a7e-bdd3-dbad46e21b3f,DE,day_ahead_price,2026-04-27T12:15:00+02:00,2026-05-28T12:15:00+02:00,2026-05-28T10:09:58Z,ok,2977,1,,2.31
+b7ddf5e9-ad9e-4a7e-bdd3-dbad46e21b3f,DE,imbalance_price,2026-04-27T12:15:00+02:00,2026-05-28T12:15:00+02:00,2026-05-28T10:10:00Z,warning,0,0,No records fetched; no snapshot file was written.,1.86
