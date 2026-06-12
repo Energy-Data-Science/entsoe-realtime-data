@@ -19,7 +19,17 @@ def main() -> None:
         write_output(True, "manifest_empty")
         return
 
-    latest = pd.to_datetime(manifest["collection_time_utc"], utc=True).max()
+    collection_times = pd.to_datetime(
+        manifest["collection_time_utc"],
+        utc=True,
+        format="mixed",
+        errors="coerce",
+    ).dropna()
+    if collection_times.empty:
+        write_output(True, "manifest_has_no_parseable_collection_times")
+        return
+
+    latest = collection_times.max()
     age_minutes = (pd.Timestamp.utcnow() - latest).total_seconds() / 60
     should_collect = age_minutes >= min_interval_minutes
     reason = f"latest_collection_age_minutes={age_minutes:.1f}"
@@ -40,4 +50,3 @@ def write_output(should_collect: bool, reason: str) -> None:
 
 if __name__ == "__main__":
     main()
-
