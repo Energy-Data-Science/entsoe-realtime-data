@@ -60,13 +60,11 @@ jobs:
           if git show-ref --verify --quiet refs/remotes/origin/data; then
             git worktree add --no-checkout ../entsoe-data origin/data
             cd ../entsoe-data
-            git sparse-checkout init --no-cone
-            {
-              echo "/data/update_manifest.csv"
-              echo "/data/status.json"
-              echo "/data/run_history.csv"
-              echo "/data/progress.json"
-            } > .git/info/sparse-checkout
+            git sparse-checkout set --no-cone \
+              /data/update_manifest.csv \
+              /data/status.json \
+              /data/run_history.csv \
+              /data/progress.json
             git checkout
             cd "$GITHUB_WORKSPACE"
             mkdir -p data/updates
