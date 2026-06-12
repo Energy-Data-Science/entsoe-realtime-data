@@ -55,7 +55,7 @@ jobs:
 
       - name: Prepare data branch
         run: |
-          git fetch origin data --depth=1 || true
+          git fetch origin data --filter=blob:none --depth=1 || true
           if git show-ref --verify --quiet refs/remotes/origin/data; then
             git worktree add --no-checkout ../entsoe-data origin/data
             cd ../entsoe-data
@@ -80,7 +80,7 @@ jobs:
         run: |
           for iteration in $(seq 1 48); do
             echo "Collection loop iteration ${iteration}/48 at $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
-            git -C ../entsoe-data fetch origin data --depth=1 || true
+            git -C ../entsoe-data fetch origin data --filter=blob:none --depth=1 || true
             git -C ../entsoe-data reset --hard FETCH_HEAD || true
             mkdir -p data/updates
             cp -f ../entsoe-data/data/update_manifest.csv data/update_manifest.csv 2>/dev/null || true
