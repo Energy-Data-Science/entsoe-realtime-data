@@ -58,8 +58,22 @@ jobs:
         run: |
           git fetch origin data --depth=1 || true
           if git show-ref --verify --quiet refs/remotes/origin/data; then
-            git worktree add ../entsoe-data origin/data
-            cp -a ../entsoe-data/data/. data/ 2>/dev/null || true
+            git worktree add --no-checkout ../entsoe-data origin/data
+            cd ../entsoe-data
+            git sparse-checkout init --no-cone
+            {
+              echo "/data/update_manifest.csv"
+              echo "/data/status.json"
+              echo "/data/run_history.csv"
+              echo "/data/progress.json"
+            } > .git/info/sparse-checkout
+            git checkout
+            cd "$GITHUB_WORKSPACE"
+            mkdir -p data/updates
+            cp -f ../entsoe-data/data/update_manifest.csv data/update_manifest.csv 2>/dev/null || true
+            cp -f ../entsoe-data/data/status.json data/status.json 2>/dev/null || true
+            cp -f ../entsoe-data/data/run_history.csv data/run_history.csv 2>/dev/null || true
+            cp -f ../entsoe-data/data/progress.json data/progress.json 2>/dev/null || true
           else
             git worktree add -b data ../entsoe-data
           fi
@@ -76,7 +90,8 @@ jobs:
         if: steps.due.outputs.should_collect == 'true' || github.event_name == 'workflow_dispatch' || github.event_name == 'repository_dispatch'
         run: |
           mkdir -p ../entsoe-data/data
-          cp -a data/updates ../entsoe-data/data/ 2>/dev/null || true
+          mkdir -p ../entsoe-data/data/updates
+          cp -a data/updates/. ../entsoe-data/data/updates/ 2>/dev/null || true
           cp -f data/update_manifest.csv ../entsoe-data/data/update_manifest.csv 2>/dev/null || true
           cp -f data/status.json ../entsoe-data/data/status.json 2>/dev/null || true
           cp -f data/run_history.csv ../entsoe-data/data/run_history.csv 2>/dev/null || true
@@ -85,7 +100,7 @@ jobs:
           cd ../entsoe-data
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/updates data/update_manifest.csv data/status.json data/run_history.csv data/progress.json
+          git add --sparse data/updates data/update_manifest.csv data/status.json data/run_history.csv data/progress.json
           if git diff --cached --quiet; then
             echo "No snapshot changes to commit."
           else
