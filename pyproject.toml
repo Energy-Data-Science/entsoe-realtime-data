@@ -14,8 +14,9 @@ dependencies = [
   "streamlit>=1.35",
   "plotly>=5.22",
   "schedule>=1.2",
+  "python-irodsclient>=3.2",
+  "mango_auth>=0.0.11",
 ]
 
 [tool.setuptools.packages.find]
 where = ["src"]
-

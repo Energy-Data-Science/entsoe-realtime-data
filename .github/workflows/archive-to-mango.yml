@@ -1,0 +1,144 @@
+name: Archive old ENTSO-E snapshots to Mango
+
+on:
+  workflow_dispatch:
+    inputs:
+      retention_days:
+        description: "Keep this many days on GitHub before archiving to Mango."
+        required: false
+        default: "14"
+      limit:
+        description: "Optional maximum number of files to archive."
+        required: false
+        default: ""
+      dry_run:
+        description: "Plan and print actions without uploading or pruning."
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
+  schedule:
+    # GitHub cron uses UTC. This is 04:00 Europe/Brussels during summer time
+    # and 03:00 Europe/Brussels during winter time.
+    - cron: "0 2 * * *"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: entsoe-mango-archive
+  cancel-in-progress: false
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      MANGO_REMOTE_ROOT: /set/home/Transparency_plus/ingress/entsoe-realtime-data-archive/data-branch-work/data/updates
+      MANGO_COUNTRY_MAP: BE=Belgium,FR=France,DE=Germany
+      IRODS_PASSWORD: ${{ secrets.MANGO_IRODS_PASSWORD }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.DATA_PUSH_TOKEN }}
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Write iRODS environment file
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        env:
+          MANGO_IRODS_ENVIRONMENT_JSON: ${{ secrets.MANGO_IRODS_ENVIRONMENT_JSON }}
+        run: |
+          if [ -z "${MANGO_IRODS_ENVIRONMENT_JSON}" ]; then
+            echo "Missing required secret MANGO_IRODS_ENVIRONMENT_JSON."
+            exit 1
+          fi
+          mkdir -p "${RUNNER_TEMP}/irods"
+          python -c "import os, pathlib; pathlib.Path(os.environ['RUNNER_TEMP'], 'irods', 'irods_environment.json').write_text(os.environ['MANGO_IRODS_ENVIRONMENT_JSON'], encoding='utf-8')"
+          echo "IRODS_ENVIRONMENT_FILE=${RUNNER_TEMP}/irods/irods_environment.json" >> "${GITHUB_ENV}"
+
+      - name: Prepare data branch metadata
+        run: |
+          git fetch origin data --filter=blob:none --depth=1
+          git worktree add --no-checkout ../entsoe-data origin/data
+          cd ../entsoe-data
+          git sparse-checkout set --no-cone \
+            /data/update_manifest.csv \
+            /data/status.json \
+            /data/run_history.csv \
+            /data/progress.json \
+            /data/mango_upload_manifest.csv
+          git checkout
+
+      - name: Plan archive file checkout
+        id: plan
+        env:
+          RETENTION_DAYS: ${{ github.event.inputs.retention_days || '14' }}
+          LIMIT: ${{ github.event.inputs.limit }}
+        run: |
+          limit_args=()
+          if [ -n "${LIMIT}" ]; then
+            limit_args=(--limit "${LIMIT}")
+          fi
+          python scripts/plan_mango_archive.py \
+            --data-root ../entsoe-data \
+            --retention-days "${RETENTION_DAYS}" \
+            --output ../mango_archive_sparse_checkout.txt \
+            "${limit_args[@]}"
+
+      - name: Check out archive candidates
+        if: steps.plan.outputs.has_candidates == 'true'
+        run: |
+          cd ../entsoe-data
+          git sparse-checkout set --no-cone --stdin < ../mango_archive_sparse_checkout.txt
+          git checkout
+
+      - name: Archive candidates to Mango
+        if: steps.plan.outputs.has_candidates == 'true'
+        env:
+          RETENTION_DAYS: ${{ github.event.inputs.retention_days || '14' }}
+          LIMIT: ${{ github.event.inputs.limit }}
+          DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
+        run: |
+          limit_args=()
+          dry_run_args=()
+          if [ -n "${LIMIT}" ]; then
+            limit_args=(--limit "${LIMIT}")
+          fi
+          if [ "${DRY_RUN}" = "true" ]; then
+            dry_run_args=(--dry-run)
+          fi
+          python scripts/archive_old_snapshots_to_mango.py \
+            --data-root ../entsoe-data \
+            --retention-days "${RETENTION_DAYS}" \
+            --remote-root "${MANGO_REMOTE_ROOT}" \
+            --metadata project=entsoe-realtime-data \
+            --metadata source=ENTSO-E \
+            "${limit_args[@]}" \
+            "${dry_run_args[@]}"
+
+      - name: Commit archive pruning to data branch
+        if: steps.plan.outputs.has_candidates == 'true' && github.event.inputs.dry_run != 'true'
+        run: |
+          cd ../entsoe-data
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse -A data
+          if git diff --cached --quiet; then
+            echo "No archive pruning changes to commit."
+          else
+            git commit -m "data: archive snapshots older than retention window"
+            git push origin HEAD:data
+          fi

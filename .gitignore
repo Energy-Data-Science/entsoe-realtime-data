@@ -7,3 +7,4 @@ __pycache__/
 logs/*.log
 data/raw/**/*.csv
 data/processed/**/*.csv
+config/irods_environment.json

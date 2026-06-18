@@ -95,6 +95,102 @@ The dashboard shows the latest collection, failures, record counts, snapshot
 coverage, and preview charts. In public deployment it can run without the API
 key and read only the committed GitHub data.
 
+## Upload Snapshots To Mango
+
+For larger transfers, use the Python iRODS upload helper instead of the Mango
+web upload button. It walks a local folder, recreates the same structure in
+Mango, skips files that already exist with the same size, and records upload
+results in `data/mango_upload_manifest.csv`.
+
+Install the Mango/iRODS dependency:
+
+```bash
+pip install -r requirements.txt
+```
+
+Set up an `irods_environment.json` file from Mango, then pass it with
+`--env-file`. If the file is stored at `~/.irods/irods_environment.json`, the
+script will find it automatically.
+
+For recurring uploads, prefer the Mango project machine account, usually the
+project `<name>_ingress` account. For machine-account uploads, set
+`IRODS_PASSWORD` to the retrieved machine-account password/token. For personal
+interactive uploads only, add `--authenticate` to start Mango's browser-based
+authentication flow through `mango_auth`.
+
+First run a small dry run:
+
+```bash
+python scripts/upload_to_mango.py \
+  --env-file config/irods_environment.json \
+  --local-root /Volumes/PSSD/1_entsoe-realtime-data-archive/data-branch-work/data/updates/FR \
+  --remote-root /set/home/Transparency_plus/ingress/entsoe-realtime-data-archive/data-branch-work/data/updates/France \
+  --limit 10 \
+  --dry-run
+```
+
+Then upload one country:
+
+```bash
+python scripts/upload_to_mango.py \
+  --env-file config/irods_environment.json \
+  --local-root /Volumes/PSSD/1_entsoe-realtime-data-archive/data-branch-work/data/updates/FR \
+  --remote-root /set/home/Transparency_plus/ingress/entsoe-realtime-data-archive/data-branch-work/data/updates/France
+```
+
+After that, upload the full `updates` tree:
+
+```bash
+python scripts/upload_to_mango.py \
+  --env-file config/irods_environment.json \
+  --local-root /Volumes/PSSD/1_entsoe-realtime-data-archive/data-branch-work/data/updates \
+  --remote-root /set/home/Transparency_plus/ingress/entsoe-realtime-data-archive/data-branch-work/data/updates
+```
+
+Optional metadata can be attached to uploaded data objects:
+
+```bash
+python scripts/upload_to_mango.py \
+  --env-file config/irods_environment.json \
+  --metadata project=entsoe-realtime-data \
+  --metadata source=ENTSO-E
+```
+
+## Daily Mango Archive Workflow
+
+The workflow `.github/workflows/archive-to-mango.yml` archives old operational
+snapshot files from the GitHub `data` branch to Mango. The default policy is:
+
+- keep the latest 14 days on GitHub
+- move older snapshot CSV files to Mango
+- map country folders as `BE -> Belgium`, `FR -> France`, and `DE -> Germany`
+- prune files from GitHub only after upload and size verification succeed
+- append archive results to `data/mango_upload_manifest.csv`
+
+It is scheduled with GitHub cron:
+
+```text
+0 2 * * *
+```
+
+GitHub cron is UTC. This is 04:00 in Brussels during summer time and 03:00 in
+Brussels during winter time. If exact 04:00 Brussels time is required all year,
+adjust the cron seasonally.
+
+For GitHub Actions automation, configure these repository secrets:
+
+```text
+DATA_PUSH_TOKEN
+MANGO_IRODS_ENVIRONMENT_JSON
+MANGO_IRODS_PASSWORD
+```
+
+`MANGO_IRODS_ENVIRONMENT_JSON` should contain the Mango
+`irods_environment.json` content for `Transparency_plus_ingress`.
+`MANGO_IRODS_PASSWORD` should contain the corresponding machine-account
+password/token. Personal KU Leuven authenticator login is suitable for local
+uploads, but not for unattended GitHub Actions.
+
 ## CSV Layout
 
 Historical CSV files are kept by country, variable, and year:
