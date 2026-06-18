@@ -169,10 +169,11 @@ def get_session(args: argparse.Namespace):
     env_file = resolve_env_file(args)
     if env_file is not None:
         password = os.getenv("IRODS_PASSWORD")
-        kwargs = {"irods_env_file": str(env_file)}
         if password:
+            kwargs = load_irods_env(env_file)
             kwargs["password"] = password
-        return iRODSSession(**kwargs)
+            return iRODSSession(**kwargs)
+        return iRODSSession(irods_env_file=str(env_file))
 
     host = os.getenv("IRODS_HOST")
     port = os.getenv("IRODS_PORT", "1247")
