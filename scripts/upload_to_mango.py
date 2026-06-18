@@ -166,14 +166,19 @@ def get_session(args: argparse.Namespace):
             "`pip install python-irodsclient` or `pip install -r requirements.txt`."
         )
 
+    connection_timeout = float(os.getenv("IRODS_CONNECTION_TIMEOUT_SECONDS", "20"))
     env_file = resolve_env_file(args)
     if env_file is not None:
         password = os.getenv("IRODS_PASSWORD")
         if password:
             kwargs = load_irods_env(env_file)
             kwargs["password"] = password
+            kwargs["connection_timeout"] = connection_timeout
             return iRODSSession(**kwargs)
-        return iRODSSession(irods_env_file=str(env_file))
+        return iRODSSession(
+            irods_env_file=str(env_file),
+            connection_timeout=connection_timeout,
+        )
 
     host = os.getenv("IRODS_HOST")
     port = os.getenv("IRODS_PORT", "1247")
@@ -205,6 +210,7 @@ def get_session(args: argparse.Namespace):
         "user": user,
         "password": password,
         "zone": zone,
+        "connection_timeout": connection_timeout,
     }
     if auth_scheme:
         kwargs["authentication_scheme"] = auth_scheme

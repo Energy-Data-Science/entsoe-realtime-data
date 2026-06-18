@@ -39,6 +39,7 @@ jobs:
       MANGO_REMOTE_ROOT: /set/home/Transparency_plus/ingress/entsoe-realtime-data-archive/data-branch-work/data/updates
       MANGO_COUNTRY_MAP: BE=Belgium,FR=France,DE=Germany
       IRODS_PASSWORD: ${{ secrets.MANGO_IRODS_PASSWORD }}
+      IRODS_CONNECTION_TIMEOUT_SECONDS: "20"
 
     steps:
       - name: Check out repository
@@ -105,8 +106,28 @@ jobs:
           git sparse-checkout set --no-cone --stdin < ../mango_archive_sparse_checkout.txt
           git checkout
 
+      - name: Preflight Mango iRODS connection
+        if: steps.plan.outputs.has_candidates == 'true' && github.event.inputs.dry_run != 'true'
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import socket
+
+          env_file = os.environ["IRODS_ENVIRONMENT_FILE"]
+          with open(env_file, encoding="utf-8") as source:
+              irods_env = json.load(source)
+          host = irods_env["irods_host"]
+          port = int(irods_env["irods_port"])
+          timeout = float(os.getenv("IRODS_CONNECTION_TIMEOUT_SECONDS", "20"))
+          print(f"Testing iRODS TCP connection to {host}:{port} with {timeout:g}s timeout.")
+          with socket.create_connection((host, port), timeout=timeout):
+              print("Mango iRODS TCP connection succeeded.")
+          PY
+
       - name: Archive candidates to Mango
         if: steps.plan.outputs.has_candidates == 'true'
+        timeout-minutes: 10
         env:
           RETENTION_DAYS: ${{ github.event.inputs.retention_days || '14' }}
           LIMIT: ${{ github.event.inputs.limit }}
