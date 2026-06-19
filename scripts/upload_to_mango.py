@@ -18,9 +18,13 @@ except ImportError:  # pragma: no cover - optional convenience dependency
 
 try:
     from irods.session import iRODSSession
-    from irods.exception import CollectionDoesNotExist
+    from irods.exception import (
+        CATALOG_ALREADY_HAS_ITEM_BY_THAT_NAME,
+        CollectionDoesNotExist,
+    )
 except ImportError:  # pragma: no cover - handled in main
     iRODSSession = None
+    CATALOG_ALREADY_HAS_ITEM_BY_THAT_NAME = None
     CollectionDoesNotExist = None
 
 
@@ -248,6 +252,11 @@ def ensure_collection(session, remote_collection: str) -> None:
     except TypeError:
         create_collection_chain(session, remote_collection)
     except Exception as exc:
+        if (
+            CATALOG_ALREADY_HAS_ITEM_BY_THAT_NAME is not None
+            and isinstance(exc, CATALOG_ALREADY_HAS_ITEM_BY_THAT_NAME)
+        ):
+            return
         if CollectionDoesNotExist is None or not isinstance(exc, CollectionDoesNotExist):
             raise
         create_collection_chain(session, remote_collection)
@@ -269,17 +278,24 @@ def create_collection_chain(session, remote_collection: str) -> None:
 
     for part in parts:
         current = f"{current}/{part}" if current else f"/{part}"
-        if not session.collections.exists(current):
-            print(f"Creating Mango collection: {current}")
-            try:
-                session.collections.create(current, recurse=False)
-            except Exception as exc:
-                if CollectionDoesNotExist is None or not isinstance(exc, CollectionDoesNotExist):
-                    raise
-                print(
-                    "Mango collection create returned before it was queryable; "
-                    f"continuing after create request for: {current}"
-                )
+        if session.collections.exists(current):
+            continue
+        print(f"Creating Mango collection: {current}")
+        try:
+            session.collections.create(current, recurse=False)
+        except Exception as exc:
+            if (
+                CATALOG_ALREADY_HAS_ITEM_BY_THAT_NAME is not None
+                and isinstance(exc, CATALOG_ALREADY_HAS_ITEM_BY_THAT_NAME)
+            ):
+                print(f"Mango collection already exists: {current}")
+                continue
+            if CollectionDoesNotExist is None or not isinstance(exc, CollectionDoesNotExist):
+                raise
+            print(
+                "Mango collection create returned before it was queryable; "
+                f"continuing after create request for: {current}"
+            )
 
 
 def remote_size(session, remote_path: str) -> int | None:
