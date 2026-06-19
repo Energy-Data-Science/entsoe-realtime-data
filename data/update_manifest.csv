@@ -1,5 +1,4 @@
 collection_time_utc,collection_time_local,run_id,country,variable,rows,window_start_utc,window_end_utc,path
-2026-06-03 11:59:26+00:00,2026-06-03T13:59:26+0200,db1c1472-d31b-43ee-8b94-4d0fe0a57805,BE,actual_load,2974,2026-05-03T12:00:00Z,2026-06-03T11:15:00Z,data/updates/BE/actual_load/2026/06/20260603T115926Z.csv
 2026-06-03 11:59:26+00:00,2026-06-03T13:59:26+0200,db1c1472-d31b-43ee-8b94-4d0fe0a57805,BE,forecast_load,2976,2026-05-03T12:00:00Z,2026-06-03T11:45:00Z,data/updates/BE/forecast_load/2026/06/20260603T115926Z.csv
 2026-06-03 11:59:26+00:00,2026-06-03T13:59:26+0200,db1c1472-d31b-43ee-8b94-4d0fe0a57805,BE,actual_solar_generation,743,2026-05-03T12:00:00Z,2026-06-03T10:00:00Z,data/updates/BE/actual_solar_generation/2026/06/20260603T115926Z.csv
 2026-06-03 11:59:26+00:00,2026-06-03T13:59:26+0200,db1c1472-d31b-43ee-8b94-4d0fe0a57805,BE,forecast_solar_generation,744,2026-05-03T12:00:00Z,2026-06-03T11:00:00Z,data/updates/BE/forecast_solar_generation/2026/06/20260603T115926Z.csv

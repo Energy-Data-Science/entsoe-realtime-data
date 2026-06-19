@@ -1,0 +1,2 @@
+archived_at_utc,status,message,size_bytes,github_path,mango_path,collection_time_utc,run_id,country,variable,rows,window_start_utc,window_end_utc
+2026-06-19T10:00:14Z,skipped_existing,,568606,data/updates/BE/actual_load/2026/06/20260603T115926Z.csv,/set/home/Transparency_plus/ingress/entsoe-realtime-data-github-archive/data-branch-work/data/updates/Belgium/actual_load/2026/06/20260603T115926Z.csv,2026-06-03 11:59:26+00:00,db1c1472-d31b-43ee-8b94-4d0fe0a57805,BE,actual_load,2974,2026-05-03T12:00:00Z,2026-06-03T11:15:00Z
