@@ -36,7 +36,7 @@ jobs:
     runs-on: [self-hosted, macOS, X64, mango]
     timeout-minutes: 120
     env:
-      MANGO_REMOTE_ROOT: /set/home/Transparency_plus/ingress/entsoe-realtime-data-archive/data-branch-work/data/updates
+      MANGO_REMOTE_ROOT: /set/home/Transparency_plus/ingress/entsoe-realtime-data-github-archive/data-branch-work/data/updates
       MANGO_EXISTING_COLLECTION_ROOT: /set/home/Transparency_plus/ingress
       MANGO_COUNTRY_MAP: BE=Belgium,FR=France,DE=Germany
       IRODS_PASSWORD: ${{ secrets.MANGO_IRODS_PASSWORD }}
