@@ -33,7 +33,7 @@ concurrency:
 
 jobs:
   archive:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, macOS, X64, mango]
     timeout-minutes: 120
     env:
       MANGO_REMOTE_ROOT: /set/home/Transparency_plus/ingress/entsoe-realtime-data-archive/data-branch-work/data/updates
