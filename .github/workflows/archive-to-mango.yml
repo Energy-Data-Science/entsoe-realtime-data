@@ -163,5 +163,7 @@ jobs:
             echo "No archive pruning changes to commit."
           else
             git commit -m "data: archive snapshots older than retention window"
+            git fetch origin data --filter=blob:none --depth=20
+            git rebase origin/data
             git push origin HEAD:data
           fi
