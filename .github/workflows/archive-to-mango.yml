@@ -72,6 +72,8 @@ jobs:
       - name: Prepare data branch metadata
         run: |
           git fetch origin data --filter=blob:none --depth=1
+          git worktree remove --force ../entsoe-data 2>/dev/null || true
+          rm -rf ../entsoe-data
           git worktree add --no-checkout ../entsoe-data origin/data
           cd ../entsoe-data
           git sparse-checkout set --no-cone \
