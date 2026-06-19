@@ -129,7 +129,7 @@ jobs:
 
       - name: Archive candidates to Mango
         if: steps.plan.outputs.has_candidates == 'true'
-        timeout-minutes: 10
+        timeout-minutes: 90
         env:
           RETENTION_DAYS: ${{ github.event.inputs.retention_days || '14' }}
           LIMIT: ${{ github.event.inputs.limit }}
@@ -143,7 +143,7 @@ jobs:
           if [ "${DRY_RUN}" = "true" ]; then
             dry_run_args=(--dry-run)
           fi
-          python3 scripts/archive_old_snapshots_to_mango.py \
+          python3 -u scripts/archive_old_snapshots_to_mango.py \
             --data-root ../entsoe-data \
             --retention-days "${RETENTION_DAYS}" \
             --remote-root "${MANGO_REMOTE_ROOT}" \
