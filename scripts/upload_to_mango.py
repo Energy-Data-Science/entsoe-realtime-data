@@ -29,6 +29,7 @@ DEFAULT_LOCAL_ROOT = (
 )
 DEFAULT_MANIFEST = "data/mango_upload_manifest.csv"
 DEFAULT_IRODS_ENV_FILE = "~/.irods/irods_environment.json"
+DEFAULT_EXISTING_COLLECTION_ROOT = "/set/home/Transparency_plus/ingress"
 
 
 @dataclass
@@ -253,10 +254,21 @@ def ensure_collection(session, remote_collection: str) -> None:
 
 
 def create_collection_chain(session, remote_collection: str) -> None:
-    parts = [part for part in remote_collection.split("/") if part]
-    current = ""
+    existing_root = os.getenv(
+        "MANGO_EXISTING_COLLECTION_ROOT",
+        DEFAULT_EXISTING_COLLECTION_ROOT,
+    ).rstrip("/")
+    if remote_collection == existing_root:
+        return
+    if remote_collection.startswith(f"{existing_root}/"):
+        current = existing_root
+        parts = [part for part in remote_collection[len(existing_root) :].split("/") if part]
+    else:
+        current = ""
+        parts = [part for part in remote_collection.split("/") if part]
+
     for part in parts:
-        current = f"{current}/{part}"
+        current = f"{current}/{part}" if current else f"/{part}"
         if not session.collections.exists(current):
             session.collections.create(current)
 
