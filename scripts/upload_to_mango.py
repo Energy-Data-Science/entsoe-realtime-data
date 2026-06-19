@@ -270,7 +270,16 @@ def create_collection_chain(session, remote_collection: str) -> None:
     for part in parts:
         current = f"{current}/{part}" if current else f"/{part}"
         if not session.collections.exists(current):
-            session.collections.create(current)
+            print(f"Creating Mango collection: {current}")
+            try:
+                session.collections.create(current, recurse=False)
+            except Exception as exc:
+                if CollectionDoesNotExist is None or not isinstance(exc, CollectionDoesNotExist):
+                    raise
+                print(
+                    "Mango collection create returned before it was queryable; "
+                    f"continuing after create request for: {current}"
+                )
 
 
 def remote_size(session, remote_path: str) -> int | None:
