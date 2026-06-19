@@ -18,8 +18,10 @@ except ImportError:  # pragma: no cover - optional convenience dependency
 
 try:
     from irods.session import iRODSSession
+    from irods.exception import CollectionDoesNotExist
 except ImportError:  # pragma: no cover - handled in main
     iRODSSession = None
+    CollectionDoesNotExist = None
 
 
 DEFAULT_LOCAL_ROOT = (
@@ -243,6 +245,10 @@ def ensure_collection(session, remote_collection: str) -> None:
     try:
         session.collections.create(remote_collection, recurse=True)
     except TypeError:
+        create_collection_chain(session, remote_collection)
+    except Exception as exc:
+        if CollectionDoesNotExist is None or not isinstance(exc, CollectionDoesNotExist):
+            raise
         create_collection_chain(session, remote_collection)
 
 
