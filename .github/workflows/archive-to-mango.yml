@@ -48,14 +48,13 @@ jobs:
           token: ${{ secrets.DATA_PUSH_TOKEN }}
           fetch-depth: 1
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-          cache: "pip"
+      - name: Check local Python
+        run: |
+          python3 --version
+          python3 -m pip --version
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: python3 -m pip install -r requirements.txt
 
       - name: Write iRODS environment file
         if: ${{ github.event.inputs.dry_run != 'true' }}
@@ -67,7 +66,7 @@ jobs:
             exit 1
           fi
           mkdir -p "${RUNNER_TEMP}/irods"
-          python -c "import os, pathlib; pathlib.Path(os.environ['RUNNER_TEMP'], 'irods', 'irods_environment.json').write_text(os.environ['MANGO_IRODS_ENVIRONMENT_JSON'], encoding='utf-8')"
+          python3 -c "import os, pathlib; pathlib.Path(os.environ['RUNNER_TEMP'], 'irods', 'irods_environment.json').write_text(os.environ['MANGO_IRODS_ENVIRONMENT_JSON'], encoding='utf-8')"
           echo "IRODS_ENVIRONMENT_FILE=${RUNNER_TEMP}/irods/irods_environment.json" >> "${GITHUB_ENV}"
 
       - name: Prepare data branch metadata
@@ -93,7 +92,7 @@ jobs:
           if [ -n "${LIMIT}" ]; then
             limit_args=(--limit "${LIMIT}")
           fi
-          python scripts/plan_mango_archive.py \
+          python3 scripts/plan_mango_archive.py \
             --data-root ../entsoe-data \
             --retention-days "${RETENTION_DAYS}" \
             --output ../mango_archive_sparse_checkout.txt \
@@ -109,7 +108,7 @@ jobs:
       - name: Preflight Mango iRODS connection
         if: steps.plan.outputs.has_candidates == 'true' && github.event.inputs.dry_run != 'true'
         run: |
-          python - <<'PY'
+          python3 - <<'PY'
           import json
           import os
           import socket
@@ -141,7 +140,7 @@ jobs:
           if [ "${DRY_RUN}" = "true" ]; then
             dry_run_args=(--dry-run)
           fi
-          python scripts/archive_old_snapshots_to_mango.py \
+          python3 scripts/archive_old_snapshots_to_mango.py \
             --data-root ../entsoe-data \
             --retention-days "${RETENTION_DAYS}" \
             --remote-root "${MANGO_REMOTE_ROOT}" \
