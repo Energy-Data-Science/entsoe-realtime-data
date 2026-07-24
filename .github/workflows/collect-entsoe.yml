@@ -17,10 +17,10 @@ concurrency:
 jobs:
   collect:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 40
     env:
       ENTSOE_API_KEY: ${{ secrets.ENTSOE_API_KEY }}
-      ENTSOE_COUNTRIES: BE,FR,DE
+      ENTSOE_COUNTRIES: BE,FR,DE,NL,DK1,DK2
       ENTSOE_TIMEZONE: Europe/Brussels
       ENTSOE_DATA_DIR: data/raw
       ENTSOE_UPDATE_DIR: data/updates

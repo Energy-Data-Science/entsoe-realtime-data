@@ -11,7 +11,7 @@ from pathlib import Path
 import pandas as pd
 
 
-DEFAULT_COUNTRY_MAP = "BE=Belgium,FR=France,DE=Germany"
+DEFAULT_COUNTRY_MAP = "BE=Belgium,FR=France,DE=Germany,NL=Netherlands,DK1=Denmark_DK1,DK2=Denmark_DK2"
 DEFAULT_PSSD_ROOT = (
     "/Volumes/PSSD/1_entsoe-realtime-data-archive/data-branch-work/data/updates"
 )

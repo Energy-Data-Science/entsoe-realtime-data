@@ -18,7 +18,7 @@ jobs:
     timeout-minutes: 250
     env:
       ENTSOE_API_KEY: ${{ secrets.ENTSOE_API_KEY }}
-      ENTSOE_COUNTRIES: BE,FR,DE
+      ENTSOE_COUNTRIES: BE,FR,DE,NL,DK1,DK2
       ENTSOE_TIMEZONE: Europe/Brussels
       ENTSOE_DATA_DIR: data/raw
       ENTSOE_UPDATE_DIR: data/updates

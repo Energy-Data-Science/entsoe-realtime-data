@@ -4,6 +4,7 @@ import argparse
 import csv
 import json
 import os
+import reprlib
 import sys
 from contextlib import nullcontext
 from dataclasses import dataclass
@@ -113,6 +114,14 @@ def parse_args() -> argparse.Namespace:
         "--include-existing-in-manifest",
         action="store_true",
         help="Also write skipped existing files to the upload manifest.",
+    )
+    parser.add_argument(
+        "--skip-uploaded-manifest",
+        default=None,
+        help=(
+            "CSV upload manifest used to skip files already recorded as uploaded. "
+            "Paths are compared by their normalized suffix after updates/."
+        ),
     )
     return parser.parse_args()
 
@@ -229,10 +238,53 @@ def iter_files(root: Path, pattern: str, limit: int | None = None) -> Iterable[P
     for path in sorted(root.rglob(pattern)):
         if not path.is_file():
             continue
+        if any(part.startswith("._") for part in path.relative_to(root).parts):
+            continue
         yield path
         count += 1
         if limit is not None and count >= limit:
             return
+
+
+def normalize_update_key(path: str) -> str | None:
+    normalized = path.replace("\\", "/")
+    marker = "/updates/"
+    if marker not in normalized:
+        return None
+    suffix = normalized.split(marker, 1)[1].lstrip("/")
+    if not suffix or suffix.startswith("._"):
+        return None
+
+    country_map = {
+        "BE": "Belgium",
+        "DE": "Germany",
+        "FR": "France",
+        "NL": "Netherlands",
+        "DK1": "Denmark_DK1",
+        "DK2": "Denmark_DK2",
+    }
+    parts = suffix.split("/")
+    if parts:
+        parts[0] = country_map.get(parts[0], parts[0])
+    if any(part.startswith("._") for part in parts):
+        return None
+    return "/".join(parts)
+
+
+def uploaded_keys_from_manifest(manifest_path: Path) -> set[str]:
+    if not manifest_path.exists():
+        return set()
+    uploaded: set[str] = set()
+    with manifest_path.open(newline="", encoding="utf-8") as source:
+        reader = csv.DictReader(source)
+        for row in reader:
+            if row.get("status") != "uploaded":
+                continue
+            for field in ("remote_path", "local_path"):
+                key = normalize_update_key(row.get(field, ""))
+                if key:
+                    uploaded.add(key)
+    return uploaded
 
 
 def remote_path_for(local_file: Path, local_root: Path, remote_root: str) -> str:
@@ -412,7 +464,22 @@ def main() -> None:
     if not local_root.is_dir():
         raise SystemExit(f"Local root is not a directory: {local_root}")
 
-    files = list(iter_files(local_root, args.pattern, args.limit))
+    files = list(iter_files(local_root, args.pattern, None))
+    if args.skip_uploaded_manifest:
+        uploaded_keys = uploaded_keys_from_manifest(Path(args.skip_uploaded_manifest))
+        before_skip = len(files)
+        files = [
+            local_file
+            for local_file in files
+            if normalize_update_key(remote_path_for(local_file, local_root, remote_root))
+            not in uploaded_keys
+        ]
+        print(
+            "Already recorded as uploaded: "
+            f"{before_skip - len(files)} skipped by {args.skip_uploaded_manifest}"
+        )
+    if args.limit is not None:
+        files = files[: args.limit]
     if not files:
         print(f"No files matched {args.pattern!r} under {local_root}")
         return
@@ -430,6 +497,15 @@ def main() -> None:
         authenticate_if_requested(args, irods_env)
     session_context = nullcontext(None) if args.dry_run else get_session(args)
     with session_context as session:
+        if not args.dry_run:
+            try:
+                print(f"iRODS server: {session.server_version}")
+            except Exception as exc:  # noqa: BLE001 - report auth/connect failures clearly
+                message = str(exc)
+                if not message or message == "None":
+                    message = f"{type(exc).__name__}: {reprlib.repr(exc)}"
+                raise SystemExit(f"Could not authenticate/connect to Mango: {message}") from exc
+
         for index, local_file in enumerate(files, start=1):
             try:
                 result = upload_file(
@@ -442,12 +518,15 @@ def main() -> None:
                     metadata,
                 )
             except Exception as exc:  # noqa: BLE001 - keep batch uploads running
+                message = str(exc)
+                if not message or message == "None":
+                    message = f"{type(exc).__name__}: {reprlib.repr(exc)}"
                 result = UploadResult(
-                    local_file=local_file,
+                    local_path=local_file,
                     remote_path=remote_path_for(local_file, local_root, remote_root),
                     size_bytes=local_file.stat().st_size,
                     status="error",
-                    message=str(exc),
+                    message=message,
                 )
             results.append(result)
             print(

@@ -1,6 +1,6 @@
 # ENTSO-E Real-Time Data Collector
 
-Reusable notebooks, fetch jobs, CSV storage, and a dashboard for monitoring ENTSO-E data updates for Belgium, France, and Germany.
+Reusable notebooks, fetch jobs, CSV storage, and a dashboard for monitoring ENTSO-E data updates for Belgium, France, Germany, the Netherlands, and Denmark.
 
 The project currently collects:
 
@@ -17,7 +17,7 @@ The project currently collects:
 
 ## Countries
 
-The public country labels are `BE`, `FR`, and `DE`. Internally, `DE` is mapped to the current ENTSO-E bidding-zone code `DE_LU`, which is the standard Germany/Luxembourg bidding zone used by `entsoe-py`.
+The public country labels are `BE`, `FR`, `DE`, `NL`, `DK1`, and `DK2`. Internally, `DE` is mapped to the current ENTSO-E bidding-zone code `DE_LU`, while Denmark is collected as the two ENTSO-E bidding zones `DK_1` and `DK_2`.
 
 ## Data Windows
 
@@ -123,8 +123,8 @@ First run a small dry run:
 ```bash
 python scripts/upload_to_mango.py \
   --env-file config/irods_environment.json \
-  --local-root /Volumes/PSSD/1_entsoe-realtime-data-archive/data-branch-work/data/updates/FR \
-  --remote-root /set/home/Transparency_plus/ingress/entsoe-realtime-data-archive/data-branch-work/data/updates/France \
+  --local-root /Volumes/PSSD/1_entsoe-realtime-data-archive/data-branch-work/data/updates/France \
+  --remote-root /set/home/Transparency_plus/ingress/updates/France \
   --limit 10 \
   --dry-run
 ```
@@ -134,8 +134,8 @@ Then upload one country:
 ```bash
 python scripts/upload_to_mango.py \
   --env-file config/irods_environment.json \
-  --local-root /Volumes/PSSD/1_entsoe-realtime-data-archive/data-branch-work/data/updates/FR \
-  --remote-root /set/home/Transparency_plus/ingress/entsoe-realtime-data-archive/data-branch-work/data/updates/France
+  --local-root /Volumes/PSSD/1_entsoe-realtime-data-archive/data-branch-work/data/updates/France \
+  --remote-root /set/home/Transparency_plus/ingress/updates/France
 ```
 
 After that, upload the full `updates` tree:
@@ -144,7 +144,7 @@ After that, upload the full `updates` tree:
 python scripts/upload_to_mango.py \
   --env-file config/irods_environment.json \
   --local-root /Volumes/PSSD/1_entsoe-realtime-data-archive/data-branch-work/data/updates \
-  --remote-root /set/home/Transparency_plus/ingress/entsoe-realtime-data-archive/data-branch-work/data/updates
+  --remote-root /set/home/Transparency_plus/ingress/updates
 ```
 
 Optional metadata can be attached to uploaded data objects:
@@ -163,7 +163,7 @@ snapshot files from the GitHub `data` branch to Mango. The default policy is:
 
 - keep the latest 14 days on GitHub
 - move older snapshot CSV files to Mango
-- map country folders as `BE -> Belgium`, `FR -> France`, and `DE -> Germany`
+- map country folders as `BE -> Belgium`, `FR -> France`, `DE -> Germany`, `NL -> Netherlands`, `DK1 -> Denmark_DK1`, and `DK2 -> Denmark_DK2`
 - prune files from GitHub only after upload and size verification succeed
 - append archive results to `data/mango_upload_manifest.csv`
 
@@ -205,6 +205,9 @@ data/raw/
       2020.csv
   FR/
   DE/
+  NL/
+  DK1/
+  DK2/
 ```
 
 Operational update snapshots are written by country, variable, collection year,
