@@ -87,6 +87,22 @@ def status_badge(error_items: int, warning_items: int) -> str:
     return "Healthy"
 
 
+def ordered_countries(*country_groups: list[str] | tuple[str, ...]) -> list[str]:
+    preferred = list(COUNTRY_LABELS)
+    seen: set[str] = set()
+    ordered: list[str] = []
+    for country in preferred:
+        ordered.append(country)
+        seen.add(country)
+    for group in country_groups:
+        for country in group:
+            code = str(country)
+            if code not in seen:
+                ordered.append(code)
+                seen.add(code)
+    return ordered
+
+
 def resolve_data_path(path_value: str) -> Path:
     path = Path(path_value)
     return path if path.is_absolute() else PROJECT_ROOT / path
@@ -136,6 +152,19 @@ if DATA_SOURCE == "remote":
 else:
     st.caption(f"Update snapshots: {settings.update_dir}")
 
+snapshot_summary = load_snapshot_summary_frame(settings)
+historical_summary = collect_file_summary(settings.data_dir) if DATA_SOURCE != "remote" else pd.DataFrame()
+
+if not snapshot_summary.empty:
+    snapshot_summary["country_label"] = snapshot_summary["country"].map(
+        lambda code: COUNTRY_LABELS.get(str(code), str(code))
+    )
+    if "size_bytes" not in snapshot_summary.columns:
+        snapshot_summary["size_bytes"] = 0
+
+available_countries = sorted(snapshot_summary["country"].dropna().astype(str).unique()) if not snapshot_summary.empty else []
+dashboard_countries = ordered_countries(settings.countries, available_countries)
+
 with st.sidebar:
     st.header("Controls")
     st.caption(f"Fetch: {settings.fetch_mode} | Storage: {settings.storage_mode}")
@@ -146,7 +175,7 @@ with st.sidebar:
         st.rerun()
     selected_country = st.selectbox(
         "Country / bidding zone",
-        settings.countries,
+        dashboard_countries,
         format_func=country_label,
     )
     selected_variable = st.selectbox("Variable", list(VARIABLES))
@@ -176,16 +205,6 @@ if DATA_SOURCE == "remote":
 elif settings.progress_file.exists():
     progress = json.loads(settings.progress_file.read_text(encoding="utf-8"))
 
-snapshot_summary = load_snapshot_summary_frame(settings)
-historical_summary = collect_file_summary(settings.data_dir) if DATA_SOURCE != "remote" else pd.DataFrame()
-
-if not snapshot_summary.empty:
-    snapshot_summary["country_label"] = snapshot_summary["country"].map(
-        lambda code: COUNTRY_LABELS.get(str(code), str(code))
-    )
-    if "size_bytes" not in snapshot_summary.columns:
-        snapshot_summary["size_bytes"] = 0
-
 st.subheader("Latest Run")
 latest_cols = st.columns(4)
 ok_items = int(status.get("ok_items", 0) or 0)
@@ -199,17 +218,16 @@ latest_cols[3].metric("Status", status_badge(error_items, warning_items))
 run_cols = st.columns(3)
 run_cols[0].metric("Warnings", f"{warning_items:,}")
 run_cols[1].metric("Errors", f"{error_items:,}")
-run_cols[2].metric("Countries configured", f"{len(settings.countries):,}")
+run_cols[2].metric("Dashboard countries", f"{len(dashboard_countries):,}")
 
 st.subheader("Snapshot Inventory")
 inventory_cols = st.columns(4)
 snapshot_rows = int(snapshot_summary["rows"].sum()) if not snapshot_summary.empty else 0
 snapshot_size = int(snapshot_summary["size_bytes"].sum()) if not snapshot_summary.empty else 0
-available_countries = sorted(snapshot_summary["country"].dropna().astype(str).unique()) if not snapshot_summary.empty else []
 inventory_cols[0].metric("Snapshot files", f"{len(snapshot_summary):,}")
 inventory_cols[1].metric("Rows", f"{snapshot_rows:,}")
 inventory_cols[2].metric("Stored size", format_bytes(snapshot_size))
-inventory_cols[3].metric("Countries present", f"{len(available_countries):,} / {len(settings.countries):,}")
+inventory_cols[3].metric("Countries present", f"{len(available_countries):,} / {len(dashboard_countries):,}")
 
 if progress:
     if progress.get("status") == "run_complete":
@@ -228,7 +246,7 @@ if progress:
             f"{progress.get('status')} at {progress.get('updated_at_utc')}"
         )
 
-missing_countries = sorted(set(settings.countries) - set(available_countries))
+missing_countries = [country for country in dashboard_countries if country not in set(available_countries)]
 if missing_countries:
     st.info(
         "No committed snapshots yet for: "
