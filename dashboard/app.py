@@ -3,13 +3,13 @@ from __future__ import annotations
 import json
 import os
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 from urllib.request import urlopen
 
 import pandas as pd
 import plotly.express as px
 import streamlit as st
-import streamlit.components.v1 as components
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT / "src"))
@@ -26,6 +26,81 @@ DATA_SOURCE = os.getenv("ENTSOE_DASHBOARD_DATA_SOURCE", "remote").strip().lower(
 REMOTE_DATA_BASE_URL = os.getenv(
     "ENTSOE_DASHBOARD_DATA_BASE_URL", DEFAULT_REMOTE_DATA_BASE_URL
 ).rstrip("/")
+
+COUNTRY_LABELS = {
+    "BE": "Belgium",
+    "FR": "France",
+    "DE": "Germany / Luxembourg",
+    "NL": "Netherlands",
+    "DK1": "Denmark DK1",
+    "DK2": "Denmark DK2",
+}
+
+
+def country_label(code: str) -> str:
+    return f"{code} - {COUNTRY_LABELS.get(code, code)}"
+
+
+def parse_utc(value: object) -> pd.Timestamp | None:
+    if value is None or pd.isna(value):
+        return None
+    parsed = pd.to_datetime(value, utc=True, errors="coerce")
+    if pd.isna(parsed):
+        return None
+    return parsed
+
+
+def format_time(value: object) -> str:
+    parsed = parse_utc(value)
+    if parsed is None:
+        return "No run yet"
+    return parsed.strftime("%Y-%m-%d %H:%M UTC")
+
+
+def format_age(value: object) -> str:
+    parsed = parse_utc(value)
+    if parsed is None:
+        return "-"
+    seconds = max(0, int((datetime.now(timezone.utc) - parsed.to_pydatetime()).total_seconds()))
+    minutes = seconds // 60
+    if minutes < 60:
+        return f"{minutes} min ago"
+    hours = minutes // 60
+    if hours < 48:
+        return f"{hours} h ago"
+    return f"{hours // 24} d ago"
+
+
+def format_bytes(size_bytes: float | int) -> str:
+    size = float(size_bytes or 0)
+    for unit in ["B", "KB", "MB", "GB", "TB"]:
+        if size < 1024 or unit == "TB":
+            return f"{size:,.1f} {unit}" if unit != "B" else f"{size:,.0f} {unit}"
+        size /= 1024
+
+
+def status_badge(error_items: int, warning_items: int) -> str:
+    if error_items:
+        return "Errors"
+    if warning_items:
+        return "Warnings"
+    return "Healthy"
+
+
+def ordered_countries(*country_groups: list[str] | tuple[str, ...]) -> list[str]:
+    preferred = list(COUNTRY_LABELS)
+    seen: set[str] = set()
+    ordered: list[str] = []
+    for country in preferred:
+        ordered.append(country)
+        seen.add(country)
+    for group in country_groups:
+        for country in group:
+            code = str(country)
+            if code not in seen:
+                ordered.append(code)
+                seen.add(code)
+    return ordered
 
 
 def resolve_data_path(path_value: str) -> Path:
@@ -65,30 +140,44 @@ def read_snapshot_csv(path_value: str) -> pd.DataFrame:
 
 
 st.set_page_config(page_title="ENTSO-E Fetch Monitor", layout="wide")
-components.html(
-    """
-    <script>
-      setTimeout(function () {
-        window.parent.location.reload();
-      }, 30000);
-    </script>
-    """,
-    height=0,
-)
-st.title("ENTSO-E 15-Minute Collection Monitor")
+st.title("ENTSO-E Collection Monitor")
 
 settings = load_settings(require_api_key=False)
+
+if st.session_state.pop("refresh_data", False):
+    st.cache_data.clear()
+
 if DATA_SOURCE == "remote":
     st.caption(f"Update snapshots: {REMOTE_DATA_BASE_URL}")
 else:
     st.caption(f"Update snapshots: {settings.update_dir}")
+
+snapshot_summary = load_snapshot_summary_frame(settings)
+historical_summary = collect_file_summary(settings.data_dir) if DATA_SOURCE != "remote" else pd.DataFrame()
+
+if not snapshot_summary.empty:
+    snapshot_summary["country_label"] = snapshot_summary["country"].map(
+        lambda code: COUNTRY_LABELS.get(str(code), str(code))
+    )
+    if "size_bytes" not in snapshot_summary.columns:
+        snapshot_summary["size_bytes"] = 0
+
+available_countries = sorted(snapshot_summary["country"].dropna().astype(str).unique()) if not snapshot_summary.empty else []
+dashboard_countries = ordered_countries(settings.countries, available_countries)
 
 with st.sidebar:
     st.header("Controls")
     st.caption(f"Fetch: {settings.fetch_mode} | Storage: {settings.storage_mode}")
     st.caption(f"Dashboard data source: {DATA_SOURCE}")
     st.caption(f"Window: latest {settings.recent_days} days")
-    selected_country = st.selectbox("Country", settings.countries)
+    if st.button("Refresh data"):
+        st.session_state["refresh_data"] = True
+        st.rerun()
+    selected_country = st.selectbox(
+        "Country / bidding zone",
+        dashboard_countries,
+        format_func=country_label,
+    )
     selected_variable = st.selectbox("Variable", list(VARIABLES))
     if settings.api_key and st.button("Fetch now", type="primary"):
         with st.spinner("Fetching ENTSO-E data..."):
@@ -116,16 +205,29 @@ if DATA_SOURCE == "remote":
 elif settings.progress_file.exists():
     progress = json.loads(settings.progress_file.read_text(encoding="utf-8"))
 
-snapshot_summary = load_snapshot_summary_frame(settings)
-historical_summary = collect_file_summary(settings.data_dir) if DATA_SOURCE != "remote" else pd.DataFrame()
+st.subheader("Latest Run")
+latest_cols = st.columns(4)
+ok_items = int(status.get("ok_items", 0) or 0)
+warning_items = int(status.get("warning_items", 0) or 0)
+error_items = int(status.get("error_items", 0) or 0)
+latest_cols[0].metric("Collection time", format_time(status.get("collection_time_utc")))
+latest_cols[1].metric("Age", format_age(status.get("collection_time_utc")))
+latest_cols[2].metric("Fetch tasks", f"{ok_items:,} succeeded")
+latest_cols[3].metric("Status", status_badge(error_items, warning_items))
 
-top = st.columns(6)
-top[0].metric("Last collection", status.get("collection_time_utc", "No run yet"))
-top[1].metric("OK", status.get("ok_items", 0))
-top[2].metric("Warnings", status.get("warning_items", 0))
-top[3].metric("Errors", status.get("error_items", 0))
-top[4].metric("Snapshot files", f"{len(snapshot_summary):,}")
-top[5].metric("Snapshot rows", f"{int(snapshot_summary['rows'].sum()) if not snapshot_summary.empty else 0:,}")
+run_cols = st.columns(3)
+run_cols[0].metric("Warnings", f"{warning_items:,}")
+run_cols[1].metric("Errors", f"{error_items:,}")
+run_cols[2].metric("Dashboard countries", f"{len(dashboard_countries):,}")
+
+st.subheader("Snapshot Inventory")
+inventory_cols = st.columns(4)
+snapshot_rows = int(snapshot_summary["rows"].sum()) if not snapshot_summary.empty else 0
+snapshot_size = int(snapshot_summary["size_bytes"].sum()) if not snapshot_summary.empty else 0
+inventory_cols[0].metric("Snapshot files", f"{len(snapshot_summary):,}")
+inventory_cols[1].metric("Rows", f"{snapshot_rows:,}")
+inventory_cols[2].metric("Stored size", format_bytes(snapshot_size))
+inventory_cols[3].metric("Countries present", f"{len(available_countries):,} / {len(dashboard_countries):,}")
 
 if progress:
     if progress.get("status") == "run_complete":
@@ -144,6 +246,14 @@ if progress:
             f"{progress.get('status')} at {progress.get('updated_at_utc')}"
         )
 
+missing_countries = [country for country in dashboard_countries if country not in set(available_countries)]
+if missing_countries:
+    st.info(
+        "No committed snapshots yet for: "
+        + ", ".join(country_label(country) for country in missing_countries)
+        + ". They will appear after the GitHub collection workflow stores the first snapshots."
+    )
+
 st.subheader("Recent Snapshot Collections")
 if snapshot_summary.empty:
     st.info("No update snapshots have been written yet. Use Fetch now or run the scheduler.")
@@ -152,7 +262,7 @@ else:
     latest_files = snapshot_summary[snapshot_summary["collection_time_utc"] == latest_collection]
     st.markdown(f"Latest collection: `{latest_collection}`")
     st.dataframe(
-        latest_files[["country", "variable", "rows", "window_start_utc", "window_end_utc", "path"]]
+        latest_files[["country", "country_label", "variable", "rows", "window_start_utc", "window_end_utc", "path"]]
         .sort_values(["country", "variable"]),
         use_container_width=True,
         hide_index=True,
@@ -164,6 +274,7 @@ else:
             [
                 "collection_time_utc",
                 "country",
+                "country_label",
                 "variable",
                 "rows",
                 "window_start_utc",
@@ -182,11 +293,26 @@ if not snapshot_summary.empty:
         .agg(
             collections=("collection_time_utc", "nunique"),
             rows=("rows", "sum"),
+            size_bytes=("size_bytes", "sum"),
             latest_collection_utc=("collection_time_utc", "max"),
             latest_window_end_utc=("window_end_utc", "max"),
         )
         .sort_values(["country", "variable"])
     )
+    coverage["country_label"] = coverage["country"].map(lambda code: COUNTRY_LABELS.get(str(code), str(code)))
+    coverage["stored_size"] = coverage["size_bytes"].map(format_bytes)
+    coverage = coverage[
+        [
+            "country",
+            "country_label",
+            "variable",
+            "collections",
+            "rows",
+            "stored_size",
+            "latest_collection_utc",
+            "latest_window_end_utc",
+        ]
+    ]
     st.dataframe(coverage, use_container_width=True, hide_index=True)
 
 st.subheader("Preview Latest Collection")
