@@ -15,7 +15,6 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 from entsoe_realtime.config import VARIABLES, load_settings
-from entsoe_realtime.jobs import run_refresh
 from entsoe_realtime.storage import collect_file_summary, collect_snapshot_summary
 
 DEFAULT_REMOTE_DATA_BASE_URL = (
@@ -41,6 +40,30 @@ COUNTRY_LABELS = {
 
 def country_label(code: str) -> str:
     return f"{code} - {COUNTRY_LABELS.get(code, code)}"
+
+
+def normalize_summary_frame(frame: pd.DataFrame) -> pd.DataFrame:
+    required_columns = [
+        "collection_time_utc",
+        "collection_time_local",
+        "run_id",
+        "country",
+        "variable",
+        "rows",
+        "window_start_utc",
+        "window_end_utc",
+        "path",
+        "size_bytes",
+    ]
+    frame = frame.copy()
+    for column in required_columns:
+        if column not in frame.columns:
+            frame[column] = 0 if column in {"rows", "size_bytes"} else ""
+    frame["country"] = frame["country"].astype(str)
+    frame["variable"] = frame["variable"].astype(str)
+    frame["rows"] = pd.to_numeric(frame["rows"], errors="coerce").fillna(0).astype("int64")
+    frame["size_bytes"] = pd.to_numeric(frame["size_bytes"], errors="coerce").fillna(0).astype("int64")
+    return frame
 
 
 def parse_utc(value: object) -> pd.Timestamp | None:
@@ -128,11 +151,11 @@ def read_remote_json(path_value: str) -> dict:
 def load_snapshot_summary_frame(settings) -> pd.DataFrame:
     if DATA_SOURCE == "remote":
         try:
-            return read_remote_csv("data/update_manifest.csv")
+            return normalize_summary_frame(read_remote_csv("data/update_manifest.csv"))
         except Exception as exc:
             st.warning(f"Could not read remote snapshot manifest: {exc}")
             return pd.DataFrame()
-    return collect_snapshot_summary(settings.update_dir, settings.update_manifest)
+    return normalize_summary_frame(collect_snapshot_summary(settings.update_dir, settings.update_manifest))
 
 
 def read_snapshot_csv(path_value: str) -> pd.DataFrame:
@@ -182,6 +205,8 @@ with st.sidebar:
     )
     selected_variable = st.selectbox("Variable", list(VARIABLES))
     if settings.api_key and st.button("Fetch now", type="primary"):
+        from entsoe_realtime.jobs import run_refresh
+
         with st.spinner("Fetching ENTSO-E data..."):
             run_refresh(countries=(selected_country,), variables=(selected_variable,), settings=settings)
         st.success("Fetch complete")
@@ -355,14 +380,18 @@ with st.expander("Historical Backfill Files"):
 
 st.subheader("Recent Run Events")
 if DATA_SOURCE == "remote":
-    try:
-        history = read_remote_csv("data/run_history.csv")
-    except Exception:
-        history = pd.DataFrame()
-    if history.empty:
-        st.info("No run history yet.")
+    if st.checkbox("Load recent run history", value=False):
+        try:
+            history = read_remote_csv("data/run_history.csv")
+        except Exception as exc:
+            st.warning(f"Could not read remote run history: {exc}")
+            history = pd.DataFrame()
+        if history.empty:
+            st.info("No run history yet.")
+        else:
+            st.dataframe(history.tail(100).iloc[::-1], use_container_width=True, hide_index=True)
     else:
-        st.dataframe(history.tail(100).iloc[::-1], use_container_width=True, hide_index=True)
+        st.caption("Run history is loaded on demand to keep the public dashboard lightweight.")
 elif settings.run_history.exists():
     history = pd.read_csv(settings.run_history)
     st.dataframe(history.tail(100).iloc[::-1], use_container_width=True, hide_index=True)
