@@ -262,6 +262,8 @@ def normalize_update_key(path: str) -> str | None:
         "NL": "Netherlands",
         "DK1": "Denmark_DK1",
         "DK2": "Denmark_DK2",
+        "ES": "Spain",
+        "PT": "Portugal",
     }
     parts = suffix.split("/")
     if parts:

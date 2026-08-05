@@ -16,6 +16,8 @@ COUNTRY_TO_ENTSOE_AREA = {
     "NL": "NL",
     "DK1": "DK_1",
     "DK2": "DK_2",
+    "ES": "ES",
+    "PT": "PT",
 }
 
 
@@ -84,7 +86,7 @@ def load_settings(require_api_key: bool = True) -> Settings:
 
     countries = tuple(
         country.strip().upper()
-        for country in os.getenv("ENTSOE_COUNTRIES", "BE,FR,DE,NL,DK1,DK2").split(",")
+        for country in os.getenv("ENTSOE_COUNTRIES", "BE,FR,DE,NL,DK1,DK2,ES,PT").split(",")
         if country.strip()
     )
     unknown = sorted(set(countries) - set(COUNTRY_TO_ENTSOE_AREA))

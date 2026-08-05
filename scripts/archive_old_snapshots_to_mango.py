@@ -22,7 +22,7 @@ from upload_to_mango import (
 )
 
 
-DEFAULT_COUNTRY_MAP = "BE=Belgium,FR=France,DE=Germany,NL=Netherlands,DK1=Denmark_DK1,DK2=Denmark_DK2"
+DEFAULT_COUNTRY_MAP = "BE=Belgium,FR=France,DE=Germany,NL=Netherlands,DK1=Denmark_DK1,DK2=Denmark_DK2,ES=Spain,PT=Portugal"
 DEFAULT_ARCHIVE_MANIFEST = "data/mango_upload_manifest.csv"
 
 

@@ -34,6 +34,8 @@ COUNTRY_LABELS = {
     "NL": "Netherlands",
     "DK1": "Denmark DK1",
     "DK2": "Denmark DK2",
+    "ES": "Spain",
+    "PT": "Portugal",
 }
 
 

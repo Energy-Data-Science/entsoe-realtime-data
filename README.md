@@ -1,6 +1,6 @@
 # ENTSO-E Real-Time Data Collector
 
-Reusable notebooks, fetch jobs, CSV storage, and a dashboard for monitoring ENTSO-E data updates for Belgium, France, Germany, the Netherlands, and Denmark.
+Reusable notebooks, fetch jobs, CSV storage, and a dashboard for monitoring ENTSO-E data updates for Belgium, France, Germany, the Netherlands, Denmark, Spain, and Portugal.
 
 The project currently collects:
 
@@ -17,7 +17,7 @@ The project currently collects:
 
 ## Countries
 
-The public country labels are `BE`, `FR`, `DE`, `NL`, `DK1`, and `DK2`. Internally, `DE` is mapped to the current ENTSO-E bidding-zone code `DE_LU`, while Denmark is collected as the two ENTSO-E bidding zones `DK_1` and `DK_2`.
+The public country labels are `BE`, `FR`, `DE`, `NL`, `DK1`, `DK2`, `ES`, and `PT`. Internally, `DE` is mapped to the current ENTSO-E bidding-zone code `DE_LU`, while Denmark is collected as the two ENTSO-E bidding zones `DK_1` and `DK_2`.
 
 ## Data Windows
 
@@ -163,7 +163,7 @@ snapshot files from the GitHub `data` branch to Mango. The default policy is:
 
 - keep the latest 14 days on GitHub
 - move older snapshot CSV files to Mango
-- map country folders as `BE -> Belgium`, `FR -> France`, `DE -> Germany`, `NL -> Netherlands`, `DK1 -> Denmark_DK1`, and `DK2 -> Denmark_DK2`
+- map country folders as `BE -> Belgium`, `FR -> France`, `DE -> Germany`, `NL -> Netherlands`, `DK1 -> Denmark_DK1`, `DK2 -> Denmark_DK2`, `ES -> Spain`, and `PT -> Portugal`
 - prune files from GitHub only after upload and size verification succeed
 - append archive results to `data/mango_upload_manifest.csv`
 
@@ -208,6 +208,8 @@ data/raw/
   NL/
   DK1/
   DK2/
+  ES/
+  PT/
 ```
 
 Operational update snapshots are written by country, variable, collection year,

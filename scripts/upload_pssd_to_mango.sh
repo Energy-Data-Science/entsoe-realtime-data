@@ -17,7 +17,7 @@ if [[ -n "${UPLOAD_LIMIT:-}" ]]; then
   LIMIT_ARGS="--limit ${UPLOAD_LIMIT}"
 fi
 
-for country in Belgium Germany France Netherlands Denmark_DK1 Denmark_DK2; do
+for country in Belgium Germany France Netherlands Denmark_DK1 Denmark_DK2 Spain Portugal; do
   echo
   echo "Uploading ${country} snapshots to Mango..."
   python scripts/upload_to_mango.py \

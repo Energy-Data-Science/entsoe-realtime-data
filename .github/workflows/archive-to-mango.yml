@@ -38,7 +38,7 @@ jobs:
     env:
       MANGO_REMOTE_ROOT: /set/home/Transparency_plus/ingress/updates
       MANGO_EXISTING_COLLECTION_ROOT: /set/home/Transparency_plus/ingress
-      MANGO_COUNTRY_MAP: BE=Belgium,FR=France,DE=Germany,NL=Netherlands,DK1=Denmark_DK1,DK2=Denmark_DK2
+      MANGO_COUNTRY_MAP: BE=Belgium,FR=France,DE=Germany,NL=Netherlands,DK1=Denmark_DK1,DK2=Denmark_DK2,ES=Spain,PT=Portugal
       IRODS_PASSWORD: ${{ secrets.MANGO_IRODS_PASSWORD }}
       IRODS_CONNECTION_TIMEOUT_SECONDS: "20"
 
