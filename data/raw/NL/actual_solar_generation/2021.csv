@@ -1,0 +1,9 @@
+timestamp_utc,timestamp_local,value,unit,country,entsoe_area,variable,source,updated_at_utc
+2021-12-31T23:00:00Z,2022-01-01T00:00:00+0100,0.0,MW,NL,NL,actual_solar_generation,Solar | Actual Aggregated,2026-08-05T15:08:45Z
+2021-12-31T23:00:00Z,2022-01-01T00:00:00+0100,0.72,MW,NL,NL,actual_solar_generation,Solar | Actual Consumption,2026-08-05T15:08:45Z
+2021-12-31T23:15:00Z,2022-01-01T00:15:00+0100,0.0,MW,NL,NL,actual_solar_generation,Solar | Actual Aggregated,2026-08-05T15:08:45Z
+2021-12-31T23:15:00Z,2022-01-01T00:15:00+0100,0.81,MW,NL,NL,actual_solar_generation,Solar | Actual Consumption,2026-08-05T15:08:45Z
+2021-12-31T23:30:00Z,2022-01-01T00:30:00+0100,0.0,MW,NL,NL,actual_solar_generation,Solar | Actual Aggregated,2026-08-05T15:08:45Z
+2021-12-31T23:30:00Z,2022-01-01T00:30:00+0100,0.78,MW,NL,NL,actual_solar_generation,Solar | Actual Consumption,2026-08-05T15:08:45Z
+2021-12-31T23:45:00Z,2022-01-01T00:45:00+0100,0.0,MW,NL,NL,actual_solar_generation,Solar | Actual Aggregated,2026-08-05T15:08:45Z
+2021-12-31T23:45:00Z,2022-01-01T00:45:00+0100,0.8,MW,NL,NL,actual_solar_generation,Solar | Actual Consumption,2026-08-05T15:08:45Z

@@ -1,0 +1,3 @@
+timestamp_utc,timestamp_local,value,unit,country,entsoe_area,variable,source,updated_at_utc
+2020-12-31T23:00:00Z,2021-01-01T00:00:00+0100,50.87,EUR/MWh,ES,ES,imbalance_price,Long,2026-08-05T20:51:11Z
+2020-12-31T23:00:00Z,2021-01-01T00:00:00+0100,57.15,EUR/MWh,ES,ES,imbalance_price,Short,2026-08-05T20:51:11Z

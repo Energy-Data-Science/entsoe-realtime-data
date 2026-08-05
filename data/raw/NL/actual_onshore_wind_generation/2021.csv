@@ -1,0 +1,9 @@
+timestamp_utc,timestamp_local,value,unit,country,entsoe_area,variable,source,updated_at_utc
+2021-12-31T23:00:00Z,2022-01-01T00:00:00+0100,1544.17,MW,NL,NL,actual_onshore_wind_generation,Wind Onshore | Actual Aggregated,2026-08-05T15:28:49Z
+2021-12-31T23:00:00Z,2022-01-01T00:00:00+0100,0.06,MW,NL,NL,actual_onshore_wind_generation,Wind Onshore | Actual Consumption,2026-08-05T15:28:49Z
+2021-12-31T23:15:00Z,2022-01-01T00:15:00+0100,1575.44,MW,NL,NL,actual_onshore_wind_generation,Wind Onshore | Actual Aggregated,2026-08-05T15:28:49Z
+2021-12-31T23:15:00Z,2022-01-01T00:15:00+0100,0.04,MW,NL,NL,actual_onshore_wind_generation,Wind Onshore | Actual Consumption,2026-08-05T15:28:49Z
+2021-12-31T23:30:00Z,2022-01-01T00:30:00+0100,1598.88,MW,NL,NL,actual_onshore_wind_generation,Wind Onshore | Actual Aggregated,2026-08-05T15:28:49Z
+2021-12-31T23:30:00Z,2022-01-01T00:30:00+0100,0.06,MW,NL,NL,actual_onshore_wind_generation,Wind Onshore | Actual Consumption,2026-08-05T15:28:49Z
+2021-12-31T23:45:00Z,2022-01-01T00:45:00+0100,1539.35,MW,NL,NL,actual_onshore_wind_generation,Wind Onshore | Actual Aggregated,2026-08-05T15:28:49Z
+2021-12-31T23:45:00Z,2022-01-01T00:45:00+0100,0.04,MW,NL,NL,actual_onshore_wind_generation,Wind Onshore | Actual Consumption,2026-08-05T15:28:49Z

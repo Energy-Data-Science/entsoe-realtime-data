@@ -1,0 +1,5 @@
+timestamp_utc,timestamp_local,value,unit,country,entsoe_area,variable,source,updated_at_utc
+2021-12-31T23:00:00Z,2022-01-01T00:00:00+0100,1364.0,MW,NL,NL,forecast_offshore_wind_generation,Wind Offshore,2026-08-05T15:53:39Z
+2021-12-31T23:15:00Z,2022-01-01T00:15:00+0100,1359.0,MW,NL,NL,forecast_offshore_wind_generation,Wind Offshore,2026-08-05T15:53:39Z
+2021-12-31T23:30:00Z,2022-01-01T00:30:00+0100,1349.0,MW,NL,NL,forecast_offshore_wind_generation,Wind Offshore,2026-08-05T15:53:39Z
+2021-12-31T23:45:00Z,2022-01-01T00:45:00+0100,1339.0,MW,NL,NL,forecast_offshore_wind_generation,Wind Offshore,2026-08-05T15:53:39Z
