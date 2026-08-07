@@ -35035,3 +35035,7 @@ timestamp_utc,timestamp_local,value,unit,country,entsoe_area,variable,source,upd
 2025-12-31T22:15:00Z,2025-12-31T23:15:00+0100,58.0,MW,ES,ES,forecast_solar_generation,Solar,2026-08-05T20:42:56Z
 2025-12-31T22:30:00Z,2025-12-31T23:30:00+0100,52.0,MW,ES,ES,forecast_solar_generation,Solar,2026-08-05T20:42:56Z
 2025-12-31T22:45:00Z,2025-12-31T23:45:00+0100,44.0,MW,ES,ES,forecast_solar_generation,Solar,2026-08-05T20:42:56Z
+2025-12-31T23:00:00Z,2026-01-01T00:00:00+0100,30.0,MW,ES,ES,forecast_solar_generation,Solar,2026-08-07T20:08:41Z
+2025-12-31T23:15:00Z,2026-01-01T00:15:00+0100,22.0,MW,ES,ES,forecast_solar_generation,Solar,2026-08-07T20:08:41Z
+2025-12-31T23:30:00Z,2026-01-01T00:30:00+0100,19.0,MW,ES,ES,forecast_solar_generation,Solar,2026-08-07T20:08:41Z
+2025-12-31T23:45:00Z,2026-01-01T00:45:00+0100,18.0,MW,ES,ES,forecast_solar_generation,Solar,2026-08-07T20:08:41Z

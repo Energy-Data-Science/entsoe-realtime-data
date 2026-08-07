@@ -8758,3 +8758,4 @@ timestamp_utc,timestamp_local,value,unit,country,entsoe_area,variable,source,upd
 2025-12-31T20:00:00Z,2025-12-31T21:00:00+0100,1855.0,MW,DK2,DK_2,forecast_load,Forecasted Load,2026-08-05T20:24:14Z
 2025-12-31T21:00:00Z,2025-12-31T22:00:00+0100,1795.0,MW,DK2,DK_2,forecast_load,Forecasted Load,2026-08-05T20:24:14Z
 2025-12-31T22:00:00Z,2025-12-31T23:00:00+0100,1739.0,MW,DK2,DK_2,forecast_load,Forecasted Load,2026-08-05T20:24:14Z
+2025-12-31T23:00:00Z,2026-01-01T00:00:00+0100,1642.0,MW,DK2,DK_2,forecast_load,Forecasted Load,2026-08-07T19:41:07Z

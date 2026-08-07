@@ -27667,3 +27667,7 @@ timestamp_utc,timestamp_local,value,unit,country,entsoe_area,variable,source,upd
 2025-12-31T22:15:00Z,2025-12-31T23:15:00+0100,436.333333,MW,DK2,DK_2,forecast_offshore_wind_generation,Wind Offshore,2026-08-05T20:32:46Z
 2025-12-31T22:30:00Z,2025-12-31T23:30:00+0100,479.0,MW,DK2,DK_2,forecast_offshore_wind_generation,Wind Offshore,2026-08-05T20:32:46Z
 2025-12-31T22:45:00Z,2025-12-31T23:45:00+0100,520.833333,MW,DK2,DK_2,forecast_offshore_wind_generation,Wind Offshore,2026-08-05T20:32:46Z
+2025-12-31T23:00:00Z,2026-01-01T00:00:00+0100,579.666666,MW,DK2,DK_2,forecast_offshore_wind_generation,Wind Offshore,2026-08-07T20:05:05Z
+2025-12-31T23:15:00Z,2026-01-01T00:15:00+0100,608.0,MW,DK2,DK_2,forecast_offshore_wind_generation,Wind Offshore,2026-08-07T20:05:05Z
+2025-12-31T23:30:00Z,2026-01-01T00:30:00+0100,635.333333,MW,DK2,DK_2,forecast_offshore_wind_generation,Wind Offshore,2026-08-07T20:05:05Z
+2025-12-31T23:45:00Z,2026-01-01T00:45:00+0100,660.666666,MW,DK2,DK_2,forecast_offshore_wind_generation,Wind Offshore,2026-08-07T20:05:05Z

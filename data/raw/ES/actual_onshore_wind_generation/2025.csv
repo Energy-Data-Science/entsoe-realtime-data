@@ -34892,3 +34892,7 @@ timestamp_utc,timestamp_local,value,unit,country,entsoe_area,variable,source,upd
 2025-12-31T22:15:00Z,2025-12-31T23:15:00+0100,1492.0,MW,ES,ES,actual_onshore_wind_generation,Wind Onshore,2026-08-05T20:46:46Z
 2025-12-31T22:30:00Z,2025-12-31T23:30:00+0100,1652.0,MW,ES,ES,actual_onshore_wind_generation,Wind Onshore,2026-08-05T20:46:46Z
 2025-12-31T22:45:00Z,2025-12-31T23:45:00+0100,1788.0,MW,ES,ES,actual_onshore_wind_generation,Wind Onshore,2026-08-05T20:46:46Z
+2025-12-31T23:00:00Z,2026-01-01T00:00:00+0100,1900.0,MW,ES,ES,actual_onshore_wind_generation,Wind Onshore,2026-08-07T20:09:05Z
+2025-12-31T23:15:00Z,2026-01-01T00:15:00+0100,2080.0,MW,ES,ES,actual_onshore_wind_generation,Wind Onshore,2026-08-07T20:09:05Z
+2025-12-31T23:30:00Z,2026-01-01T00:30:00+0100,2216.0,MW,ES,ES,actual_onshore_wind_generation,Wind Onshore,2026-08-07T20:09:05Z
+2025-12-31T23:45:00Z,2026-01-01T00:45:00+0100,2324.0,MW,ES,ES,actual_onshore_wind_generation,Wind Onshore,2026-08-07T20:09:05Z
