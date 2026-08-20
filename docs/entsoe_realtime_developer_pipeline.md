@@ -121,6 +121,20 @@ For renewable variables, the PSR type is important:
 - `B18`: offshore wind
 - `B19`: onshore wind
 
+An `n/a` value in the ENTSO-E PSR type column does not mean the data is
+unavailable. It means the variable does not require a generation technology
+filter. Load and price data are fetched through their own ENTSO-E API methods:
+
+| Variable type | Fetching method |
+| --- | --- |
+| actual load | `query_load(...)` |
+| forecast load | `query_load_forecast(...)` |
+| day-ahead price | `query_day_ahead_prices(...)` |
+| imbalance price | `query_imbalance_prices(...)` |
+
+Only generation variables need a PSR type because the request must specify
+which generation technology is being queried.
+
 Some country-variable combinations may have no published data. For example,
 Spain offshore wind forecast has previously returned no ENTSO-E records. In
 that case the run records a warning and no snapshot file is written.
