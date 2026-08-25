@@ -65,6 +65,12 @@ jobs:
       - name: Install dependencies
         run: .venv-archive/bin/python -m pip install -r requirements.txt
 
+      - name: Configure Python certificate bundle
+        run: |
+          ca_file="$(.venv-archive/bin/python -c 'import certifi; print(certifi.where())')"
+          echo "SSL_CERT_FILE=${ca_file}" >> "${GITHUB_ENV}"
+          echo "REQUESTS_CA_BUNDLE=${ca_file}" >> "${GITHUB_ENV}"
+
       - name: Write iRODS environment file
         if: ${{ github.event.inputs.dry_run != 'true' }}
         env:
@@ -75,7 +81,17 @@ jobs:
             exit 1
           fi
           mkdir -p "${RUNNER_TEMP}/irods"
-          .venv-archive/bin/python -c "import os, pathlib; pathlib.Path(os.environ['RUNNER_TEMP'], 'irods', 'irods_environment.json').write_text(os.environ['MANGO_IRODS_ENVIRONMENT_JSON'], encoding='utf-8')"
+          .venv-archive/bin/python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          env_path = Path(os.environ["RUNNER_TEMP"], "irods", "irods_environment.json")
+          irods_env = json.loads(os.environ["MANGO_IRODS_ENVIRONMENT_JSON"])
+          if not irods_env.get("irods_ssl_ca_certificate_file"):
+              irods_env["irods_ssl_ca_certificate_file"] = os.environ.get("SSL_CERT_FILE", "")
+          env_path.write_text(json.dumps(irods_env, indent=2), encoding="utf-8")
+          PY
           echo "IRODS_ENVIRONMENT_FILE=${RUNNER_TEMP}/irods/irods_environment.json" >> "${GITHUB_ENV}"
 
       - name: Prepare data branch metadata
