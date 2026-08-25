@@ -41,8 +41,8 @@ jobs:
       MANGO_COUNTRY_MAP: BE=Belgium,FR=France,DE=Germany,NL=Netherlands,DK1=Denmark_DK1,DK2=Denmark_DK2,ES=Spain,PT=Portugal
       IRODS_PASSWORD: ${{ secrets.MANGO_IRODS_PASSWORD }}
       IRODS_CONNECTION_TIMEOUT_SECONDS: "20"
-      AGENT_TOOLSDIRECTORY: ${{ runner.temp }}/_tool
-      RUNNER_TOOL_CACHE: ${{ runner.temp }}/_tool
+      AGENT_TOOLSDIRECTORY: ${{ github.workspace }}/.github-toolcache
+      RUNNER_TOOL_CACHE: ${{ github.workspace }}/.github-toolcache
 
     steps:
       - name: Check out repository
