@@ -41,6 +41,8 @@ jobs:
       MANGO_COUNTRY_MAP: BE=Belgium,FR=France,DE=Germany,NL=Netherlands,DK1=Denmark_DK1,DK2=Denmark_DK2,ES=Spain,PT=Portugal
       IRODS_PASSWORD: ${{ secrets.MANGO_IRODS_PASSWORD }}
       IRODS_CONNECTION_TIMEOUT_SECONDS: "20"
+      AGENT_TOOLSDIRECTORY: ${{ runner.temp }}/_tool
+      RUNNER_TOOL_CACHE: ${{ runner.temp }}/_tool
 
     steps:
       - name: Check out repository
@@ -49,13 +51,19 @@ jobs:
           token: ${{ secrets.DATA_PUSH_TOKEN }}
           fetch-depth: 1
 
-      - name: Check local Python
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Check Python
         run: |
-          python3 --version
-          python3 -m pip --version
+          python --version
+          python -m pip --version
 
       - name: Install dependencies
-        run: python3 -m pip install -r requirements.txt
+        run: python -m pip install -r requirements.txt
 
       - name: Write iRODS environment file
         if: ${{ github.event.inputs.dry_run != 'true' }}
@@ -67,7 +75,7 @@ jobs:
             exit 1
           fi
           mkdir -p "${RUNNER_TEMP}/irods"
-          python3 -c "import os, pathlib; pathlib.Path(os.environ['RUNNER_TEMP'], 'irods', 'irods_environment.json').write_text(os.environ['MANGO_IRODS_ENVIRONMENT_JSON'], encoding='utf-8')"
+          python -c "import os, pathlib; pathlib.Path(os.environ['RUNNER_TEMP'], 'irods', 'irods_environment.json').write_text(os.environ['MANGO_IRODS_ENVIRONMENT_JSON'], encoding='utf-8')"
           echo "IRODS_ENVIRONMENT_FILE=${RUNNER_TEMP}/irods/irods_environment.json" >> "${GITHUB_ENV}"
 
       - name: Prepare data branch metadata
@@ -95,7 +103,7 @@ jobs:
           if [ -n "${LIMIT}" ]; then
             limit_args=(--limit "${LIMIT}")
           fi
-          python3 scripts/plan_mango_archive.py \
+          python scripts/plan_mango_archive.py \
             --data-root ../entsoe-data \
             --retention-days "${RETENTION_DAYS}" \
             --output ../mango_archive_sparse_checkout.txt \
@@ -111,7 +119,7 @@ jobs:
       - name: Preflight Mango iRODS connection
         if: steps.plan.outputs.has_candidates == 'true' && github.event.inputs.dry_run != 'true'
         run: |
-          python3 - <<'PY'
+          python - <<'PY'
           import json
           import os
           import socket
@@ -143,7 +151,7 @@ jobs:
           if [ "${DRY_RUN}" = "true" ]; then
             dry_run_args=(--dry-run)
           fi
-          python3 -u scripts/archive_old_snapshots_to_mango.py \
+          python -u scripts/archive_old_snapshots_to_mango.py \
             --data-root ../entsoe-data \
             --retention-days "${RETENTION_DAYS}" \
             --remote-root "${MANGO_REMOTE_ROOT}" \
