@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from threading import RLock
 from pathlib import Path
 
 import pandas as pd
@@ -41,6 +42,9 @@ HOURLY_COLUMNS = [
     "collection_time_local",
     "run_id",
 ]
+
+
+_WRITE_LOCK = RLock()
 
 
 def save_variable_frame(
@@ -230,14 +234,15 @@ def save_collection_snapshot(
 def append_update_manifest(rows: list[dict], settings: Settings) -> None:
     if not rows:
         return
-    settings.update_manifest.parent.mkdir(parents=True, exist_ok=True)
-    incoming = pd.DataFrame(rows)
-    if settings.update_manifest.exists():
-        existing = pd.read_csv(settings.update_manifest)
-        outgoing = pd.concat([existing, incoming], ignore_index=True)
-    else:
-        outgoing = incoming
-    outgoing.to_csv(settings.update_manifest, index=False)
+    with _WRITE_LOCK:
+        settings.update_manifest.parent.mkdir(parents=True, exist_ok=True)
+        incoming = pd.DataFrame(rows)
+        if settings.update_manifest.exists():
+            existing = pd.read_csv(settings.update_manifest)
+            outgoing = pd.concat([existing, incoming], ignore_index=True)
+        else:
+            outgoing = incoming
+        outgoing.to_csv(settings.update_manifest, index=False)
 
 
 def portable_path(path: Path, settings: Settings) -> str:
@@ -265,24 +270,27 @@ def merge_existing(path: Path, incoming: pd.DataFrame) -> pd.DataFrame:
 def append_run_history(records: list[dict], settings: Settings) -> None:
     if not records:
         return
-    settings.run_history.parent.mkdir(parents=True, exist_ok=True)
-    incoming = pd.DataFrame(records)
-    if settings.run_history.exists():
-        existing = pd.read_csv(settings.run_history)
-        outgoing = pd.concat([existing, incoming], ignore_index=True)
-    else:
-        outgoing = incoming
-    outgoing.to_csv(settings.run_history, index=False)
+    with _WRITE_LOCK:
+        settings.run_history.parent.mkdir(parents=True, exist_ok=True)
+        incoming = pd.DataFrame(records)
+        if settings.run_history.exists():
+            existing = pd.read_csv(settings.run_history)
+            outgoing = pd.concat([existing, incoming], ignore_index=True)
+        else:
+            outgoing = incoming
+        outgoing.to_csv(settings.run_history, index=False)
 
 
 def write_status(status: dict, settings: Settings) -> None:
-    settings.status_file.parent.mkdir(parents=True, exist_ok=True)
-    settings.status_file.write_text(json.dumps(status, indent=2), encoding="utf-8")
+    with _WRITE_LOCK:
+        settings.status_file.parent.mkdir(parents=True, exist_ok=True)
+        settings.status_file.write_text(json.dumps(status, indent=2), encoding="utf-8")
 
 
 def write_progress(progress: dict, settings: Settings) -> None:
-    settings.progress_file.parent.mkdir(parents=True, exist_ok=True)
-    settings.progress_file.write_text(json.dumps(progress, indent=2), encoding="utf-8")
+    with _WRITE_LOCK:
+        settings.progress_file.parent.mkdir(parents=True, exist_ok=True)
+        settings.progress_file.write_text(json.dumps(progress, indent=2), encoding="utf-8")
 
 
 def collect_file_summary(data_dir: Path) -> pd.DataFrame:
