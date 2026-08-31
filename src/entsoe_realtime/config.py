@@ -77,6 +77,7 @@ class Settings:
     min_chunk_hours: int
     request_timeout_seconds: int
     progress_file: Path
+    country_workers: int
 
 
 def load_settings(require_api_key: bool = True) -> Settings:
@@ -114,4 +115,5 @@ def load_settings(require_api_key: bool = True) -> Settings:
         min_chunk_hours=int(os.getenv("ENTSOE_MIN_CHUNK_HOURS", "24")),
         request_timeout_seconds=int(os.getenv("ENTSOE_REQUEST_TIMEOUT_SECONDS", "60")),
         progress_file=PROJECT_ROOT / os.getenv("ENTSOE_PROGRESS_FILE", "data/progress.json"),
+        country_workers=max(1, int(os.getenv("ENTSOE_COUNTRY_WORKERS", "1"))),
     )

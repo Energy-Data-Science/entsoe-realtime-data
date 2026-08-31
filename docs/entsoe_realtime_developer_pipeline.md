@@ -168,6 +168,11 @@ the ENTSO-E 15-minute publication interval.
 every 5 minutes inside a 4-hour GitHub Actions job and uses the same
 `should_collect.py` guard before fetching.
 
+Country-level parallelism is controlled by `ENTSOE_COUNTRY_WORKERS`. A value of
+`1` keeps the old sequential behavior; the GitHub workflows can set this to the
+number of configured bidding zones to fetch countries in parallel while each
+country still processes its variables sequentially.
+
 `archive-to-mango.yml` archives data older than the configured retention window,
 normally 14 days, from GitHub to Mango.
 

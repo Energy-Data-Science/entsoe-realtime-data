@@ -38,6 +38,7 @@ jobs:
       ENTSOE_MIN_CHUNK_HOURS: 24
       ENTSOE_REQUEST_TIMEOUT_SECONDS: 60
       ENTSOE_MIN_COLLECTION_INTERVAL_MINUTES: 13
+      ENTSOE_COUNTRY_WORKERS: 8
 
     steps:
       - name: Check out repository

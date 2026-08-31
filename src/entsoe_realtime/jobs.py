@@ -3,6 +3,7 @@ from __future__ import annotations
 import logging
 import re
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from uuid import uuid4
 
 import pandas as pd
@@ -44,12 +45,14 @@ def run_refresh(
     def progress_callback(progress: dict) -> None:
         write_progress({"run_id": run_id, **progress}, settings)
 
-    fetcher = EntsoeFetcher(settings, progress_callback=progress_callback)
     history: list[dict] = []
 
     logger.info("Starting ENTSO-E refresh %s", run_id)
 
-    for country in countries:
+    def fetch_country(country: str) -> list[dict]:
+        fetcher = EntsoeFetcher(settings, progress_callback=progress_callback)
+        country_history: list[dict] = []
+
         for variable_name in variable_names:
             spec = VARIABLES[variable_name]
             start, end = make_time_window(spec, settings)
@@ -99,8 +102,41 @@ def run_refresh(
                 )
 
             event["duration_seconds"] = round(time.time() - item_started, 2)
-            history.append(event)
+            country_history.append(event)
             append_run_history([event], settings)
+
+        return country_history
+
+    worker_count = min(settings.country_workers, len(countries))
+    if worker_count <= 1:
+        for country in countries:
+            history.extend(fetch_country(country))
+    else:
+        logger.info("Fetching %s countries with %s workers", len(countries), worker_count)
+        with ThreadPoolExecutor(max_workers=worker_count) as executor:
+            futures = {executor.submit(fetch_country, country): country for country in countries}
+            for future in as_completed(futures):
+                country = futures[future]
+                try:
+                    history.extend(future.result())
+                except Exception as exc:
+                    message = sanitize_error_message(str(exc), settings)
+                    logger.error("Country worker failed for %s: %s", country, message)
+                    history.append(
+                        {
+                            "run_id": run_id,
+                            "country": country,
+                            "variable": "__country_worker__",
+                            "window_start": "",
+                            "window_end": "",
+                            "started_at_utc": pd.Timestamp.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
+                            "status": "error",
+                            "records_fetched": 0,
+                            "files_touched": 0,
+                            "message": message,
+                            "duration_seconds": 0,
+                        }
+                    )
 
     historical_summary = collect_file_summary(settings.data_dir)
     hourly_summary = collect_hourly_summary(settings.hourly_dir)
