@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import logging
+import os
 import sys
 from pathlib import Path
 
@@ -12,10 +13,11 @@ from entsoe_realtime.jobs import run_refresh
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
-    status = run_refresh()
+    variables_env = os.getenv("ENTSOE_VARIABLES", "").strip()
+    variables = tuple(item.strip() for item in variables_env.split(",") if item.strip()) or None
+    status = run_refresh(variables=variables)
     print(
         f"Finished run {status['run_id']}: "
         f"{status['ok_items']} ok, {status['error_items']} errors, "
         f"{status['total_rows']} stored rows."
     )
-

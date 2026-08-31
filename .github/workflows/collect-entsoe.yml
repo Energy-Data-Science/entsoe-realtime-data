@@ -2,6 +2,15 @@ name: Collect ENTSO-E snapshots
 
 on:
   workflow_dispatch:
+    inputs:
+      countries:
+        description: "Comma-separated ENTSO-E countries to collect"
+        required: false
+        default: "BE,FR,DE"
+      variables:
+        description: "Comma-separated variables to collect"
+        required: false
+        default: "actual_load,forecast_load,actual_solar_generation,forecast_solar_generation,actual_onshore_wind_generation,forecast_onshore_wind_generation,actual_offshore_wind_generation,forecast_offshore_wind_generation"
   repository_dispatch:
     types: [collect-entsoe]
   schedule:
@@ -20,7 +29,8 @@ jobs:
     timeout-minutes: 60
     env:
       ENTSOE_API_KEY: ${{ secrets.ENTSOE_API_KEY }}
-      ENTSOE_COUNTRIES: BE,FR,DE,NL,DK1,DK2,ES,PT
+      ENTSOE_COUNTRIES: ${{ github.event.inputs.countries || 'BE,FR,DE,NL,DK1,DK2,ES,PT' }}
+      ENTSOE_VARIABLES: ${{ github.event.inputs.variables || 'actual_load,forecast_load,actual_solar_generation,forecast_solar_generation,actual_onshore_wind_generation,forecast_onshore_wind_generation,actual_offshore_wind_generation,forecast_offshore_wind_generation' }}
       ENTSOE_TIMEZONE: Europe/Brussels
       ENTSOE_DATA_DIR: data/raw
       ENTSOE_UPDATE_DIR: data/updates
