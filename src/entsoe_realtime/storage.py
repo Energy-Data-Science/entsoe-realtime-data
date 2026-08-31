@@ -27,6 +27,21 @@ SNAPSHOT_COLUMNS = [
     *BASE_COLUMNS,
 ]
 
+HOURLY_COLUMNS = [
+    "timestamp_utc",
+    "timestamp_local",
+    "value",
+    "unit",
+    "country",
+    "entsoe_area",
+    "variable",
+    "source",
+    "updated_at_utc",
+    "collection_time_utc",
+    "collection_time_local",
+    "run_id",
+]
+
 
 def save_variable_frame(
     frame: pd.DataFrame,
@@ -36,6 +51,9 @@ def save_variable_frame(
 ) -> dict[str, int]:
     if frame.empty:
         return {}
+
+    if collection_time_utc is not None and run_id is not None:
+        save_hourly_archive(frame, settings, collection_time_utc, run_id)
 
     if settings.storage_mode == "snapshot":
         if collection_time_utc is None or run_id is None:
@@ -57,6 +75,104 @@ def save_variable_frame(
         counts[str(path)] = len(merged)
 
     return counts
+
+
+def save_hourly_archive(
+    frame: pd.DataFrame,
+    settings: Settings,
+    collection_time_utc: pd.Timestamp,
+    run_id: str,
+) -> dict[str, int]:
+    if frame.empty:
+        return {}
+
+    hourly = prepare_hourly_frame(frame, settings, collection_time_utc, run_id)
+    if hourly.empty:
+        return {}
+
+    counts: dict[str, int] = {}
+    hourly["year"] = pd.to_datetime(hourly["timestamp_utc"], utc=True).dt.year
+
+    for (country, variable, year), group in hourly.groupby(["country", "variable", "year"]):
+        path = settings.hourly_dir / country / variable / f"{year}.parquet"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        merged = merge_existing_hourly(path, group[HOURLY_COLUMNS])
+        merged.to_parquet(path, index=False)
+        counts[str(path)] = len(merged)
+
+    return counts
+
+
+def prepare_hourly_frame(
+    frame: pd.DataFrame,
+    settings: Settings,
+    collection_time_utc: pd.Timestamp,
+    run_id: str,
+) -> pd.DataFrame:
+    hourly = frame.copy()
+    collection_time_utc = pd.Timestamp(collection_time_utc)
+    if collection_time_utc.tzinfo is None:
+        collection_time_utc = collection_time_utc.tz_localize("UTC")
+    collection_time_utc = collection_time_utc.tz_convert("UTC")
+    collection_time_local = collection_time_utc.tz_convert(settings.timezone)
+
+    hourly["timestamp_utc"] = pd.to_datetime(hourly["timestamp_utc"], utc=True, errors="coerce")
+    hourly = hourly.dropna(subset=["timestamp_utc", "value"])
+    if hourly.empty:
+        return hourly
+
+    hourly["hour_utc"] = hourly["timestamp_utc"].dt.floor("h")
+    hourly["value"] = pd.to_numeric(hourly["value"], errors="coerce")
+    hourly = hourly.dropna(subset=["value"])
+    if hourly.empty:
+        return hourly
+
+    grouping_columns = [
+        "hour_utc",
+        "country",
+        "variable",
+        "source",
+        "unit",
+        "entsoe_area",
+    ]
+    aggregated = (
+        hourly.groupby(grouping_columns, dropna=False, as_index=False)
+        .agg({"value": "mean", "updated_at_utc": "max"})
+        .rename(columns={"hour_utc": "timestamp_utc"})
+    )
+    aggregated["timestamp_local"] = (
+        pd.to_datetime(aggregated["timestamp_utc"], utc=True)
+        .dt.tz_convert(settings.timezone)
+        .dt.strftime("%Y-%m-%dT%H:%M:%S%z")
+    )
+    aggregated["timestamp_utc"] = (
+        pd.to_datetime(aggregated["timestamp_utc"], utc=True).dt.strftime("%Y-%m-%dT%H:%M:%SZ")
+    )
+    aggregated["collection_time_utc"] = collection_time_utc.strftime("%Y-%m-%dT%H:%M:%SZ")
+    aggregated["collection_time_local"] = collection_time_local.strftime("%Y-%m-%dT%H:%M:%S%z")
+    aggregated["run_id"] = run_id
+    return aggregated[HOURLY_COLUMNS]
+
+
+def merge_existing_hourly(path: Path, incoming: pd.DataFrame) -> pd.DataFrame:
+    if path.exists():
+        existing = pd.read_parquet(path)
+        combined = pd.concat([existing, incoming], ignore_index=True)
+    else:
+        combined = incoming.copy()
+
+    combined["collection_time_utc_sort"] = pd.to_datetime(
+        combined["collection_time_utc"], utc=True, errors="coerce"
+    )
+    combined = combined.sort_values(
+        ["timestamp_utc", "variable", "collection_time_utc_sort", "source"]
+    )
+    combined = combined.drop_duplicates(
+        subset=["timestamp_utc", "country", "variable"], keep="last"
+    )
+    combined = combined.drop(columns=["collection_time_utc_sort"])
+    combined = combined.sort_values(["timestamp_utc", "source"]).reset_index(drop=True)
+    return combined[HOURLY_COLUMNS]
 
 
 def save_collection_snapshot(
@@ -193,6 +309,40 @@ def collect_file_summary(data_dir: Path) -> pd.DataFrame:
                     "year": path.stem,
                     "rows": 0,
                     "latest_timestamp_utc": None,
+                    "path": str(path),
+                    "error": str(exc),
+                }
+            )
+    return pd.DataFrame(rows)
+
+
+def collect_hourly_summary(hourly_dir: Path) -> pd.DataFrame:
+    rows = []
+    for path in sorted(hourly_dir.glob("*/*/*.parquet")):
+        try:
+            frame = pd.read_parquet(path, columns=["timestamp_utc", "value", "collection_time_utc"])
+            latest_timestamp = frame["timestamp_utc"].max() if not frame.empty else None
+            latest_collection = frame["collection_time_utc"].max() if not frame.empty else None
+            rows.append(
+                {
+                    "country": path.parts[-3],
+                    "variable": path.parts[-2],
+                    "year": path.stem,
+                    "rows": len(frame),
+                    "latest_timestamp_utc": latest_timestamp,
+                    "latest_collection_time_utc": latest_collection,
+                    "path": str(path),
+                }
+            )
+        except Exception as exc:
+            rows.append(
+                {
+                    "country": path.parts[-3],
+                    "variable": path.parts[-2],
+                    "year": path.stem,
+                    "rows": 0,
+                    "latest_timestamp_utc": None,
+                    "latest_collection_time_utc": None,
                     "path": str(path),
                     "error": str(exc),
                 }

@@ -63,6 +63,7 @@ class Settings:
     timezone: str
     data_dir: Path
     update_dir: Path
+    hourly_dir: Path
     update_manifest: Path
     run_history: Path
     status_file: Path
@@ -99,6 +100,7 @@ def load_settings(require_api_key: bool = True) -> Settings:
         timezone=os.getenv("ENTSOE_TIMEZONE", "Europe/Brussels"),
         data_dir=PROJECT_ROOT / os.getenv("ENTSOE_DATA_DIR", "data/raw"),
         update_dir=PROJECT_ROOT / os.getenv("ENTSOE_UPDATE_DIR", "data/updates"),
+        hourly_dir=PROJECT_ROOT / os.getenv("ENTSOE_HOURLY_DIR", "data/hourly"),
         update_manifest=PROJECT_ROOT / os.getenv("ENTSOE_UPDATE_MANIFEST", "data/update_manifest.csv"),
         run_history=PROJECT_ROOT / os.getenv("ENTSOE_RUN_HISTORY", "data/run_history.csv"),
         status_file=PROJECT_ROOT / os.getenv("ENTSOE_STATUS_FILE", "data/status.json"),

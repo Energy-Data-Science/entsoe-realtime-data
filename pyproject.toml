@@ -10,6 +10,7 @@ requires-python = ">=3.10"
 dependencies = [
   "entsoe-py>=0.6.18",
   "pandas>=2.2",
+  "pyarrow>=15",
   "python-dotenv>=1.0",
   "streamlit>=1.35",
   "plotly>=5.22",

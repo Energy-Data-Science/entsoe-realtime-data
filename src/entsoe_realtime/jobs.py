@@ -12,6 +12,7 @@ from entsoe_realtime.config import VARIABLES, Settings, load_settings
 from entsoe_realtime.storage import (
     append_run_history,
     collect_file_summary,
+    collect_hourly_summary,
     collect_snapshot_summary,
     save_variable_frame,
     write_progress,
@@ -102,6 +103,7 @@ def run_refresh(
             append_run_history([event], settings)
 
     historical_summary = collect_file_summary(settings.data_dir)
+    hourly_summary = collect_hourly_summary(settings.hourly_dir)
     snapshot_summary = collect_snapshot_summary(settings.update_dir, settings.update_manifest)
     active_summary = snapshot_summary if settings.storage_mode == "snapshot" else historical_summary
     status = {
@@ -120,6 +122,8 @@ def run_refresh(
         "total_rows": int(active_summary["rows"].sum()) if not active_summary.empty else 0,
         "historical_file_count": int(len(historical_summary)),
         "historical_total_rows": int(historical_summary["rows"].sum()) if not historical_summary.empty else 0,
+        "hourly_file_count": int(len(hourly_summary)),
+        "hourly_total_rows": int(hourly_summary["rows"].sum()) if not hourly_summary.empty else 0,
         "snapshot_file_count": int(len(snapshot_summary)),
         "snapshot_total_rows": int(snapshot_summary["rows"].sum()) if not snapshot_summary.empty else 0,
         "history": history[-20:],
