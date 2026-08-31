@@ -11,6 +11,10 @@ on:
         description: "Comma-separated variables to collect"
         required: false
         default: "actual_load,forecast_load,actual_solar_generation,forecast_solar_generation,actual_onshore_wind_generation,forecast_onshore_wind_generation,actual_offshore_wind_generation,forecast_offshore_wind_generation"
+      recent_days:
+        description: "Rolling lookback window in days"
+        required: false
+        default: "7"
   repository_dispatch:
     types: [collect-entsoe]
   schedule:
@@ -41,8 +45,8 @@ jobs:
       ENTSOE_PROGRESS_FILE: data/progress.json
       ENTSOE_FETCH_MODE: recent
       ENTSOE_STORAGE_MODE: snapshot
-      ENTSOE_RECENT_DAYS: 31
-      ENTSOE_CHUNK_DAYS: 31
+      ENTSOE_RECENT_DAYS: ${{ github.event.inputs.recent_days || '7' }}
+      ENTSOE_CHUNK_DAYS: ${{ github.event.inputs.recent_days || '7' }}
       ENTSOE_SLEEP_SECONDS: 1.0
       ENTSOE_MAX_RETRIES: 3
       ENTSOE_RETRY_SLEEP_SECONDS: 5.0
