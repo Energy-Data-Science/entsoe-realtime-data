@@ -94,6 +94,12 @@ Supported collection zones are configured in `COUNTRY_TO_ENTSOE_AREA` in
 | `ES` | `ES` | Spain |
 | `PT` | `PT` | Portugal |
 
+Germany imbalance prices use a variable-specific domain rule. ENTSO-E returns
+German imbalance prices from `DE_LU` up to `2022-06-21 23:45` Brussels time,
+then from `DE` starting `2022-06-22 00:00` Brussels time. This is handled in
+`entsoe_area_windows(...)` in `src/entsoe_realtime/client.py`; the global
+`DE -> DE_LU` mapping remains correct for the bidding-zone variables.
+
 When adding another country, update the mapping in `config.py`, update any
 workflow `ENTSOE_COUNTRIES` environment variables, and check the dashboard
 country selector.

@@ -43,15 +43,15 @@ class EntsoeFetcher:
 
     def fetch_variable(self, country: str, spec: VariableSpec, start: pd.Timestamp, end: pd.Timestamp) -> pd.DataFrame:
         country = country.upper()
-        entsoe_area = COUNTRY_TO_ENTSOE_AREA[country]
         frames: list[pd.DataFrame] = []
         self.warnings = []
 
-        for chunk_start, chunk_end in chunk_timerange(start, end, self.settings.chunk_days):
-            self._emit_progress(country, spec, chunk_start, chunk_end, "fetching")
-            frames.extend(self._fetch_range(country, entsoe_area, spec, chunk_start, chunk_end))
-            self._emit_progress(country, spec, chunk_start, chunk_end, "chunk_complete")
-            time.sleep(self.settings.sleep_seconds)
+        for entsoe_area, area_start, area_end in entsoe_area_windows(country, spec, start, end, self.settings.timezone):
+            for chunk_start, chunk_end in chunk_timerange(area_start, area_end, self.settings.chunk_days):
+                self._emit_progress(country, spec, chunk_start, chunk_end, "fetching")
+                frames.extend(self._fetch_range(country, entsoe_area, spec, chunk_start, chunk_end))
+                self._emit_progress(country, spec, chunk_start, chunk_end, "chunk_complete")
+                time.sleep(self.settings.sleep_seconds)
 
         if not frames:
             return pd.DataFrame(columns=STANDARD_COLUMNS)
@@ -124,7 +124,7 @@ class EntsoeFetcher:
         last_error: Exception | None = None
         for attempt in range(self.settings.max_retries + 1):
             try:
-                logger.info("%s: fetching %s to %s", spec.name, start, end)
+                logger.info("%s/%s: fetching %s to %s", spec.name, entsoe_area, start, end)
                 return self._fetch_chunk(entsoe_area, spec, start, end)
             except NoMatchingDataError:
                 raise
@@ -184,6 +184,24 @@ def make_time_window(spec: VariableSpec, settings: Settings) -> tuple[pd.Timesta
 
 def is_forward_delivery_variable(spec: VariableSpec) -> bool:
     return spec.fetcher in FORWARD_DELIVERY_FETCHERS
+
+
+def entsoe_area_windows(
+    country: str,
+    spec: VariableSpec,
+    start: pd.Timestamp,
+    end: pd.Timestamp,
+    timezone: str,
+) -> Iterator[tuple[str, pd.Timestamp, pd.Timestamp]]:
+    if country == "DE" and spec.fetcher == "imbalance_price":
+        transition = pd.Timestamp("2022-06-22 00:00", tz=timezone)
+        if start < transition:
+            yield COUNTRY_TO_ENTSOE_AREA[country], start, min(end, transition)
+        if end > transition:
+            yield "DE", max(start, transition), end
+        return
+
+    yield COUNTRY_TO_ENTSOE_AREA[country], start, end
 
 
 def chunk_timerange(start: pd.Timestamp, end: pd.Timestamp, chunk_days: int) -> Iterator[tuple[pd.Timestamp, pd.Timestamp]]:

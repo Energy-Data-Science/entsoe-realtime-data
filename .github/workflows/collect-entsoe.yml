@@ -10,7 +10,7 @@ on:
       variables:
         description: "Comma-separated variables to collect"
         required: false
-        default: "actual_load,forecast_load,actual_solar_generation,forecast_solar_generation,actual_onshore_wind_generation,forecast_onshore_wind_generation,actual_offshore_wind_generation,forecast_offshore_wind_generation"
+        default: "actual_load,forecast_load,actual_solar_generation,forecast_solar_generation,actual_onshore_wind_generation,forecast_onshore_wind_generation,actual_offshore_wind_generation,forecast_offshore_wind_generation,day_ahead_price,imbalance_price"
       recent_days:
         description: "Rolling lookback window in days"
         required: false
@@ -34,7 +34,7 @@ jobs:
     env:
       ENTSOE_API_KEY: ${{ secrets.ENTSOE_API_KEY }}
       ENTSOE_COUNTRIES: ${{ github.event.inputs.countries || 'BE,FR,DE,NL,DK1,DK2,ES,PT' }}
-      ENTSOE_VARIABLES: ${{ github.event.inputs.variables || 'actual_load,forecast_load,actual_solar_generation,forecast_solar_generation,actual_onshore_wind_generation,forecast_onshore_wind_generation,actual_offshore_wind_generation,forecast_offshore_wind_generation' }}
+      ENTSOE_VARIABLES: ${{ github.event.inputs.variables || 'actual_load,forecast_load,actual_solar_generation,forecast_solar_generation,actual_onshore_wind_generation,forecast_onshore_wind_generation,actual_offshore_wind_generation,forecast_offshore_wind_generation,day_ahead_price,imbalance_price' }}
       ENTSOE_TIMEZONE: Europe/Brussels
       ENTSOE_DATA_DIR: data/raw
       ENTSOE_UPDATE_DIR: data/updates
