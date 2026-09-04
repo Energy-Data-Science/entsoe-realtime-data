@@ -27,6 +27,7 @@ STANDARD_COLUMNS = [
 
 logger = logging.getLogger(__name__)
 TRANSIENT_STATUS_CODES = {429, 500, 502, 503, 504}
+FORWARD_DELIVERY_FETCHERS = {"forecast_load", "forecast_generation", "day_ahead_price"}
 
 
 class EntsoeFetcher:
@@ -174,7 +175,15 @@ def make_time_window(spec: VariableSpec, settings: Settings) -> tuple[pd.Timesta
     else:
         raise ValueError("ENTSOE_FETCH_MODE must be either 'full' or 'recent'.")
 
-    return start, now
+    end = now
+    if is_forward_delivery_variable(spec):
+        end = now + pd.Timedelta(hours=settings.forecast_horizon_hours)
+
+    return start, end
+
+
+def is_forward_delivery_variable(spec: VariableSpec) -> bool:
+    return spec.fetcher in FORWARD_DELIVERY_FETCHERS
 
 
 def chunk_timerange(start: pd.Timestamp, end: pd.Timestamp, chunk_days: int) -> Iterator[tuple[pd.Timestamp, pd.Timestamp]]:

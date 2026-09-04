@@ -70,6 +70,7 @@ class Settings:
     fetch_mode: str
     storage_mode: str
     recent_days: int
+    forecast_horizon_hours: int
     chunk_days: int
     sleep_seconds: float
     max_retries: int
@@ -108,6 +109,7 @@ def load_settings(require_api_key: bool = True) -> Settings:
         fetch_mode=os.getenv("ENTSOE_FETCH_MODE", "recent").lower(),
         storage_mode=os.getenv("ENTSOE_STORAGE_MODE", "snapshot").lower(),
         recent_days=int(os.getenv("ENTSOE_RECENT_DAYS", "31")),
+        forecast_horizon_hours=max(0, int(os.getenv("ENTSOE_FORECAST_HORIZON_HOURS", "48"))),
         chunk_days=int(os.getenv("ENTSOE_CHUNK_DAYS", "31")),
         sleep_seconds=float(os.getenv("ENTSOE_SLEEP_SECONDS", "1.0")),
         max_retries=int(os.getenv("ENTSOE_MAX_RETRIES", "3")),

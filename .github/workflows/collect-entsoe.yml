@@ -46,6 +46,7 @@ jobs:
       ENTSOE_FETCH_MODE: recent
       ENTSOE_STORAGE_MODE: snapshot
       ENTSOE_RECENT_DAYS: ${{ github.event.inputs.recent_days || '7' }}
+      ENTSOE_FORECAST_HORIZON_HOURS: 48
       ENTSOE_CHUNK_DAYS: ${{ github.event.inputs.recent_days || '7' }}
       ENTSOE_SLEEP_SECONDS: 1.0
       ENTSOE_MAX_RETRIES: 3

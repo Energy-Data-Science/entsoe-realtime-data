@@ -146,6 +146,14 @@ The collector has two main modes controlled by environment variables:
 - `ENTSOE_FETCH_MODE=recent`: fetches only the latest window, usually 31 days.
 - `ENTSOE_FETCH_MODE=full`: fetches from the configured variable start date.
 
+For actual variables and imbalance prices, the query window ends at the current
+collection time. For forecast variables and day-ahead prices, the collector
+extends the query window beyond the collection time so every snapshot preserves
+the TSO values available for future delivery timestamps. This forward delivery
+window is controlled by `ENTSOE_FORECAST_HORIZON_HOURS`, with a default of 48
+hours. In the stored data, `collection_time_utc` is the time we queried the API;
+`timestamp_utc` is the delivery or forecast target time.
+
 Storage mode is controlled separately:
 
 - `ENTSOE_STORAGE_MODE=snapshot`: writes one timestamped snapshot per
