@@ -17,7 +17,7 @@ The project currently collects:
 
 ## Countries
 
-The public country labels are `BE`, `FR`, `DE`, `NL`, `DK1`, `DK2`, `ES`, and `PT`. Internally, `DE` is mapped to the current ENTSO-E bidding-zone code `DE_LU`, while Denmark is collected as the two ENTSO-E bidding zones `DK_1` and `DK_2`.
+The public country labels are `BE`, `FR`, `DE`, `NL`, `DK1`, `DK2`, `ES`, and `PT`. Internally, `DE` is mapped to the current ENTSO-E bidding-zone code `DE_LU`, while Denmark is collected as the two ENTSO-E bidding zones `DK_1` and `DK_2`. Germany imbalance prices are a special case: ENTSO-E uses `DE_LU` before `2022-06-22` and `DE` from `2022-06-22` onward.
 
 ## Data Windows
 
