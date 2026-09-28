@@ -1,9 +1,9 @@
 {
-  "run_id": "98460483-8ec9-4c81-9d76-7a9b0557e770",
+  "run_id": "c9dfb795-0bd3-4eee-ae40-22798e9d849f",
   "status": "run_complete",
-  "updated_at_utc": "2026-09-28T06:50:28Z",
-  "collection_time_utc": "2026-09-28T06:45:58Z",
-  "ok_items": 80,
+  "updated_at_utc": "2026-09-28T07:06:21Z",
+  "collection_time_utc": "2026-09-28T07:01:00Z",
+  "ok_items": 78,
   "warning_items": 1,
-  "error_items": 0
+  "error_items": 2
 }
