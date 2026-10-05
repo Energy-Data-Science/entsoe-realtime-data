@@ -6,6 +6,9 @@ from pathlib import Path
 import pandas as pd
 
 
+DASHBOARD_COUNTRIES = ("BE", "FR", "DE", "NL", "DK1", "DK2", "ES", "PT")
+DASHBOARD_EXCLUDED_SERIES = {("ES", "wind_offshore")}
+
 DASHBOARD_TARGETS = {
     "actual_load": "load",
     "actual_solar_generation": "solar",
@@ -18,7 +21,7 @@ def build_dashboard_actuals(
     hourly_dir: Path,
     output_dir: Path,
     *,
-    countries: tuple[str, ...] = ("BE", "FR", "DE"),
+    countries: tuple[str, ...] = DASHBOARD_COUNTRIES,
     lookback_days: int = 90,
     generated_at: pd.Timestamp | str | None = None,
 ) -> dict:
@@ -33,6 +36,8 @@ def build_dashboard_actuals(
     parts: list[pd.DataFrame] = []
     for country in countries:
         for variable, target in DASHBOARD_TARGETS.items():
+            if (country, target) in DASHBOARD_EXCLUDED_SERIES:
+                continue
             for path in sorted((hourly_dir / country / variable).glob("*.parquet")):
                 frame = pd.read_parquet(
                     path,
