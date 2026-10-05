@@ -44,3 +44,17 @@ def test_build_dashboard_actuals_keeps_recent_latest_rows(tmp_path) -> None:
     saved_status = json.loads((output / "actuals_status.json").read_text())
     assert saved_status["generated_at_utc"] == "2026-04-01T12:00:00Z"
     assert saved_status["series"][0]["actual_through_utc"] == "2026-04-01T11:00:00Z"
+
+
+def test_dashboard_actuals_excludes_unavailable_es_offshore(tmp_path) -> None:
+    hourly = tmp_path / "hourly" / "ES" / "actual_offshore_wind_generation"
+    hourly.mkdir(parents=True)
+    pd.DataFrame({
+        "timestamp_utc": ["2026-04-01T10:00:00Z"],
+        "value": [0.0],
+        "collection_time_utc": ["2026-04-01T10:20:00Z"],
+    }).to_parquet(hourly / "2026.parquet", index=False)
+    output = tmp_path / "dashboard"
+    status = build_dashboard_actuals(tmp_path / "hourly", output, countries=("ES",), generated_at="2026-04-01T12:00:00Z")
+    assert status["rows"] == 0
+    assert status["series"] == []
