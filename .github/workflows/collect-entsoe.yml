@@ -39,6 +39,8 @@ jobs:
       ENTSOE_DATA_DIR: data/raw
       ENTSOE_UPDATE_DIR: data/updates
       ENTSOE_HOURLY_DIR: data/hourly
+      ENTSOE_DASHBOARD_DIR: data/dashboard
+      ENTSOE_DASHBOARD_LOOKBACK_DAYS: 90
       ENTSOE_UPDATE_MANIFEST: data/update_manifest.csv
       ENTSOE_RUN_HISTORY: data/run_history.csv
       ENTSOE_STATUS_FILE: data/status.json
@@ -82,16 +84,19 @@ jobs:
               /data/status.json \
               /data/run_history.csv \
               /data/progress.json \
-              /data/hourly
+              /data/hourly \
+              /data/dashboard
             git checkout
             cd "$GITHUB_WORKSPACE"
             mkdir -p data/updates
             mkdir -p data/hourly
+            mkdir -p data/dashboard
             cp -f ../entsoe-data/data/update_manifest.csv data/update_manifest.csv 2>/dev/null || true
             cp -f ../entsoe-data/data/status.json data/status.json 2>/dev/null || true
             cp -f ../entsoe-data/data/run_history.csv data/run_history.csv 2>/dev/null || true
             cp -f ../entsoe-data/data/progress.json data/progress.json 2>/dev/null || true
             cp -a ../entsoe-data/data/hourly/. data/hourly/ 2>/dev/null || true
+            cp -a ../entsoe-data/data/dashboard/. data/dashboard/ 2>/dev/null || true
           else
             git worktree add -b data ../entsoe-data
           fi
@@ -114,15 +119,16 @@ jobs:
             git fetch origin data --filter=blob:none --depth=1 || true
             git reset --hard origin/data || true
 
-            mkdir -p data/updates data/hourly
+            mkdir -p data/updates data/hourly data/dashboard
             cp -a "$GITHUB_WORKSPACE/data/updates/." data/updates/ 2>/dev/null || true
             cp -a "$GITHUB_WORKSPACE/data/hourly/." data/hourly/ 2>/dev/null || true
+            cp -a "$GITHUB_WORKSPACE/data/dashboard/." data/dashboard/ 2>/dev/null || true
             cp -f "$GITHUB_WORKSPACE/data/update_manifest.csv" data/update_manifest.csv 2>/dev/null || true
             cp -f "$GITHUB_WORKSPACE/data/status.json" data/status.json 2>/dev/null || true
             cp -f "$GITHUB_WORKSPACE/data/run_history.csv" data/run_history.csv 2>/dev/null || true
             cp -f "$GITHUB_WORKSPACE/data/progress.json" data/progress.json 2>/dev/null || true
 
-            git add --sparse data/updates data/hourly data/update_manifest.csv data/status.json data/run_history.csv data/progress.json
+            git add --sparse data/updates data/hourly data/dashboard data/update_manifest.csv data/status.json data/run_history.csv data/progress.json
             if git diff --cached --quiet; then
               echo "No snapshot changes to commit."
               exit 0

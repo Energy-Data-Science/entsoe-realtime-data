@@ -235,6 +235,19 @@ For multi-column ENTSO-E responses, the column name is stored in `source`.
 `data/update_manifest.csv` stores one lightweight metadata row per snapshot file
 so the dashboard can stay fast even when many large update CSVs exist.
 
+Each successful collection also publishes a compact 90-day dashboard artifact:
+
+```text
+data/dashboard/actuals_recent.parquet
+data/dashboard/actuals_status.json
+```
+
+The Parquet file contains hourly actuals for load, solar, onshore wind, and
+offshore wind in BE, FR, and DE. The status file records the generation time and
+the latest available timestamp for every zone/target pair. These files let
+latency-sensitive dashboards retrieve all comparison actuals with one small
+download instead of reading each annual archive independently.
+
 ## Notebooks
 
 - `notebooks/01_backfill_entsoe_data.ipynb`: readable backfill workflow.
