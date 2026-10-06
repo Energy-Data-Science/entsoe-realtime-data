@@ -1,0 +1,92 @@
+name: Backfill bounded ENTSO-E window
+
+on:
+  workflow_dispatch:
+    inputs:
+      start:
+        description: Inclusive start date
+        required: true
+        default: "2026-04-20"
+      end:
+        description: Exclusive end date
+        required: true
+        default: "2026-10-07"
+      countries:
+        description: Comma-separated zones
+        required: true
+        default: "NL,DK1,DK2,ES,PT"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: entsoe-collection
+  cancel-in-progress: false
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.DATA_PUSH_TOKEN }}
+
+      - name: Check out data branch
+        uses: actions/checkout@v4
+        with:
+          repository: Energy-Data-Science/entsoe-realtime-data
+          ref: data
+          token: ${{ secrets.DATA_PUSH_TOKEN }}
+          path: data-branch
+          filter: blob:none
+          sparse-checkout: |
+            data/hourly
+            data/dashboard
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Fetch bounded history and rebuild dashboard actuals
+        env:
+          ENTSOE_API_KEY: ${{ secrets.ENTSOE_API_KEY }}
+          ENTSOE_TIMEZONE: Europe/Brussels
+          ENTSOE_CHUNK_DAYS: 14
+          ENTSOE_SLEEP_SECONDS: 1.0
+          ENTSOE_MAX_RETRIES: 3
+          ENTSOE_RETRY_SLEEP_SECONDS: 5.0
+          ENTSOE_MIN_CHUNK_HOURS: 24
+          ENTSOE_REQUEST_TIMEOUT_SECONDS: 60
+        run: |
+          python scripts/backfill_window.py \
+            --start "${{ inputs.start }}" \
+            --end "${{ inputs.end }}" \
+            --countries "${{ inputs.countries }}" \
+            --hourly-dir data-branch/data/hourly \
+            --dashboard-dir data-branch/data/dashboard \
+            | tee backfill-report.json
+
+      - name: Commit backfill to data branch
+        working-directory: data-branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/hourly data/dashboard
+          if git diff --cached --quiet; then
+            echo "No backfill changes to commit."
+          else
+            git commit -m "data: backfill five zones from ${{ inputs.start }}"
+            git push origin HEAD:data
+          fi
+
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bounded-backfill-report
+          path: backfill-report.json
