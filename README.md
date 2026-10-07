@@ -95,30 +95,145 @@ The dashboard shows the latest collection, failures, record counts, snapshot
 coverage, and preview charts. In public deployment it can run without the API
 key and read only the committed GitHub data.
 
-## Upload Snapshots To Mango
+## Upload Snapshots To ManGO
 
-For larger transfers, use the Python iRODS upload helper instead of the Mango
-web upload button. It walks a local folder, recreates the same structure in
-Mango, skips files that already exist with the same size, and records upload
-results in `data/mango_upload_manifest.csv`.
+The transfer uses the Python iRODS client because ManGO is backed by iRODS.
+The uploader recreates the local directory structure, skips matching remote
+objects, verifies uploaded sizes, and records results in
+`data/mango_upload_manifest.csv`.
 
-Install the Mango/iRODS dependency:
+### Network and runner requirements
 
-```bash
-pip install -r requirements.txt
+The automated job does **not** run on a GitHub-hosted computer. The workflow is
+assigned to a self-hosted runner with these labels:
+
+```yaml
+runs-on: [self-hosted, macOS, X64, mango]
 ```
 
-Set up an `irods_environment.json` file from Mango, then pass it with
-`--env-file`. If the file is stored at `~/.irods/irods_environment.json`, the
-script will find it automatically.
+Consequently, all of the following must remain true for the job to run:
 
-For recurring uploads, prefer the Mango project machine account, usually the
-project `<name>_ingress` account. For machine-account uploads, set
-`IRODS_PASSWORD` to the retrieved machine-account password/token. For personal
-interactive uploads only, add `--authenticate` to start Mango's browser-based
-authentication flow through `mango_auth`.
+1. The runner computer is powered on and awake.
+2. The GitHub Actions runner process or service is running.
+3. The runner has Internet access to GitHub.
+4. The runner can resolve and connect to `set.irods.icts.kuleuven.be:1247`.
+5. When required by the runner's location and network policy, the runner is
+   connected to the KU Leuven network or KU Leuven VPN.
 
-First run a small dry run:
+If the runner is a personal Mac outside the KU Leuven network, this means that
+the Mac and its KU Leuven VPN connection must stay active for the entire job.
+Closing the laptop or disconnecting VPN can interrupt an upload. A self-hosted
+runner installed on an always-on ESAT server is preferable for scheduled jobs;
+in that case the laptop and laptop VPN are not part of the data path.
+
+KU Leuven references:
+
+- [KU Leuven network FAQ: SSL VPN provides access to internal KU Leuven servers](https://admin.kuleuven.be/icts/english/servicedesk/FAQs-EN/FAQ-network)
+- [KU Leuven MFA login before starting VPN](https://admin.kuleuven.be/icts/servicepunt/lokaleondersteuning/temp/mfaloginvpn)
+- [KU Leuven network facilities: VPN and SSH jump-server access](https://admin.kuleuven.be/icts/services/netwerkfaciliteiten)
+
+GitHub reference:
+
+- [Adding self-hosted runners](https://docs.github.com/en/actions/how-tos/manage-runners/self-hosted-runners/add-runners)
+
+### Step 1: establish the KU Leuven network path
+
+When working off campus, connect the runner computer to the KU Leuven VPN
+before starting an upload:
+
+1. Visit [vpn.kuleuven.be](https://vpn.kuleuven.be/).
+2. Authenticate with the KU Leuven account used for VPN access.
+3. Start the VPN connection with the ICTS-supported client and the VPN zone
+   assigned by ICTS or the local IT administrator.
+4. Complete the additional MFA confirmation when requested.
+5. Confirm that the iRODS endpoint is reachable:
+
+```bash
+nc -vz set.irods.icts.kuleuven.be 1247
+```
+
+A successful TCP test only confirms network reachability; ManGO credentials
+are still required. If the test fails, verify VPN status before investigating
+the Python uploader.
+
+### Step 2: obtain the ManGO ingress machine account
+
+Use a machine account for unattended uploads. According to the official
+[ManGO workflow automation documentation](https://rdm-docs.icts.kuleuven.be/mango/features/automation.html),
+`<project>_ingress` is intended for writes and `<project>_egress` for reads.
+This project uploads with:
+
+```text
+Transparency_plus_ingress
+```
+
+1. Log in to the [ManGO portal](https://mango.kuleuven.be/).
+2. Open the `Transparency_plus` project page.
+3. Find the machine-account section at the bottom of the project page.
+4. Activate `Transparency_plus_ingress` if it is not active.
+5. Select **Retrieve API token**.
+6. Save the displayed token in a password manager. Retrieving a new token
+   invalidates the previous token.
+7. Save the displayed iRODS environment JSON as
+   `config/irods_environment.json`, or obtain the connection settings from the
+   ManGO **How to connect** page.
+
+Do not commit the token, `.irodsA`, `.env`, or any generated credentials. The
+environment JSON contains connection settings and the account name; the token
+must remain in a secret store.
+
+Official references:
+
+- [ManGO workflow automation and machine accounts](https://rdm-docs.icts.kuleuven.be/mango/features/automation.html)
+- [ManGO user access and the How to connect page](https://rdm-docs.icts.kuleuven.be/mango/basics/user_access.html)
+- [Python-iRODSClient authentication and sessions](https://rdm-docs.icts.kuleuven.be/mango/clients/python_client.html)
+
+### Step 3: install and test the Python client locally
+
+Create an isolated environment and install the repository dependencies:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+```
+
+Load the machine token without placing it directly in shell history:
+
+```bash
+read -s "IRODS_PASSWORD?ManGO ingress token: "
+export IRODS_PASSWORD
+echo
+```
+
+Test authentication and read access to the ingress collection:
+
+```bash
+python - <<'PY'
+import json
+import os
+from irods.session import iRODSSession
+
+with open("config/irods_environment.json", encoding="utf-8") as source:
+    settings = json.load(source)
+
+with iRODSSession(**settings, password=os.environ["IRODS_PASSWORD"]) as session:
+    collection = session.collections.get(
+        "/set/home/Transparency_plus/ingress"
+    )
+    print("Connected to", collection.path)
+PY
+```
+
+For a personal interactive session instead of a machine account, follow the
+official [Python client authentication instructions](https://rdm-docs.icts.kuleuven.be/mango/clients/python_client.html)
+and invoke the uploader with `--authenticate`. Personal authentication expires
+and is therefore unsuitable for a scheduled runner.
+
+### Step 4: run a manual dry run and small upload
+
+First inspect ten planned files without contacting ManGO or changing data:
 
 ```bash
 python scripts/upload_to_mango.py \
@@ -129,34 +244,87 @@ python scripts/upload_to_mango.py \
   --dry-run
 ```
 
-Then upload one country:
+Then upload and verify a small batch:
 
 ```bash
 python scripts/upload_to_mango.py \
   --env-file config/irods_environment.json \
   --local-root /Volumes/PSSD/1_entsoe-realtime-data-archive/data-branch-work/data/updates/France \
-  --remote-root /set/home/Transparency_plus/ingress/updates/France
+  --remote-root /set/home/Transparency_plus/ingress/updates/France \
+  --limit 10 \
+  --metadata project=entsoe-realtime-data \
+  --metadata source=ENTSO-E
 ```
 
-After that, upload the full `updates` tree:
+Inspect `data/mango_upload_manifest.csv` and the destination in the ManGO
+portal before attempting the complete tree. To upload the complete tree:
 
 ```bash
 python scripts/upload_to_mango.py \
   --env-file config/irods_environment.json \
   --local-root /Volumes/PSSD/1_entsoe-realtime-data-archive/data-branch-work/data/updates \
-  --remote-root /set/home/Transparency_plus/ingress/updates
-```
-
-Optional metadata can be attached to uploaded data objects:
-
-```bash
-python scripts/upload_to_mango.py \
-  --env-file config/irods_environment.json \
+  --remote-root /set/home/Transparency_plus/ingress/updates \
   --metadata project=entsoe-realtime-data \
   --metadata source=ENTSO-E
 ```
 
-## Daily Mango Archive Workflow
+### Step 5: configure the self-hosted GitHub Actions runner
+
+In the GitHub repository:
+
+1. Open **Settings > Actions > Runners**.
+2. Select **New self-hosted runner** and choose macOS with the runner's
+   architecture.
+3. Run the installation and registration commands generated by GitHub on the
+   computer that will perform the upload.
+4. Add the custom `mango` label to that runner.
+5. Install the runner as a background service if it must survive logout or
+   reboot, following the commands shown by GitHub for the installed runner.
+6. Verify that the runner is shown as **Idle** before triggering the workflow.
+
+GitHub's registration token and commands are generated for the repository and
+expire; use the current commands from the repository settings rather than
+copying an old registration command from another machine.
+
+### Step 6: configure GitHub secrets
+
+Open **Settings > Secrets and variables > Actions** and create:
+
+```text
+DATA_PUSH_TOKEN
+MANGO_IRODS_ENVIRONMENT_JSON
+MANGO_IRODS_PASSWORD
+```
+
+- `DATA_PUSH_TOKEN` allows the workflow to update the `data` branch.
+- `MANGO_IRODS_ENVIRONMENT_JSON` contains the complete JSON object for
+  `Transparency_plus_ingress`, not a path to a file.
+- `MANGO_IRODS_PASSWORD` contains the ingress machine-account token.
+
+References:
+
+- [GitHub: using secrets in Actions](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions)
+- [GitHub: managing personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
+
+### Step 7: test the GitHub workflow
+
+1. Confirm that the runner is **Idle** and its KU Leuven network path is active.
+2. Open **Actions > Archive old ENTSO-E snapshots to Mango**.
+3. Select **Run workflow**.
+4. First use `retention_days=14`, `limit=10`, and `dry_run=true`.
+5. Inspect the planner output. A dry run does not test ManGO authentication.
+6. Run again with `limit=10` and `dry_run=false` to test the complete upload,
+   verification, manifest, pruning, commit, and push sequence.
+7. Confirm the objects in ManGO, inspect `data/mango_upload_manifest.csv`, and
+   verify that the workflow completed before removing the limit.
+
+If a workflow remains **Queued / Waiting for a runner**, the self-hosted runner
+is offline or its labels do not match. If the preflight step cannot reach
+`set.irods.icts.kuleuven.be:1247`, restore the KU Leuven network or VPN path.
+An authentication error indicates an invalidated token or mismatched
+environment JSON rather than a VPN problem.
+
+## Daily ManGO Archive Workflow
 
 The workflow `.github/workflows/archive-to-mango.yml` archives old operational
 snapshot files from the GitHub `data` branch to Mango. The default policy is:
@@ -177,19 +345,11 @@ GitHub cron is UTC. This is 04:00 in Brussels during summer time and 03:00 in
 Brussels during winter time. If exact 04:00 Brussels time is required all year,
 adjust the cron seasonally.
 
-For GitHub Actions automation, configure these repository secrets:
-
-```text
-DATA_PUSH_TOKEN
-MANGO_IRODS_ENVIRONMENT_JSON
-MANGO_IRODS_PASSWORD
-```
-
-`MANGO_IRODS_ENVIRONMENT_JSON` should contain the Mango
-`irods_environment.json` content for `Transparency_plus_ingress`.
-`MANGO_IRODS_PASSWORD` should contain the corresponding machine-account
-password/token. Personal KU Leuven authenticator login is suitable for local
-uploads, but not for unattended GitHub Actions.
+The schedule is only effective while a matching self-hosted runner is online.
+GitHub will queue a scheduled job when the runner, computer, or required
+network path is unavailable. For reliable daily operation, run the worker on
+an always-on ESAT-managed machine or monitor the personal runner, power, sleep,
+VPN, and runner-service state.
 
 ## CSV Layout
 
