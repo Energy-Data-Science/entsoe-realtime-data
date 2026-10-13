@@ -94,7 +94,7 @@ class EntsoeFetcher:
             logger.info("%s %s: no matching ENTSO-E data for %s to %s", country, spec.name, start, end)
             return []
         except Exception as exc:
-            if not is_transient_error(exc):
+            if not is_split_worthy_error(exc):
                 raise
 
             if not can_split_range(start, end, self.settings.min_chunk_hours):
@@ -193,6 +193,13 @@ def is_transient_error(exc: Exception) -> bool:
         response = getattr(exc, "response", None)
         return response is not None and response.status_code in TRANSIENT_STATUS_CODES
     return False
+
+
+def is_split_worthy_error(exc: Exception) -> bool:
+    """Return whether retrying the same query over smaller windows can recover."""
+    if is_transient_error(exc):
+        return True
+    return isinstance(exc, NotImplementedError) and "Can only union MultiIndex" in str(exc)
 
 
 def can_split_range(start: pd.Timestamp, end: pd.Timestamp, min_chunk_hours: int) -> bool:

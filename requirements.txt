@@ -1,4 +1,4 @@
-entsoe-py>=0.6.18
+entsoe-py==0.8.0
 pandas>=2.2
 pyarrow>=15
 python-dotenv>=1.0
