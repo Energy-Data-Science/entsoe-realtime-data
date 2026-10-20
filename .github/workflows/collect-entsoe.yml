@@ -98,21 +98,9 @@ jobs:
             cp -f ../entsoe-data/data/progress.json data/progress.json 2>/dev/null || true
             cp -a ../entsoe-data/data/hourly/. data/hourly/ 2>/dev/null || true
             cp -a ../entsoe-data/data/dashboard/. data/dashboard/ 2>/dev/null || true
-            python scripts/list_recent_update_paths.py \
-              --manifest ../entsoe-data/data/update_manifest.csv \
-              --recent-days "${ENTSOE_HOURLY_REPAIR_DAYS}" \
-              --countries "${ENTSOE_COUNTRIES}" \
-              --variables "${ENTSOE_VARIABLES}" \
-              --output /tmp/entsoe_recent_update_paths.txt || true
-            if [ -s /tmp/entsoe_recent_update_paths.txt ]; then
-              cd ../entsoe-data
-              while IFS= read -r snapshot_path; do
-                git sparse-checkout add "${snapshot_path}"
-              done < /tmp/entsoe_recent_update_paths.txt
-              git checkout
-              cd "$GITHUB_WORKSPACE"
-              cp -a ../entsoe-data/data/updates/. data/updates/ 2>/dev/null || true
-            fi
+            # Resume from compact hourly data; restoring 45 days of raw snapshots
+            # path by path can block collection for hours. New snapshots still
+            # repair the hourly archive; older repairs use the backfill workflow.
           else
             git worktree add -b data ../entsoe-data
           fi
