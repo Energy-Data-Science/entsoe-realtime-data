@@ -549058,3 +549058,83 @@ a3d2246f-2e5d-4212-9b85-c25a5633b191,DK1,imbalance_price,2026-10-25T15:15:00+01:
 4b9c17b8-c886-43ea-942e-9e7a3ea784cb,DK2,imbalance_price,2026-10-25T17:00:00+01:00,2026-11-01T17:00:00+01:00,2026-11-01T15:53:10Z,ok,1336,1,,6.51
 4b9c17b8-c886-43ea-942e-9e7a3ea784cb,NL,imbalance_price,2026-10-25T17:00:00+01:00,2026-11-01T17:00:00+01:00,2026-11-01T15:53:16Z,ok,1208,1,,7.15
 4b9c17b8-c886-43ea-942e-9e7a3ea784cb,FR,imbalance_price,2026-10-25T17:00:00+01:00,2026-11-01T17:00:00+01:00,2026-11-01T15:53:04Z,ok,1342,1,,19.99
+e47ff156-de50-4195-a41e-38127af9800c,DK2,actual_load,2026-10-25T17:15:00+01:00,2026-11-01T17:15:00+01:00,2026-11-01T16:03:48Z,ok,128,1,,19.01
+e47ff156-de50-4195-a41e-38127af9800c,BE,actual_load,2026-10-25T17:15:00+01:00,2026-11-01T17:15:00+01:00,2026-11-01T16:03:48Z,ok,670,1,,19.4
+e47ff156-de50-4195-a41e-38127af9800c,FR,actual_load,2026-10-25T17:15:00+01:00,2026-11-01T17:15:00+01:00,2026-11-01T16:03:48Z,ok,667,1,,22.0
+e47ff156-de50-4195-a41e-38127af9800c,BE,forecast_load,2026-10-25T17:15:00+01:00,2026-11-03T17:15:00+01:00,2026-11-01T16:04:12Z,error,0,0,599 Server Error: status code 599 for url: https://web-api.tp.entsoe.eu/api?documentType=A65&processType=A01&outBiddingZone_Domain=10YBE----------2&securityToken=<redacted>&periodStart=202610251600&periodEnd=202611011600,7.24
+e47ff156-de50-4195-a41e-38127af9800c,FR,forecast_load,2026-10-25T17:15:00+01:00,2026-11-03T17:15:00+01:00,2026-11-01T16:04:14Z,error,0,0,599 Server Error: status code 599 for url: https://web-api.tp.entsoe.eu/api?documentType=A65&processType=A01&outBiddingZone_Domain=10YFR-RTE------C&securityToken=<redacted>&periodStart=202611011600&periodEnd=202611031600,22.54
+e47ff156-de50-4195-a41e-38127af9800c,BE,actual_solar_generation,2026-10-25T17:15:00+01:00,2026-11-01T17:15:00+01:00,2026-11-01T16:04:21Z,ok,166,1,,18.93
+e47ff156-de50-4195-a41e-38127af9800c,FR,actual_solar_generation,2026-10-25T17:15:00+01:00,2026-11-01T17:15:00+01:00,2026-11-01T16:04:39Z,ok,667,1,,16.44
+e47ff156-de50-4195-a41e-38127af9800c,ES,actual_load,2026-10-25T17:15:00+01:00,2026-11-01T17:15:00+01:00,2026-11-01T16:03:48Z,ok,670,1,,74.24
+e47ff156-de50-4195-a41e-38127af9800c,NL,actual_load,2026-10-25T17:15:00+01:00,2026-11-01T17:15:00+01:00,2026-11-01T16:03:48Z,ok,669,1,,74.63
+e47ff156-de50-4195-a41e-38127af9800c,PT,actual_load,2026-10-25T17:15:00+01:00,2026-11-01T17:15:00+01:00,2026-11-01T16:03:48Z,ok,151,1,,77.12
+e47ff156-de50-4195-a41e-38127af9800c,DK1,actual_load,2026-10-25T17:15:00+01:00,2026-11-01T17:15:00+01:00,2026-11-01T16:03:48Z,error,0,0,527 Server Error: status code 527 for url: https://web-api.tp.entsoe.eu/api?documentType=A65&processType=A16&outBiddingZone_Domain=10YDK-1--------W&out_Domain=10YDK-1--------W&securityToken=<redacted>&periodStart=202610251600&periodEnd=202611011600,79.5
+e47ff156-de50-4195-a41e-38127af9800c,BE,forecast_solar_generation,2026-10-25T17:15:00+01:00,2026-11-03T17:15:00+01:00,2026-11-01T16:04:42Z,ok,677,1,,29.31
+e47ff156-de50-4195-a41e-38127af9800c,BE,actual_onshore_wind_generation,2026-10-25T17:15:00+01:00,2026-11-01T17:15:00+01:00,2026-11-01T16:05:14Z,error,0,0,599 Server Error: status code 599 for url: https://web-api.tp.entsoe.eu/api?documentType=A75&processType=A16&in_Domain=10YBE----------2&psrType=B19&securityToken=<redacted>&periodStart=202610251600&periodEnd=202611011600,5.18
+e47ff156-de50-4195-a41e-38127af9800c,ES,forecast_load,2026-10-25T17:15:00+01:00,2026-11-03T17:15:00+01:00,2026-11-01T16:05:05Z,ok,794,1,,17.07
+e47ff156-de50-4195-a41e-38127af9800c,DK2,forecast_load,2026-10-25T17:15:00+01:00,2026-11-03T17:15:00+01:00,2026-11-01T16:04:09Z,error,0,0,599 Server Error: status code 599 for url: https://web-api.tp.entsoe.eu/api?documentType=A65&processType=A01&outBiddingZone_Domain=10YDK-2--------M&securityToken=<redacted>&periodStart=202610251600&periodEnd=202611011600,72.99
+e47ff156-de50-4195-a41e-38127af9800c,NL,forecast_load,2026-10-25T17:15:00+01:00,2026-11-03T17:15:00+01:00,2026-11-01T16:05:07Z,ok,794,1,,19.41
+e47ff156-de50-4195-a41e-38127af9800c,BE,forecast_onshore_wind_generation,2026-10-25T17:15:00+01:00,2026-11-03T17:15:00+01:00,2026-11-01T16:05:21Z,error,0,0,599 Server Error: status code 599 for url: https://web-api.tp.entsoe.eu/api?documentType=A69&processType=A01&in_Domain=10YBE----------2&psrType=B19&securityToken=<redacted>&periodStart=202610251600&periodEnd=202611011600,5.54
+e47ff156-de50-4195-a41e-38127af9800c,DK1,forecast_load,2026-10-25T17:15:00+01:00,2026-11-03T17:15:00+01:00,2026-11-01T16:05:11Z,ok,197,1,,15.52
+e47ff156-de50-4195-a41e-38127af9800c,ES,actual_solar_generation,2026-10-25T17:15:00+01:00,2026-11-01T17:15:00+01:00,2026-11-01T16:05:24Z,error,0,0,599 Server Error: status code 599 for url: https://web-api.tp.entsoe.eu/api?documentType=A75&processType=A16&in_Domain=10YES-REE------0&psrType=B16&securityToken=<redacted>&periodStart=202610251600&periodEnd=202611011600,8.1
+e47ff156-de50-4195-a41e-38127af9800c,DK2,actual_solar_generation,2026-10-25T17:15:00+01:00,2026-11-01T17:15:00+01:00,2026-11-01T16:05:26Z,ok,670,1,,9.9
+e47ff156-de50-4195-a41e-38127af9800c,NL,actual_solar_generation,2026-10-25T17:15:00+01:00,2026-11-01T17:15:00+01:00,2026-11-01T16:05:29Z,ok,1336,1,,9.53
+e47ff156-de50-4195-a41e-38127af9800c,ES,forecast_solar_generation,2026-10-25T17:15:00+01:00,2026-11-03T17:15:00+01:00,2026-11-01T16:05:36Z,error,0,0,599 Server Error: status code 599 for url: https://web-api.tp.entsoe.eu/api?documentType=A69&processType=A01&in_Domain=10YES-REE------0&psrType=B16&securityToken=<redacted>&periodStart=202610251600&periodEnd=202611011600,5.67
+e47ff156-de50-4195-a41e-38127af9800c,DK2,forecast_solar_generation,2026-10-25T17:15:00+01:00,2026-11-03T17:15:00+01:00,2026-11-01T16:05:38Z,ok,698,1,,7.23
+e47ff156-de50-4195-a41e-38127af9800c,ES,actual_onshore_wind_generation,2026-10-25T17:15:00+01:00,2026-11-01T17:15:00+01:00,2026-11-01T16:05:43Z,ok,670,1,,4.54
+e47ff156-de50-4195-a41e-38127af9800c,DK2,actual_onshore_wind_generation,2026-10-25T17:15:00+01:00,2026-11-01T17:15:00+01:00,2026-11-01T16:05:48Z,ok,670,1,,3.97
+e47ff156-de50-4195-a41e-38127af9800c,ES,forecast_onshore_wind_generation,2026-10-25T17:15:00+01:00,2026-11-03T17:15:00+01:00,2026-11-01T16:05:50Z,error,0,0,599 Server Error: status code 599 for url: https://web-api.tp.entsoe.eu/api?documentType=A69&processType=A01&in_Domain=10YES-REE------0&psrType=B19&securityToken=<redacted>&periodStart=202610251600&periodEnd=202611011600,5.2
+e47ff156-de50-4195-a41e-38127af9800c,ES,actual_offshore_wind_generation,2026-10-25T17:15:00+01:00,2026-11-01T17:15:00+01:00,2026-11-01T16:05:58Z,error,0,0,599 Server Error: status code 599 for url: https://web-api.tp.entsoe.eu/api?documentType=A75&processType=A16&in_Domain=10YES-REE------0&psrType=B18&securityToken=<redacted>&periodStart=202610251600&periodEnd=202611011600,5.15
+e47ff156-de50-4195-a41e-38127af9800c,DK2,forecast_onshore_wind_generation,2026-10-25T17:15:00+01:00,2026-11-03T17:15:00+01:00,2026-11-01T16:05:54Z,error,0,0,599 Server Error: status code 599 for url: https://web-api.tp.entsoe.eu/api?documentType=A69&processType=A01&in_Domain=10YDK-2--------M&psrType=B19&securityToken=<redacted>&periodStart=202611011600&periodEnd=202611031600,8.93
+e47ff156-de50-4195-a41e-38127af9800c,FR,forecast_solar_generation,2026-10-25T17:15:00+01:00,2026-11-03T17:15:00+01:00,2026-11-01T16:04:57Z,error,0,0,599 Server Error: status code 599 for url: https://web-api.tp.entsoe.eu/api?documentType=A69&processType=A01&in_Domain=10YFR-RTE------C&psrType=B16&securityToken=<redacted>&periodStart=202610251600&periodEnd=202611011600,70.55
+e47ff156-de50-4195-a41e-38127af9800c,DE,actual_load,2026-10-25T17:15:00+01:00,2026-11-01T17:15:00+01:00,2026-11-01T16:03:48Z,ok,665,1,,143.58
+e47ff156-de50-4195-a41e-38127af9800c,DK2,actual_offshore_wind_generation,2026-10-25T17:15:00+01:00,2026-11-01T17:15:00+01:00,2026-11-01T16:06:07Z,ok,670,1,,8.06
+e47ff156-de50-4195-a41e-38127af9800c,FR,actual_onshore_wind_generation,2026-10-25T17:15:00+01:00,2026-11-01T17:15:00+01:00,2026-11-01T16:06:10Z,error,0,0,599 Server Error: status code 599 for url: https://web-api.tp.entsoe.eu/api?documentType=A75&processType=A16&in_Domain=10YFR-RTE------C&psrType=B19&securityToken=<redacted>&periodStart=202610251600&periodEnd=202611011600,5.18
+e47ff156-de50-4195-a41e-38127af9800c,PT,forecast_load,2026-10-25T17:15:00+01:00,2026-11-03T17:15:00+01:00,2026-11-01T16:05:09Z,ok,198,1,,94.85
+e47ff156-de50-4195-a41e-38127af9800c,DK2,forecast_offshore_wind_generation,2026-10-25T17:15:00+01:00,2026-11-03T17:15:00+01:00,2026-11-01T16:06:17Z,ok,698,1,,31.02
+e47ff156-de50-4195-a41e-38127af9800c,NL,forecast_solar_generation,2026-10-25T17:15:00+01:00,2026-11-03T17:15:00+01:00,2026-11-01T16:05:41Z,error,0,0,599 Server Error: status code 599 for url: https://web-api.tp.entsoe.eu/api?documentType=A69&processType=A01&in_Domain=10YNL----------L&psrType=B16&securityToken=<redacted>&periodStart=202611011600&periodEnd=202611031600,73.26
+e47ff156-de50-4195-a41e-38127af9800c,PT,actual_solar_generation,2026-10-25T17:15:00+01:00,2026-11-01T17:15:00+01:00,2026-11-01T16:06:46Z,ok,166,1,,15.91
+e47ff156-de50-4195-a41e-38127af9800c,NL,actual_onshore_wind_generation,2026-10-25T17:15:00+01:00,2026-11-01T17:15:00+01:00,2026-11-01T16:06:56Z,ok,1338,1,,9.61
+e47ff156-de50-4195-a41e-38127af9800c,FR,forecast_onshore_wind_generation,2026-10-25T17:15:00+01:00,2026-11-03T17:15:00+01:00,2026-11-01T16:06:19Z,ok,790,1,,59.16
+e47ff156-de50-4195-a41e-38127af9800c,BE,actual_offshore_wind_generation,2026-10-25T17:15:00+01:00,2026-11-01T17:15:00+01:00,2026-11-01T16:05:31Z,ok,167,1,,110.09
+e47ff156-de50-4195-a41e-38127af9800c,DK1,actual_solar_generation,2026-10-25T17:15:00+01:00,2026-11-01T17:15:00+01:00,2026-11-01T16:05:33Z,ok,670,1,,110.93
+e47ff156-de50-4195-a41e-38127af9800c,DE,forecast_load,2026-10-25T17:15:00+01:00,2026-11-03T17:15:00+01:00,2026-11-01T16:06:14Z,error,0,0,599 Server Error: status code 599 for url: https://web-api.tp.entsoe.eu/api?documentType=A65&processType=A01&outBiddingZone_Domain=10Y1001A1001A82H&securityToken=<redacted>&periodStart=202611011600&periodEnd=202611031600,75.77
+e47ff156-de50-4195-a41e-38127af9800c,BE,forecast_offshore_wind_generation,2026-10-25T17:15:00+01:00,2026-11-03T17:15:00+01:00,2026-11-01T16:07:24Z,ok,197,1,,5.67
+e47ff156-de50-4195-a41e-38127af9800c,DK1,forecast_solar_generation,2026-10-25T17:15:00+01:00,2026-11-03T17:15:00+01:00,2026-11-01T16:07:27Z,ok,698,1,,7.8
+e47ff156-de50-4195-a41e-38127af9800c,PT,forecast_solar_generation,2026-10-25T17:15:00+01:00,2026-11-03T17:15:00+01:00,2026-11-01T16:07:04Z,error,0,0,599 Server Error: status code 599 for url: https://web-api.tp.entsoe.eu/api?documentType=A69&processType=A01&in_Domain=10YPT-REN------W&psrType=B16&securityToken=<redacted>&periodStart=202611011600&periodEnd=202611031600,32.53
+e47ff156-de50-4195-a41e-38127af9800c,ES,forecast_offshore_wind_generation,2026-10-25T17:15:00+01:00,2026-11-03T17:15:00+01:00,2026-11-01T16:06:05Z,warning,0,0,No records fetched; no snapshot file was written.,95.87
+e47ff156-de50-4195-a41e-38127af9800c,DK1,actual_onshore_wind_generation,2026-10-25T17:15:00+01:00,2026-11-01T17:15:00+01:00,2026-11-01T16:07:37Z,ok,670,1,,3.96
+e47ff156-de50-4195-a41e-38127af9800c,FR,actual_offshore_wind_generation,2026-10-25T17:15:00+01:00,2026-11-01T17:15:00+01:00,2026-11-01T16:07:21Z,ok,667,1,,26.32
+e47ff156-de50-4195-a41e-38127af9800c,DE,actual_solar_generation,2026-10-25T17:15:00+01:00,2026-11-01T17:15:00+01:00,2026-11-01T16:07:32Z,ok,667,1,,20.16
+e47ff156-de50-4195-a41e-38127af9800c,FR,forecast_offshore_wind_generation,2026-10-25T17:15:00+01:00,2026-11-03T17:15:00+01:00,2026-11-01T16:07:49Z,ok,790,1,,5.26
+e47ff156-de50-4195-a41e-38127af9800c,NL,forecast_onshore_wind_generation,2026-10-25T17:15:00+01:00,2026-11-03T17:15:00+01:00,2026-11-01T16:07:08Z,ok,794,1,,49.3
+e47ff156-de50-4195-a41e-38127af9800c,PT,actual_onshore_wind_generation,2026-10-25T17:15:00+01:00,2026-11-01T17:15:00+01:00,2026-11-01T16:07:39Z,ok,166,1,,21.69
+e47ff156-de50-4195-a41e-38127af9800c,NL,actual_offshore_wind_generation,2026-10-25T17:15:00+01:00,2026-11-01T17:15:00+01:00,2026-11-01T16:08:00Z,ok,1338,1,,4.0
+e47ff156-de50-4195-a41e-38127af9800c,DK2,day_ahead_price,2026-10-25T17:15:00+01:00,2026-11-03T17:15:00+01:00,2026-11-01T16:06:50Z,ok,795,1,,76.91
+e47ff156-de50-4195-a41e-38127af9800c,NL,forecast_offshore_wind_generation,2026-10-25T17:15:00+01:00,2026-11-03T17:15:00+01:00,2026-11-01T16:08:06Z,ok,794,1,,5.53
+e47ff156-de50-4195-a41e-38127af9800c,DK1,forecast_onshore_wind_generation,2026-10-25T17:15:00+01:00,2026-11-03T17:15:00+01:00,2026-11-01T16:07:45Z,ok,698,1,,28.95
+e47ff156-de50-4195-a41e-38127af9800c,DK2,imbalance_price,2026-10-25T17:15:00+01:00,2026-11-01T17:15:00+01:00,2026-11-01T16:08:10Z,error,0,0,599 Server Error: status code 599 for url: https://web-api.tp.entsoe.eu/api?documentType=A85&controlArea_Domain=10YDK-2--------M&securityToken=<redacted>&periodStart=202610251600&periodEnd=202611011600,5.19
+e47ff156-de50-4195-a41e-38127af9800c,DE,forecast_solar_generation,2026-10-25T17:15:00+01:00,2026-11-03T17:15:00+01:00,2026-11-01T16:07:54Z,ok,698,1,,31.09
+e47ff156-de50-4195-a41e-38127af9800c,DE,actual_onshore_wind_generation,2026-10-25T17:15:00+01:00,2026-11-01T17:15:00+01:00,2026-11-01T16:08:27Z,ok,667,1,,1.87
+e47ff156-de50-4195-a41e-38127af9800c,PT,forecast_onshore_wind_generation,2026-10-25T17:15:00+01:00,2026-11-03T17:15:00+01:00,2026-11-01T16:08:03Z,ok,173,1,,29.7
+e47ff156-de50-4195-a41e-38127af9800c,DK1,actual_offshore_wind_generation,2026-10-25T17:15:00+01:00,2026-11-01T17:15:00+01:00,2026-11-01T16:08:16Z,ok,670,1,,20.53
+e47ff156-de50-4195-a41e-38127af9800c,DE,forecast_onshore_wind_generation,2026-10-25T17:15:00+01:00,2026-11-03T17:15:00+01:00,2026-11-01T16:08:31Z,ok,698,1,,5.74
+e47ff156-de50-4195-a41e-38127af9800c,BE,day_ahead_price,2026-10-25T17:15:00+01:00,2026-11-03T17:15:00+01:00,2026-11-01T16:07:34Z,ok,795,1,,68.01
+e47ff156-de50-4195-a41e-38127af9800c,DE,actual_offshore_wind_generation,2026-10-25T17:15:00+01:00,2026-11-01T17:15:00+01:00,2026-11-01T16:08:42Z,ok,670,1,,4.15
+e47ff156-de50-4195-a41e-38127af9800c,BE,imbalance_price,2026-10-25T17:15:00+01:00,2026-11-01T17:15:00+01:00,2026-11-01T16:08:44Z,ok,1342,1,,4.05
+e47ff156-de50-4195-a41e-38127af9800c,FR,day_ahead_price,2026-10-25T17:15:00+01:00,2026-11-03T17:15:00+01:00,2026-11-01T16:07:57Z,ok,795,1,,54.02
+e47ff156-de50-4195-a41e-38127af9800c,PT,actual_offshore_wind_generation,2026-10-25T17:15:00+01:00,2026-11-01T17:15:00+01:00,2026-11-01T16:08:35Z,ok,166,1,,19.54
+e47ff156-de50-4195-a41e-38127af9800c,DE,forecast_offshore_wind_generation,2026-10-25T17:15:00+01:00,2026-11-03T17:15:00+01:00,2026-11-01T16:08:48Z,ok,698,1,,9.16
+e47ff156-de50-4195-a41e-38127af9800c,FR,imbalance_price,2026-10-25T17:15:00+01:00,2026-11-01T17:15:00+01:00,2026-11-01T16:08:53Z,ok,1342,1,,4.41
+e47ff156-de50-4195-a41e-38127af9800c,NL,day_ahead_price,2026-10-25T17:15:00+01:00,2026-11-03T17:15:00+01:00,2026-11-01T16:08:14Z,ok,795,1,,49.77
+e47ff156-de50-4195-a41e-38127af9800c,ES,day_ahead_price,2026-10-25T17:15:00+01:00,2026-11-03T17:15:00+01:00,2026-11-01T16:07:43Z,ok,795,1,,80.9
+e47ff156-de50-4195-a41e-38127af9800c,DK1,forecast_offshore_wind_generation,2026-10-25T17:15:00+01:00,2026-11-03T17:15:00+01:00,2026-11-01T16:08:39Z,ok,698,1,,29.13
+e47ff156-de50-4195-a41e-38127af9800c,NL,imbalance_price,2026-10-25T17:15:00+01:00,2026-11-01T17:15:00+01:00,2026-11-01T16:09:06Z,ok,1206,1,,6.75
+e47ff156-de50-4195-a41e-38127af9800c,ES,imbalance_price,2026-10-25T17:15:00+01:00,2026-11-01T17:15:00+01:00,2026-11-01T16:09:08Z,ok,1340,1,,4.97
+e47ff156-de50-4195-a41e-38127af9800c,DE,day_ahead_price,2026-10-25T17:15:00+01:00,2026-11-03T17:15:00+01:00,2026-11-01T16:09:00Z,ok,795,1,,34.13
+e47ff156-de50-4195-a41e-38127af9800c,PT,forecast_offshore_wind_generation,2026-10-25T17:15:00+01:00,2026-11-03T17:15:00+01:00,2026-11-01T16:08:57Z,ok,173,1,,39.59
+e47ff156-de50-4195-a41e-38127af9800c,DE,imbalance_price,2026-10-25T17:15:00+01:00,2026-11-01T17:15:00+01:00,2026-11-01T16:09:36Z,ok,1340,1,,4.22
+e47ff156-de50-4195-a41e-38127af9800c,DK1,day_ahead_price,2026-10-25T17:15:00+01:00,2026-11-03T17:15:00+01:00,2026-11-01T16:09:11Z,ok,795,1,,39.04
+e47ff156-de50-4195-a41e-38127af9800c,DK1,imbalance_price,2026-10-25T17:15:00+01:00,2026-11-01T17:15:00+01:00,2026-11-01T16:09:53Z,ok,1336,1,,1.9
+e47ff156-de50-4195-a41e-38127af9800c,PT,day_ahead_price,2026-10-25T17:15:00+01:00,2026-11-03T17:15:00+01:00,2026-11-01T16:09:39Z,ok,795,1,,36.3
+e47ff156-de50-4195-a41e-38127af9800c,PT,imbalance_price,2026-10-25T17:15:00+01:00,2026-11-01T17:15:00+01:00,2026-11-01T16:10:17Z,ok,630,1,,21.36
