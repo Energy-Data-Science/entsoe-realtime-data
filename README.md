@@ -26,7 +26,9 @@ The public country labels are `BE`, `FR`, `DE`, `NL`, `DK1`, `DK2`, `ES`, and `P
 - The historical backfill is kept in `data/raw`.
 - Operational updates fetch only the latest 31 days.
 - Every update run ends at the latest available timestamp at runtime.
-- The scheduler runs every 15 minutes and stores a new timestamped snapshot.
+- The snapshot workflow is scheduled every 15 minutes; GitHub Actions can delay or drop scheduled starts.
+- A continuous collector checks every five minutes and collects when the previous collection is at least 13 minutes old. It exits after about 230 minutes, with a 250-minute hard timeout. Hourly starts queue its replacement without cancelling the active collector.
+- These are best-effort schedules, not a guaranteed hourly publication service; actual timestamps also depend on ENTSO-E publication.
 
 The fetch cadence is 15 minutes, but the saved data preserve ENTSO-E's native resolution. Many ENTSO-E series are hourly, 30-minute, 15-minute, or irregular depending on market area and data item.
 

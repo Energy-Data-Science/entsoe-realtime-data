@@ -3,14 +3,15 @@ name: Continuous ENTSO-E collector
 on:
   workflow_dispatch:
   schedule:
-    - cron: "5 */4 * * *"
+    # Queue a successor hourly; delayed schedules must not cancel active collection.
+    - cron: "5 * * * *"
 
 permissions:
   contents: read
 
 concurrency:
   group: entsoe-continuous-collector
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   collect-loop:
@@ -94,8 +95,12 @@ jobs:
       - name: Run collection loop
         shell: bash
         run: |
-          for iteration in $(seq 1 48); do
-            echo "Collection loop iteration ${iteration}/48 at $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+          # Leave 20 minutes for a final collection/push before the job timeout.
+          collection_deadline=$((SECONDS + 230 * 60))
+          iteration=0
+          while (( SECONDS < collection_deadline )); do
+            iteration=$((iteration + 1))
+            echo "Collection loop iteration ${iteration} at $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
             git -C ../entsoe-data fetch origin data --filter=blob:none --depth=1 || true
             git -C ../entsoe-data reset --hard FETCH_HEAD || true
             mkdir -p data/updates
@@ -159,7 +164,9 @@ jobs:
               echo "Collection not due yet."
             fi
 
-            if [ "${iteration}" != "48" ]; then
+            if (( SECONDS + 300 < collection_deadline )); then
               sleep 300
+            else
+              break
             fi
           done
