@@ -1,225 +1,225 @@
 {
   "schema_version": 1,
-  "generated_at_utc": "2026-11-07T19:07:09Z",
+  "generated_at_utc": "2026-11-07T19:21:46Z",
   "lookback_days": 90,
-  "rows": 61418,
+  "rows": 61430,
   "series": [
     {
       "zone": "BE",
       "target": "load",
       "actual_through_utc": "2026-11-07T18:00:00Z",
-      "source_collection_through_utc": "2026-11-07T19:02:01Z",
+      "source_collection_through_utc": "2026-11-07T19:17:34Z",
       "rows": 1755
     },
     {
       "zone": "BE",
       "target": "solar",
-      "actual_through_utc": "2026-11-07T17:00:00Z",
-      "source_collection_through_utc": "2026-11-07T19:02:01Z",
-      "rows": 1753
+      "actual_through_utc": "2026-11-07T18:00:00Z",
+      "source_collection_through_utc": "2026-11-07T19:17:34Z",
+      "rows": 1754
     },
     {
       "zone": "BE",
       "target": "wind_offshore",
       "actual_through_utc": "2026-11-07T17:00:00Z",
-      "source_collection_through_utc": "2026-11-07T19:02:01Z",
+      "source_collection_through_utc": "2026-11-07T19:17:34Z",
       "rows": 1753
     },
     {
       "zone": "BE",
       "target": "wind_onshore",
-      "actual_through_utc": "2026-11-07T17:00:00Z",
-      "source_collection_through_utc": "2026-11-07T19:02:01Z",
-      "rows": 1753
+      "actual_through_utc": "2026-11-07T18:00:00Z",
+      "source_collection_through_utc": "2026-11-07T19:17:34Z",
+      "rows": 1754
     },
     {
       "zone": "DE",
       "target": "load",
       "actual_through_utc": "2026-11-07T17:00:00Z",
-      "source_collection_through_utc": "2026-11-07T19:02:01Z",
+      "source_collection_through_utc": "2026-11-07T19:17:34Z",
       "rows": 1754
     },
     {
       "zone": "DE",
       "target": "solar",
-      "actual_through_utc": "2026-11-07T17:00:00Z",
-      "source_collection_through_utc": "2026-11-07T19:02:01Z",
-      "rows": 1754
+      "actual_through_utc": "2026-11-07T18:00:00Z",
+      "source_collection_through_utc": "2026-11-07T19:17:34Z",
+      "rows": 1755
     },
     {
       "zone": "DE",
       "target": "wind_offshore",
       "actual_through_utc": "2026-11-07T18:00:00Z",
-      "source_collection_through_utc": "2026-11-07T19:02:01Z",
+      "source_collection_through_utc": "2026-11-07T19:17:34Z",
       "rows": 1755
     },
     {
       "zone": "DE",
       "target": "wind_onshore",
-      "actual_through_utc": "2026-11-07T17:00:00Z",
-      "source_collection_through_utc": "2026-11-07T19:02:01Z",
-      "rows": 1754
+      "actual_through_utc": "2026-11-07T18:00:00Z",
+      "source_collection_through_utc": "2026-11-07T19:17:34Z",
+      "rows": 1755
     },
     {
       "zone": "DK1",
       "target": "load",
       "actual_through_utc": "2026-11-07T17:00:00Z",
-      "source_collection_through_utc": "2026-11-07T19:02:01Z",
+      "source_collection_through_utc": "2026-11-07T19:17:34Z",
       "rows": 2090
     },
     {
       "zone": "DK1",
       "target": "solar",
       "actual_through_utc": "2026-11-04T07:00:00Z",
-      "source_collection_through_utc": "2026-11-07T19:02:01Z",
+      "source_collection_through_utc": "2026-11-07T19:17:34Z",
       "rows": 2066
     },
     {
       "zone": "DK1",
       "target": "wind_offshore",
       "actual_through_utc": "2026-11-04T07:00:00Z",
-      "source_collection_through_utc": "2026-11-07T19:02:01Z",
+      "source_collection_through_utc": "2026-11-07T19:17:34Z",
       "rows": 2076
     },
     {
       "zone": "DK1",
       "target": "wind_onshore",
       "actual_through_utc": "2026-11-04T07:00:00Z",
-      "source_collection_through_utc": "2026-11-07T19:02:01Z",
+      "source_collection_through_utc": "2026-11-07T19:17:34Z",
       "rows": 2076
     },
     {
       "zone": "DK2",
       "target": "load",
       "actual_through_utc": "2026-11-07T17:00:00Z",
-      "source_collection_through_utc": "2026-11-07T19:02:01Z",
+      "source_collection_through_utc": "2026-11-07T19:17:34Z",
       "rows": 2090
     },
     {
       "zone": "DK2",
       "target": "solar",
       "actual_through_utc": "2026-11-04T07:00:00Z",
-      "source_collection_through_utc": "2026-11-07T19:02:01Z",
+      "source_collection_through_utc": "2026-11-07T19:17:34Z",
       "rows": 2076
     },
     {
       "zone": "DK2",
       "target": "wind_offshore",
       "actual_through_utc": "2026-11-04T07:00:00Z",
-      "source_collection_through_utc": "2026-11-07T19:02:01Z",
+      "source_collection_through_utc": "2026-11-07T19:17:34Z",
       "rows": 2076
     },
     {
       "zone": "DK2",
       "target": "wind_onshore",
       "actual_through_utc": "2026-11-04T07:00:00Z",
-      "source_collection_through_utc": "2026-11-07T19:02:01Z",
+      "source_collection_through_utc": "2026-11-07T19:17:34Z",
       "rows": 2076
     },
     {
       "zone": "ES",
       "target": "load",
       "actual_through_utc": "2026-11-07T18:00:00Z",
-      "source_collection_through_utc": "2026-11-07T19:02:01Z",
+      "source_collection_through_utc": "2026-11-07T19:17:34Z",
       "rows": 2159
     },
     {
       "zone": "ES",
       "target": "solar",
       "actual_through_utc": "2026-11-07T18:00:00Z",
-      "source_collection_through_utc": "2026-11-07T19:02:01Z",
+      "source_collection_through_utc": "2026-11-07T19:17:34Z",
       "rows": 2159
     },
     {
       "zone": "ES",
       "target": "wind_onshore",
       "actual_through_utc": "2026-11-07T18:00:00Z",
-      "source_collection_through_utc": "2026-11-07T19:02:01Z",
+      "source_collection_through_utc": "2026-11-07T19:17:34Z",
       "rows": 2159
     },
     {
       "zone": "FR",
       "target": "load",
-      "actual_through_utc": "2026-11-07T17:00:00Z",
-      "source_collection_through_utc": "2026-11-07T19:02:01Z",
-      "rows": 1754
+      "actual_through_utc": "2026-11-07T18:00:00Z",
+      "source_collection_through_utc": "2026-11-07T19:17:34Z",
+      "rows": 1755
     },
     {
       "zone": "FR",
       "target": "solar",
-      "actual_through_utc": "2026-11-07T17:00:00Z",
-      "source_collection_through_utc": "2026-11-07T19:02:01Z",
-      "rows": 1754
+      "actual_through_utc": "2026-11-07T18:00:00Z",
+      "source_collection_through_utc": "2026-11-07T19:17:34Z",
+      "rows": 1755
     },
     {
       "zone": "FR",
       "target": "wind_offshore",
-      "actual_through_utc": "2026-11-07T17:00:00Z",
-      "source_collection_through_utc": "2026-11-07T19:02:01Z",
-      "rows": 1754
+      "actual_through_utc": "2026-11-07T18:00:00Z",
+      "source_collection_through_utc": "2026-11-07T19:17:34Z",
+      "rows": 1755
     },
     {
       "zone": "FR",
       "target": "wind_onshore",
-      "actual_through_utc": "2026-11-07T17:00:00Z",
-      "source_collection_through_utc": "2026-11-07T19:02:01Z",
-      "rows": 1754
+      "actual_through_utc": "2026-11-07T18:00:00Z",
+      "source_collection_through_utc": "2026-11-07T19:17:34Z",
+      "rows": 1755
     },
     {
       "zone": "NL",
       "target": "load",
       "actual_through_utc": "2026-11-07T18:00:00Z",
-      "source_collection_through_utc": "2026-11-07T19:02:01Z",
+      "source_collection_through_utc": "2026-11-07T19:17:34Z",
       "rows": 2159
     },
     {
       "zone": "NL",
       "target": "solar",
       "actual_through_utc": "2026-11-07T18:00:00Z",
-      "source_collection_through_utc": "2026-11-07T19:02:01Z",
+      "source_collection_through_utc": "2026-11-07T19:17:34Z",
       "rows": 2159
     },
     {
       "zone": "NL",
       "target": "wind_offshore",
       "actual_through_utc": "2026-11-07T18:00:00Z",
-      "source_collection_through_utc": "2026-11-07T19:02:01Z",
+      "source_collection_through_utc": "2026-11-07T19:17:34Z",
       "rows": 2159
     },
     {
       "zone": "NL",
       "target": "wind_onshore",
       "actual_through_utc": "2026-11-07T18:00:00Z",
-      "source_collection_through_utc": "2026-11-07T19:02:01Z",
+      "source_collection_through_utc": "2026-11-07T19:17:34Z",
       "rows": 2159
     },
     {
       "zone": "PT",
       "target": "load",
-      "actual_through_utc": "2026-11-07T17:00:00Z",
-      "source_collection_through_utc": "2026-11-07T19:02:01Z",
-      "rows": 2158
+      "actual_through_utc": "2026-11-07T18:00:00Z",
+      "source_collection_through_utc": "2026-11-07T19:17:34Z",
+      "rows": 2159
     },
     {
       "zone": "PT",
       "target": "solar",
-      "actual_through_utc": "2026-11-07T17:00:00Z",
-      "source_collection_through_utc": "2026-11-07T19:02:01Z",
-      "rows": 2158
+      "actual_through_utc": "2026-11-07T18:00:00Z",
+      "source_collection_through_utc": "2026-11-07T19:17:34Z",
+      "rows": 2159
     },
     {
       "zone": "PT",
       "target": "wind_offshore",
-      "actual_through_utc": "2026-11-07T17:00:00Z",
-      "source_collection_through_utc": "2026-11-07T19:02:01Z",
-      "rows": 2158
+      "actual_through_utc": "2026-11-07T18:00:00Z",
+      "source_collection_through_utc": "2026-11-07T19:17:34Z",
+      "rows": 2159
     },
     {
       "zone": "PT",
       "target": "wind_onshore",
-      "actual_through_utc": "2026-11-07T17:00:00Z",
-      "source_collection_through_utc": "2026-11-07T19:02:01Z",
-      "rows": 2158
+      "actual_through_utc": "2026-11-07T18:00:00Z",
+      "source_collection_through_utc": "2026-11-07T19:17:34Z",
+      "rows": 2159
     }
   ]
 }
