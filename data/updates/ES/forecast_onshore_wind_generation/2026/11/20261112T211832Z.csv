@@ -1,0 +1,5 @@
+collection_time_utc,collection_time_local,run_id,timestamp_utc,timestamp_local,value,unit,country,entsoe_area,variable,source,updated_at_utc
+2026-11-12T21:18:32Z,2026-11-12T22:18:32+0100,3b3eb595-b476-4b2a-b2a3-a024225a75ec,2026-11-05T22:00:00Z,2026-11-05T23:00:00+0100,1373.0,MW,ES,ES,forecast_onshore_wind_generation,Wind Onshore,2026-11-12T21:21:35Z
+2026-11-12T21:18:32Z,2026-11-12T22:18:32+0100,3b3eb595-b476-4b2a-b2a3-a024225a75ec,2026-11-05T22:15:00Z,2026-11-05T23:15:00+0100,1334.0,MW,ES,ES,forecast_onshore_wind_generation,Wind Onshore,2026-11-12T21:21:35Z
+2026-11-12T21:18:32Z,2026-11-12T22:18:32+0100,3b3eb595-b476-4b2a-b2a3-a024225a75ec,2026-11-05T22:30:00Z,2026-11-05T23:30:00+0100,1255.0,MW,ES,ES,forecast_onshore_wind_generation,Wind Onshore,2026-11-12T21:21:35Z
+2026-11-12T21:18:32Z,2026-11-12T22:18:32+0100,3b3eb595-b476-4b2a-b2a3-a024225a75ec,2026-11-05T22:45:00Z,2026-11-05T23:45:00+0100,1160.0,MW,ES,ES,forecast_onshore_wind_generation,Wind Onshore,2026-11-12T21:21:35Z
