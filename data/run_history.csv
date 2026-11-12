@@ -599618,3 +599618,83 @@ cd4718e3-f6ca-4261-beca-9990fa652c28,ES,imbalance_price,2026-11-05T20:00:00+01:0
 3c38eacb-28d9-444f-b904-ef083aa9da7a,NL,imbalance_price,2026-11-05T20:30:00+01:00,2026-11-12T20:30:00+01:00,2026-11-12T19:17:07Z,ok,1176,1,,20.28
 3c38eacb-28d9-444f-b904-ef083aa9da7a,ES,imbalance_price,2026-11-05T20:30:00+01:00,2026-11-12T20:30:00+01:00,2026-11-12T19:17:22Z,ok,1108,1,,15.34
 3c38eacb-28d9-444f-b904-ef083aa9da7a,BE,imbalance_price,2026-11-05T20:30:00+01:00,2026-11-12T20:30:00+01:00,2026-11-12T19:17:26Z,ok,1338,1,,15.95
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,DK2,actual_load,2026-11-05T20:30:00+01:00,2026-11-12T20:30:00+01:00,2026-11-12T19:28:06Z,ok,131,1,,4.7
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,PT,actual_load,2026-11-05T20:30:00+01:00,2026-11-12T20:30:00+01:00,2026-11-12T19:28:06Z,ok,167,1,,4.9
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,DK1,actual_load,2026-11-05T20:30:00+01:00,2026-11-12T20:30:00+01:00,2026-11-12T19:28:06Z,ok,131,1,,5.11
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,DE,actual_load,2026-11-05T20:30:00+01:00,2026-11-12T20:30:00+01:00,2026-11-12T19:28:06Z,ok,663,1,,10.12
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,DK2,forecast_load,2026-11-05T20:30:00+01:00,2026-11-14T20:30:00+01:00,2026-11-12T19:28:13Z,ok,195,1,,12.71
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,FR,actual_load,2026-11-05T20:30:00+01:00,2026-11-12T20:30:00+01:00,2026-11-12T19:28:06Z,ok,668,1,,26.41
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,ES,actual_load,2026-11-05T20:30:00+01:00,2026-11-12T20:30:00+01:00,2026-11-12T19:28:06Z,ok,553,1,,28.22
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,NL,actual_load,2026-11-05T20:30:00+01:00,2026-11-12T20:30:00+01:00,2026-11-12T19:28:06Z,ok,667,1,,28.43
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,BE,actual_load,2026-11-05T20:30:00+01:00,2026-11-12T20:30:00+01:00,2026-11-12T19:28:06Z,ok,668,1,,32.9
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,PT,forecast_load,2026-11-05T20:30:00+01:00,2026-11-14T20:30:00+01:00,2026-11-12T19:28:14Z,ok,196,1,,32.45
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,DK1,forecast_load,2026-11-05T20:30:00+01:00,2026-11-14T20:30:00+01:00,2026-11-12T19:28:16Z,ok,195,1,,31.08
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,DK2,actual_solar_generation,2026-11-05T20:30:00+01:00,2026-11-12T20:30:00+01:00,2026-11-12T19:28:27Z,warning,0,0,No records fetched; no snapshot file was written.,24.14
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,DE,forecast_load,2026-11-05T20:30:00+01:00,2026-11-14T20:30:00+01:00,2026-11-12T19:28:18Z,ok,779,1,,35.26
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,DK1,actual_solar_generation,2026-11-05T20:30:00+01:00,2026-11-12T20:30:00+01:00,2026-11-12T19:28:50Z,warning,0,0,No records fetched; no snapshot file was written.,3.81
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,PT,actual_solar_generation,2026-11-05T20:30:00+01:00,2026-11-12T20:30:00+01:00,2026-11-12T19:28:49Z,ok,167,1,,7.84
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,DE,actual_solar_generation,2026-11-05T20:30:00+01:00,2026-11-12T20:30:00+01:00,2026-11-12T19:28:55Z,ok,662,1,,4.96
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,FR,forecast_load,2026-11-05T20:30:00+01:00,2026-11-14T20:30:00+01:00,2026-11-12T19:28:34Z,ok,779,1,,28.36
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,DK2,forecast_solar_generation,2026-11-05T20:30:00+01:00,2026-11-14T20:30:00+01:00,2026-11-12T19:28:53Z,ok,779,1,,9.84
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,NL,forecast_load,2026-11-05T20:30:00+01:00,2026-11-14T20:30:00+01:00,2026-11-12T19:28:38Z,ok,779,1,,30.8
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,DK2,actual_onshore_wind_generation,2026-11-05T20:30:00+01:00,2026-11-12T20:30:00+01:00,2026-11-12T19:29:06Z,warning,0,0,No records fetched; no snapshot file was written.,5.3
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,FR,actual_solar_generation,2026-11-05T20:30:00+01:00,2026-11-12T20:30:00+01:00,2026-11-12T19:29:04Z,ok,668,1,,8.65
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,DE,forecast_solar_generation,2026-11-05T20:30:00+01:00,2026-11-14T20:30:00+01:00,2026-11-12T19:29:01Z,ok,683,1,,13.57
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,BE,forecast_load,2026-11-05T20:30:00+01:00,2026-11-14T20:30:00+01:00,2026-11-12T19:28:41Z,ok,779,1,,36.06
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,ES,forecast_load,2026-11-05T20:30:00+01:00,2026-11-14T20:30:00+01:00,2026-11-12T19:28:36Z,ok,683,1,,45.28
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,PT,forecast_solar_generation,2026-11-05T20:30:00+01:00,2026-11-14T20:30:00+01:00,2026-11-12T19:28:58Z,ok,195,1,,25.18
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,BE,actual_solar_generation,2026-11-05T20:30:00+01:00,2026-11-12T20:30:00+01:00,2026-11-12T19:29:18Z,ok,167,1,,6.82
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,ES,actual_solar_generation,2026-11-05T20:30:00+01:00,2026-11-12T20:30:00+01:00,2026-11-12T19:29:23Z,ok,553,1,,4.85
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,NL,actual_solar_generation,2026-11-05T20:30:00+01:00,2026-11-12T20:30:00+01:00,2026-11-12T19:29:10Z,ok,1334,1,,20.72
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,BE,forecast_solar_generation,2026-11-05T20:30:00+01:00,2026-11-14T20:30:00+01:00,2026-11-12T19:29:27Z,ok,779,1,,7.31
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,DE,actual_onshore_wind_generation,2026-11-05T20:30:00+01:00,2026-11-12T20:30:00+01:00,2026-11-12T19:29:16Z,ok,664,1,,20.49
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,DK1,forecast_solar_generation,2026-11-05T20:30:00+01:00,2026-11-14T20:30:00+01:00,2026-11-12T19:28:56Z,ok,779,1,,42.47
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,BE,actual_onshore_wind_generation,2026-11-05T20:30:00+01:00,2026-11-12T20:30:00+01:00,2026-11-12T19:29:36Z,ok,167,1,,4.94
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,FR,forecast_solar_generation,2026-11-05T20:30:00+01:00,2026-11-14T20:30:00+01:00,2026-11-12T19:29:15Z,ok,779,1,,26.34
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,PT,actual_onshore_wind_generation,2026-11-05T20:30:00+01:00,2026-11-12T20:30:00+01:00,2026-11-12T19:29:25Z,ok,167,1,,20.44
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,DK2,forecast_onshore_wind_generation,2026-11-05T20:30:00+01:00,2026-11-14T20:30:00+01:00,2026-11-12T19:29:13Z,ok,779,1,,42.5
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,NL,forecast_solar_generation,2026-11-05T20:30:00+01:00,2026-11-14T20:30:00+01:00,2026-11-12T19:29:32Z,ok,779,1,,24.61
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,DK1,actual_onshore_wind_generation,2026-11-05T20:30:00+01:00,2026-11-12T20:30:00+01:00,2026-11-12T19:29:40Z,warning,0,0,No records fetched; no snapshot file was written.,19.4
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,DK2,actual_offshore_wind_generation,2026-11-05T20:30:00+01:00,2026-11-12T20:30:00+01:00,2026-11-12T19:29:57Z,warning,0,0,No records fetched; no snapshot file was written.,3.15
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,DE,forecast_onshore_wind_generation,2026-11-05T20:30:00+01:00,2026-11-14T20:30:00+01:00,2026-11-12T19:29:39Z,ok,683,1,,25.89
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,NL,actual_onshore_wind_generation,2026-11-05T20:30:00+01:00,2026-11-12T20:30:00+01:00,2026-11-12T19:29:59Z,ok,1334,1,,6.05
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,FR,actual_onshore_wind_generation,2026-11-05T20:30:00+01:00,2026-11-12T20:30:00+01:00,2026-11-12T19:29:44Z,ok,668,1,,24.02
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,BE,forecast_onshore_wind_generation,2026-11-05T20:30:00+01:00,2026-11-14T20:30:00+01:00,2026-11-12T19:29:42Z,ok,195,1,,27.48
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,ES,forecast_solar_generation,2026-11-05T20:30:00+01:00,2026-11-14T20:30:00+01:00,2026-11-12T19:29:30Z,ok,12,1,,40.59
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,DE,actual_offshore_wind_generation,2026-11-05T20:45:00+01:00,2026-11-12T20:45:00+01:00,2026-11-12T19:30:06Z,ok,668,1,,14.84
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,PT,forecast_onshore_wind_generation,2026-11-05T20:30:00+01:00,2026-11-14T20:30:00+01:00,2026-11-12T19:29:47Z,ok,195,1,,37.04
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,DK2,forecast_offshore_wind_generation,2026-11-05T20:45:00+01:00,2026-11-14T20:45:00+01:00,2026-11-12T19:30:03Z,ok,780,1,,25.57
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,DK1,forecast_onshore_wind_generation,2026-11-05T20:45:00+01:00,2026-11-14T20:45:00+01:00,2026-11-12T19:30:01Z,ok,780,1,,28.94
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,FR,forecast_onshore_wind_generation,2026-11-05T20:45:00+01:00,2026-11-14T20:45:00+01:00,2026-11-12T19:30:10Z,ok,780,1,,29.35
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,ES,actual_onshore_wind_generation,2026-11-05T20:45:00+01:00,2026-11-12T20:45:00+01:00,2026-11-12T19:30:13Z,ok,553,1,,28.53
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,DK1,actual_offshore_wind_generation,2026-11-05T20:45:00+01:00,2026-11-12T20:45:00+01:00,2026-11-12T19:30:32Z,warning,0,0,No records fetched; no snapshot file was written.,14.01
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,NL,forecast_onshore_wind_generation,2026-11-05T20:45:00+01:00,2026-11-14T20:45:00+01:00,2026-11-12T19:30:08Z,ok,780,1,,40.0
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,BE,actual_offshore_wind_generation,2026-11-05T20:45:00+01:00,2026-11-12T20:45:00+01:00,2026-11-12T19:30:12Z,ok,182,1,,36.36
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,DK2,day_ahead_price,2026-11-05T20:45:00+01:00,2026-11-14T20:45:00+01:00,2026-11-12T19:30:30Z,error,0,0,599 Server Error: status code 599 for url: https://web-api.tp.entsoe.eu/api?documentType=A44&in_Domain=10YDK-2--------M&out_Domain=10YDK-2--------M&offset=100&contract_MarketAgreement.type=A01&securityToken=<redacted>&periodStart=202611042000&periodEnd=202611132000,18.87
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,PT,actual_offshore_wind_generation,2026-11-05T20:45:00+01:00,2026-11-12T20:45:00+01:00,2026-11-12T19:30:25Z,ok,167,1,,28.69
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,DE,forecast_offshore_wind_generation,2026-11-05T20:45:00+01:00,2026-11-14T20:45:00+01:00,2026-11-12T19:30:23Z,ok,780,1,,41.23
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,ES,forecast_onshore_wind_generation,2026-11-05T20:45:00+01:00,2026-11-14T20:45:00+01:00,2026-11-12T19:30:44Z,ok,12,1,,27.7
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,FR,actual_offshore_wind_generation,2026-11-05T20:45:00+01:00,2026-11-12T20:45:00+01:00,2026-11-12T19:30:41Z,ok,668,1,,34.21
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,DK1,forecast_offshore_wind_generation,2026-11-05T20:45:00+01:00,2026-11-14T20:45:00+01:00,2026-11-12T19:30:48Z,ok,780,1,,29.06
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,BE,forecast_offshore_wind_generation,2026-11-05T20:45:00+01:00,2026-11-14T20:45:00+01:00,2026-11-12T19:30:51Z,ok,195,1,,30.38
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,DK2,imbalance_price,2026-11-05T20:45:00+01:00,2026-11-12T20:45:00+01:00,2026-11-12T19:30:53Z,ok,1334,1,,32.03
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,PT,forecast_offshore_wind_generation,2026-11-05T20:45:00+01:00,2026-11-14T20:45:00+01:00,2026-11-12T19:30:56Z,ok,195,1,,29.29
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,NL,actual_offshore_wind_generation,2026-11-05T20:45:00+01:00,2026-11-12T20:45:00+01:00,2026-11-12T19:30:50Z,ok,1334,1,,35.61
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,ES,actual_offshore_wind_generation,2026-11-05T20:45:00+01:00,2026-11-12T20:45:00+01:00,2026-11-12T19:31:13Z,ok,553,1,,17.59
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,FR,forecast_offshore_wind_generation,2026-11-05T20:45:00+01:00,2026-11-14T20:45:00+01:00,2026-11-12T19:31:17Z,ok,780,1,,38.3
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,DK1,day_ahead_price,2026-11-05T20:45:00+01:00,2026-11-14T20:45:00+01:00,2026-11-12T19:31:18Z,ok,781,1,,47.55
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,ES,forecast_offshore_wind_generation,2026-11-05T20:45:00+01:00,2026-11-14T20:45:00+01:00,2026-11-12T19:31:32Z,warning,0,0,No records fetched; no snapshot file was written.,36.61
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,NL,forecast_offshore_wind_generation,2026-11-05T20:45:00+01:00,2026-11-14T20:45:00+01:00,2026-11-12T19:31:30Z,ok,780,1,,40.22
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,DE,day_ahead_price,2026-11-05T20:45:00+01:00,2026-11-14T20:45:00+01:00,2026-11-12T19:31:05Z,ok,781,1,,74.86
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,DK1,imbalance_price,2026-11-05T20:45:00+01:00,2026-11-12T20:45:00+01:00,2026-11-12T19:32:08Z,ok,1334,1,,14.62
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,BE,day_ahead_price,2026-11-05T20:45:00+01:00,2026-11-14T20:45:00+01:00,2026-11-12T19:31:24Z,ok,781,1,,70.83
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,DE,imbalance_price,2026-11-05T20:45:00+01:00,2026-11-12T20:45:00+01:00,2026-11-12T19:32:22Z,ok,1336,1,,24.26
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,PT,day_ahead_price,2026-11-05T20:45:00+01:00,2026-11-14T20:45:00+01:00,2026-11-12T19:31:28Z,ok,781,1,,83.69
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,FR,day_ahead_price,2026-11-05T20:45:00+01:00,2026-11-14T20:45:00+01:00,2026-11-12T19:31:56Z,ok,781,1,,58.58
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,BE,imbalance_price,2026-11-05T20:45:00+01:00,2026-11-12T20:45:00+01:00,2026-11-12T19:32:36Z,ok,1340,1,,23.26
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,PT,imbalance_price,2026-11-05T20:45:00+01:00,2026-11-12T20:45:00+01:00,2026-11-12T19:32:54Z,ok,984,1,,20.01
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,FR,imbalance_price,2026-11-05T20:45:00+01:00,2026-11-12T20:45:00+01:00,2026-11-12T19:32:57Z,ok,1338,1,,20.23
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,NL,day_ahead_price,2026-11-05T20:45:00+01:00,2026-11-14T20:45:00+01:00,2026-11-12T19:32:12Z,ok,781,1,,65.05
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,ES,day_ahead_price,2026-11-05T20:45:00+01:00,2026-11-14T20:45:00+01:00,2026-11-12T19:32:10Z,ok,685,1,,75.48
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,NL,imbalance_price,2026-11-05T20:45:00+01:00,2026-11-12T20:45:00+01:00,2026-11-12T19:33:20Z,ok,1176,1,,21.32
+c0a5afa3-5003-4f59-bd3c-b9bb9f2dfcad,ES,imbalance_price,2026-11-05T20:45:00+01:00,2026-11-12T20:45:00+01:00,2026-11-12T19:33:27Z,ok,1110,1,,21.27
