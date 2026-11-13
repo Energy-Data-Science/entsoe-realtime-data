@@ -602898,3 +602898,83 @@ e52a69f0-4be6-4596-ab32-a3e3ec72f6b7,DE,imbalance_price,2026-11-06T10:15:00+01:0
 873644ff-f3f5-42f4-b7f0-22825405b803,DK2,day_ahead_price,2026-11-06T16:00:00+01:00,2026-11-15T16:00:00+01:00,2026-11-13T14:47:37Z,ok,800,1,,91.47
 873644ff-f3f5-42f4-b7f0-22825405b803,DK1,imbalance_price,2026-11-06T16:00:00+01:00,2026-11-13T16:00:00+01:00,2026-11-13T14:48:42Z,ok,1332,1,,33.36
 873644ff-f3f5-42f4-b7f0-22825405b803,DK2,imbalance_price,2026-11-06T16:00:00+01:00,2026-11-13T16:00:00+01:00,2026-11-13T14:49:10Z,ok,1332,1,,29.02
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,FR,actual_load,2026-11-06T16:00:00+01:00,2026-11-13T16:00:00+01:00,2026-11-13T14:55:14Z,ok,668,1,,26.4
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,NL,actual_load,2026-11-06T16:00:00+01:00,2026-11-13T16:00:00+01:00,2026-11-13T14:55:14Z,ok,669,1,,26.59
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,DK2,actual_load,2026-11-06T16:00:00+01:00,2026-11-13T16:00:00+01:00,2026-11-13T14:55:14Z,ok,134,1,,31.34
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,DE,actual_load,2026-11-06T16:00:00+01:00,2026-11-13T16:00:00+01:00,2026-11-13T14:55:14Z,ok,665,1,,31.56
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,PT,actual_load,2026-11-06T16:00:00+01:00,2026-11-13T16:00:00+01:00,2026-11-13T14:55:14Z,ok,167,1,,31.77
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,DK1,actual_load,2026-11-06T16:00:00+01:00,2026-11-13T16:00:00+01:00,2026-11-13T14:55:14Z,ok,134,1,,32.01
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,ES,actual_load,2026-11-06T16:00:00+01:00,2026-11-13T16:00:00+01:00,2026-11-13T14:55:14Z,ok,670,1,,32.22
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,BE,actual_load,2026-11-06T16:00:00+01:00,2026-11-13T16:00:00+01:00,2026-11-13T14:55:14Z,ok,670,1,,32.44
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,FR,forecast_load,2026-11-06T16:00:00+01:00,2026-11-15T16:00:00+01:00,2026-11-13T14:55:42Z,ok,800,1,,44.91
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,NL,forecast_load,2026-11-06T16:00:00+01:00,2026-11-15T16:00:00+01:00,2026-11-13T14:55:44Z,ok,800,1,,50.16
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,DK2,forecast_load,2026-11-06T16:00:00+01:00,2026-11-15T16:00:00+01:00,2026-11-13T14:55:48Z,ok,200,1,,49.9
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,DE,forecast_load,2026-11-06T16:00:00+01:00,2026-11-15T16:00:00+01:00,2026-11-13T14:55:49Z,ok,800,1,,54.68
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,ES,forecast_load,2026-11-06T16:00:00+01:00,2026-11-15T16:00:00+01:00,2026-11-13T14:55:54Z,ok,800,1,,51.94
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,DK1,forecast_load,2026-11-06T16:00:00+01:00,2026-11-15T16:00:00+01:00,2026-11-13T14:55:53Z,ok,200,1,,60.15
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,PT,forecast_load,2026-11-06T16:00:00+01:00,2026-11-15T16:00:00+01:00,2026-11-13T14:55:51Z,ok,201,1,,62.06
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,BE,forecast_load,2026-11-06T16:00:00+01:00,2026-11-15T16:00:00+01:00,2026-11-13T14:55:56Z,ok,800,1,,57.49
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,NL,actual_solar_generation,2026-11-06T16:00:00+01:00,2026-11-13T16:00:00+01:00,2026-11-13T14:56:36Z,ok,1338,1,,23.45
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,DK2,actual_solar_generation,2026-11-06T16:00:00+01:00,2026-11-13T16:00:00+01:00,2026-11-13T14:56:40Z,warning,0,0,No records fetched; no snapshot file was written.,20.48
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,FR,actual_solar_generation,2026-11-06T16:00:00+01:00,2026-11-13T16:00:00+01:00,2026-11-13T14:56:29Z,ok,668,1,,35.04
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,DE,actual_solar_generation,2026-11-06T16:00:00+01:00,2026-11-13T16:00:00+01:00,2026-11-13T14:56:46Z,ok,666,1,,25.06
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,ES,actual_solar_generation,2026-11-06T16:00:00+01:00,2026-11-13T16:00:00+01:00,2026-11-13T14:56:48Z,ok,669,1,,25.98
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,BE,actual_solar_generation,2026-11-06T16:00:00+01:00,2026-11-13T16:00:00+01:00,2026-11-13T14:56:59Z,ok,167,1,,15.15
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,DK1,actual_solar_generation,2026-11-06T16:00:00+01:00,2026-11-13T16:00:00+01:00,2026-11-13T14:56:55Z,warning,0,0,No records fetched; no snapshot file was written.,26.79
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,PT,actual_solar_generation,2026-11-06T16:00:00+01:00,2026-11-13T16:00:00+01:00,2026-11-13T14:56:57Z,ok,167,1,,27.1
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,DK2,forecast_solar_generation,2026-11-06T16:00:00+01:00,2026-11-15T16:00:00+01:00,2026-11-13T14:57:03Z,ok,704,1,,40.17
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,FR,forecast_solar_generation,2026-11-06T16:00:00+01:00,2026-11-15T16:00:00+01:00,2026-11-13T14:57:06Z,ok,704,1,,39.87
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,ES,forecast_solar_generation,2026-11-06T16:00:00+01:00,2026-11-15T16:00:00+01:00,2026-11-13T14:57:16Z,ok,96,1,,32.27
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,DK1,forecast_solar_generation,2026-11-06T16:00:00+01:00,2026-11-15T16:00:00+01:00,2026-11-13T14:57:24Z,ok,704,1,,27.5
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,DE,forecast_solar_generation,2026-11-06T16:00:00+01:00,2026-11-15T16:00:00+01:00,2026-11-13T14:57:13Z,ok,704,1,,40.97
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,NL,forecast_solar_generation,2026-11-06T16:00:00+01:00,2026-11-15T16:00:00+01:00,2026-11-13T14:57:01Z,ok,800,1,,52.6
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,DK2,actual_onshore_wind_generation,2026-11-06T16:00:00+01:00,2026-11-13T16:00:00+01:00,2026-11-13T14:57:45Z,warning,0,0,No records fetched; no snapshot file was written.,13.84
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,BE,forecast_solar_generation,2026-11-06T16:00:00+01:00,2026-11-15T16:00:00+01:00,2026-11-13T14:57:18Z,ok,704,1,,40.98
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,PT,forecast_solar_generation,2026-11-06T16:00:00+01:00,2026-11-15T16:00:00+01:00,2026-11-13T14:57:26Z,ok,200,1,,38.29
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,FR,actual_onshore_wind_generation,2026-11-06T16:00:00+01:00,2026-11-13T16:00:00+01:00,2026-11-13T14:57:47Z,ok,668,1,,23.16
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,ES,actual_onshore_wind_generation,2026-11-06T16:00:00+01:00,2026-11-13T16:00:00+01:00,2026-11-13T14:57:50Z,ok,669,1,,23.7
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,NL,actual_onshore_wind_generation,2026-11-06T16:00:00+01:00,2026-11-13T16:00:00+01:00,2026-11-13T14:57:58Z,ok,1338,1,,18.86
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,DK1,actual_onshore_wind_generation,2026-11-06T16:00:00+01:00,2026-11-13T16:00:00+01:00,2026-11-13T14:57:54Z,warning,0,0,No records fetched; no snapshot file was written.,24.13
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,BE,actual_onshore_wind_generation,2026-11-06T16:00:00+01:00,2026-11-13T16:00:00+01:00,2026-11-13T14:58:03Z,ok,167,1,,18.34
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,DE,actual_onshore_wind_generation,2026-11-06T16:00:00+01:00,2026-11-13T16:00:00+01:00,2026-11-13T14:57:56Z,ok,666,1,,30.5
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,PT,actual_onshore_wind_generation,2026-11-06T16:00:00+01:00,2026-11-13T16:00:00+01:00,2026-11-13T14:58:07Z,ok,167,1,,25.47
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,DK2,forecast_onshore_wind_generation,2026-11-06T16:00:00+01:00,2026-11-15T16:00:00+01:00,2026-11-13T14:58:01Z,ok,704,1,,41.21
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,ES,forecast_onshore_wind_generation,2026-11-06T16:00:00+01:00,2026-11-15T16:00:00+01:00,2026-11-13T14:58:16Z,ok,96,1,,36.61
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,DK1,forecast_onshore_wind_generation,2026-11-06T16:00:00+01:00,2026-11-15T16:00:00+01:00,2026-11-13T14:58:20Z,ok,704,1,,36.34
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,NL,forecast_onshore_wind_generation,2026-11-06T16:00:00+01:00,2026-11-15T16:00:00+01:00,2026-11-13T14:58:19Z,ok,800,1,,40.35
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,BE,forecast_onshore_wind_generation,2026-11-06T16:00:00+01:00,2026-11-15T16:00:00+01:00,2026-11-13T14:58:23Z,ok,200,1,,37.77
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,FR,forecast_onshore_wind_generation,2026-11-06T16:00:00+01:00,2026-11-15T16:00:00+01:00,2026-11-13T14:58:12Z,ok,704,1,,51.92
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,DK2,actual_offshore_wind_generation,2026-11-06T16:00:00+01:00,2026-11-13T16:00:00+01:00,2026-11-13T14:58:44Z,warning,0,0,No records fetched; no snapshot file was written.,22.77
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,PT,forecast_onshore_wind_generation,2026-11-06T16:00:00+01:00,2026-11-15T16:00:00+01:00,2026-11-13T14:58:34Z,ok,200,1,,34.83
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,DE,forecast_onshore_wind_generation,2026-11-06T16:00:00+01:00,2026-11-15T16:00:00+01:00,2026-11-13T14:58:28Z,ok,704,1,,43.58
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,NL,actual_offshore_wind_generation,2026-11-06T16:00:00+01:00,2026-11-13T16:00:00+01:00,2026-11-13T14:59:01Z,ok,1338,1,,14.52
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,ES,actual_offshore_wind_generation,2026-11-06T16:00:00+01:00,2026-11-13T16:00:00+01:00,2026-11-13T14:58:54Z,ok,669,1,,21.45
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,DK1,actual_offshore_wind_generation,2026-11-06T16:00:00+01:00,2026-11-13T16:00:00+01:00,2026-11-13T14:58:59Z,warning,0,0,No records fetched; no snapshot file was written.,21.61
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,BE,actual_offshore_wind_generation,2026-11-06T16:00:00+01:00,2026-11-13T16:00:00+01:00,2026-11-13T14:59:03Z,ok,178,1,,21.61
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,PT,actual_offshore_wind_generation,2026-11-06T16:00:00+01:00,2026-11-13T16:00:00+01:00,2026-11-13T14:59:11Z,ok,167,1,,16.77
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,FR,actual_offshore_wind_generation,2026-11-06T16:00:00+01:00,2026-11-13T16:00:00+01:00,2026-11-13T14:59:06Z,ok,668,1,,23.71
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,DE,actual_offshore_wind_generation,2026-11-06T16:00:00+01:00,2026-11-13T16:00:00+01:00,2026-11-13T14:59:14Z,ok,670,1,,21.14
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,DK2,forecast_offshore_wind_generation,2026-11-06T16:00:00+01:00,2026-11-15T16:00:00+01:00,2026-11-13T14:59:09Z,ok,704,1,,38.63
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,NL,forecast_offshore_wind_generation,2026-11-06T16:00:00+01:00,2026-11-15T16:00:00+01:00,2026-11-13T14:59:18Z,ok,800,1,,36.45
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,ES,forecast_offshore_wind_generation,2026-11-06T16:00:00+01:00,2026-11-15T16:00:00+01:00,2026-11-13T14:59:19Z,warning,0,0,No records fetched; no snapshot file was written.,39.4
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,PT,forecast_offshore_wind_generation,2026-11-06T16:00:00+01:00,2026-11-15T16:00:00+01:00,2026-11-13T14:59:30Z,ok,200,1,,32.55
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,BE,forecast_offshore_wind_generation,2026-11-06T16:00:00+01:00,2026-11-15T16:00:00+01:00,2026-11-13T14:59:26Z,ok,200,1,,38.29
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,DK1,forecast_offshore_wind_generation,2026-11-06T16:00:00+01:00,2026-11-15T16:00:00+01:00,2026-11-13T14:59:22Z,ok,704,1,,44.6
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,FR,forecast_offshore_wind_generation,2026-11-06T16:00:00+01:00,2026-11-15T16:00:00+01:00,2026-11-13T14:59:32Z,ok,704,1,,38.54
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,DE,forecast_offshore_wind_generation,2026-11-06T16:00:00+01:00,2026-11-15T16:00:00+01:00,2026-11-13T14:59:37Z,ok,704,1,,46.52
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,DE,day_ahead_price,2026-11-06T16:15:00+01:00,2026-11-15T16:15:00+01:00,2026-11-13T15:00:25Z,error,0,0,599 Server Error: status code 599 for url: https://web-api.tp.entsoe.eu/api?documentType=A44&in_Domain=10Y1001A1001A82H&out_Domain=10Y1001A1001A82H&offset=0&contract_MarketAgreement.type=A01&classificationSequence_AttributeInstanceComponent.position=1&securityToken=<redacted>&periodStart=202611051500&periodEnd=202611141500,8.29
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,DK2,day_ahead_price,2026-11-06T16:00:00+01:00,2026-11-15T16:00:00+01:00,2026-11-13T14:59:49Z,error,0,0,599 Server Error: status code 599 for url: https://web-api.tp.entsoe.eu/api?documentType=A44&in_Domain=10YDK-2--------M&out_Domain=10YDK-2--------M&offset=0&contract_MarketAgreement.type=A01&securityToken=<redacted>&periodStart=202611121500&periodEnd=202611161500,51.43
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,DE,imbalance_price,2026-11-06T16:15:00+01:00,2026-11-13T16:15:00+01:00,2026-11-13T15:00:35Z,error,0,0,599 Server Error: status code 599 for url: https://web-api.tp.entsoe.eu/api?documentType=A85&controlArea_Domain=10Y1001A1001A83F&securityToken=<redacted>&periodStart=202611061500&periodEnd=202611131500,5.91
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,PT,day_ahead_price,2026-11-06T16:15:00+01:00,2026-11-15T16:15:00+01:00,2026-11-13T15:00:04Z,error,0,0,599 Server Error: status code 599 for url: https://web-api.tp.entsoe.eu/api?documentType=A44&in_Domain=10YPT-REN------W&out_Domain=10YPT-REN------W&offset=100&contract_MarketAgreement.type=A01&securityToken=<redacted>&periodStart=202611051500&periodEnd=202611141500,38.51
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,BE,day_ahead_price,2026-11-06T16:15:00+01:00,2026-11-15T16:15:00+01:00,2026-11-13T15:00:07Z,error,0,0,599 Server Error: status code 599 for url: https://web-api.tp.entsoe.eu/api?documentType=A44&in_Domain=10YBE----------2&out_Domain=10YBE----------2&offset=100&contract_MarketAgreement.type=A01&securityToken=<redacted>&periodStart=202611051500&periodEnd=202611141500,39.69
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,DK2,imbalance_price,2026-11-06T16:15:00+01:00,2026-11-13T16:15:00+01:00,2026-11-13T15:00:43Z,error,0,0,599 Server Error: status code 599 for url: https://web-api.tp.entsoe.eu/api?documentType=A85&controlArea_Domain=10YDK-2--------M&securityToken=<redacted>&periodStart=202611061500&periodEnd=202611131500,9.3
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,BE,imbalance_price,2026-11-06T16:15:00+01:00,2026-11-13T16:15:00+01:00,2026-11-13T15:00:49Z,ok,1342,1,,21.92
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,PT,imbalance_price,2026-11-06T16:15:00+01:00,2026-11-13T16:15:00+01:00,2026-11-13T15:00:47Z,ok,1022,1,,27.25
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,NL,day_ahead_price,2026-11-06T16:00:00+01:00,2026-11-15T16:00:00+01:00,2026-11-13T14:59:56Z,ok,800,1,,106.74
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,ES,day_ahead_price,2026-11-06T16:15:00+01:00,2026-11-15T16:15:00+01:00,2026-11-13T15:00:01Z,ok,799,1,,105.64
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,DK1,day_ahead_price,2026-11-06T16:15:00+01:00,2026-11-15T16:15:00+01:00,2026-11-13T15:00:09Z,ok,799,1,,110.95
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,FR,day_ahead_price,2026-11-06T16:15:00+01:00,2026-11-15T16:15:00+01:00,2026-11-13T15:00:13Z,ok,799,1,,123.67
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,ES,imbalance_price,2026-11-06T16:15:00+01:00,2026-11-13T16:15:00+01:00,2026-11-13T15:01:48Z,ok,1340,1,,30.14
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,NL,imbalance_price,2026-11-06T16:15:00+01:00,2026-11-13T16:15:00+01:00,2026-11-13T15:01:45Z,ok,1214,1,,37.03
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,FR,imbalance_price,2026-11-06T16:15:00+01:00,2026-11-13T16:15:00+01:00,2026-11-13T15:02:18Z,error,0,0,599 Server Error: status code 599 for url: https://web-api.tp.entsoe.eu/api?documentType=A85&controlArea_Domain=10YFR-RTE------C&securityToken=<redacted>&periodStart=202611061500&periodEnd=202611131500,5.33
+c01059ad-d1f9-4fe9-94ed-fd5d0b6c0f67,DK1,imbalance_price,2026-11-06T16:15:00+01:00,2026-11-13T16:15:00+01:00,2026-11-13T15:02:02Z,ok,1330,1,,30.72
