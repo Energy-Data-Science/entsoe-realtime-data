@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at_utc": "2026-11-23T11:15:49Z",
+  "generated_at_utc": "2026-11-23T11:41:51Z",
   "lookback_days": 90,
   "rows": 63650,
   "series": [
@@ -183,7 +183,7 @@
       "zone": "NL",
       "target": "wind_offshore",
       "actual_through_utc": "2026-11-23T10:00:00Z",
-      "source_collection_through_utc": "2026-11-23T11:09:42Z",
+      "source_collection_through_utc": "2026-11-23T11:26:21Z",
       "rows": 2159
     },
     {
